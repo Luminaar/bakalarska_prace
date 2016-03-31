@@ -61,8 +61,8 @@
 \bottommargin 2.5cm
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip smallskip
 \quotes_language german
 \papercolumns 1
 \papersides 1
@@ -104,7 +104,7 @@ Hodnocení IT služeb
 \end_layout
 
 \begin_layout Author
-Auto:Maxim Kovykov
+Maxim Kovykov
 \end_layout
 
 \begin_layout Standard
@@ -151,6 +151,103 @@ LatexCommand tableofcontents
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Úvod
+\end_layout
+
+\begin_layout Standard
+úvod - vymezení tématu práce a důvod výběru tématu, cíle práce, způsob/metoda
+ dosažení cíle, předpoklady a omezení práce, struktura práce, výstupy práce
+ (příp.
+ komu jsou určeny) a očekávané přínosy.
+\end_layout
+
+\begin_layout Part
+Teoretická
+\end_layout
+
+\begin_layout Section
+Rešerše
+\end_layout
+
+\begin_layout Standard
+kdo a co všechno napsal k tématu.
+ Jaké jsou trendy
+\end_layout
+
+\begin_layout Standard
+co o tom napsal Bing Liu
+\end_layout
+
+\begin_layout Section
+Hodnocení služeb
+\end_layout
+
+\begin_layout Standard
+co je to služba, IT služba, jak se hodnotí, zpětná vazba od uživaele,...
+\end_layout
+
+\begin_layout Section
+Zpracování textu obecně
+\end_layout
+
+\begin_layout Section
+Aspect mining
+\end_layout
+
+\begin_layout Standard
+různé přístupy, rozdíl mezi aspect a topic miningem, 
+\end_layout
+
+\begin_layout Part
+Praktická
+\end_layout
+
+\begin_layout Section
+Vyhodnocení aspektů on-line bankovnictví CIBC
+\end_layout
+
+\begin_layout Standard
+co je CIBC
+\end_layout
+
+\begin_layout Standard
+jaká data použijeme
+\end_layout
+
+\begin_layout Standard
+použitá metoda
+\end_layout
+
+\begin_layout Standard
+popis použitých nástrojů - KNIME, Python a knihovny
+\end_layout
+
+\begin_layout Standard
+popis jednotlivých kroků (uzlů v KNIME)
+\end_layout
+
+\begin_layout Section
+Závěr
+\end_layout
+
+\begin_layout Standard
+shrnutí výsledků, ke kterým autor dospěl,
+\end_layout
+
+\begin_layout Standard
+přínos autora práce k řešené problematice (co je v práci původní),
+\end_layout
+
+\begin_layout Standard
+zhodnocení využitelnosti dosažených výsledků, příp.
+ další náměty pro řešení v uvedené
+\end_layout
+
+\begin_layout Standard
+oblasti.
 \end_layout
 
 \end_body
