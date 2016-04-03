@@ -153,15 +153,55 @@ LatexCommand tableofcontents
 
 \end_layout
 
+\begin_layout Section*
+Abstract
+\end_layout
+
 \begin_layout Section
 Úvod
 \end_layout
 
 \begin_layout Standard
-úvod - vymezení tématu práce a důvod výběru tématu, cíle práce, způsob/metoda
- dosažení cíle, předpoklady a omezení práce, struktura práce, výstupy práce
- (příp.
- komu jsou určeny) a očekávané přínosy.
+Aby mohl poskytovatel zlepšovat nabízené služby, musí brát ohledy na zpětnou
+ vazbu od svých zákazníků.
+ Nejcennější zpětná vazba nejčastěji nemá pevně danou strukturu, tzn.
+ jde o text (např.
+ příspěvek na internetové diskuzi).
+ Při velkém množství dat (textu), může být nepraktické nebo i nemožné vyhodnotit
+ vše ručně.
+ Tato práce se zabývá metodami, které umožňují zcela, nebo alespoň částečně
+ automatizovat vyhodnocení zpětné vazby.
+\end_layout
+
+\begin_layout Standard
+Cílem této práce je popsat některé dostupné metody pro dobývání informací
+ z textu (v našem případě zpětné vazby od zákazníků) a jednu z těchto metod
+ aplikovat na reálná data.
+ Použitá metoda je založena na výsledcích předchozího výzkumu v této oblasti.
+ Všechny použité nástroje jsou volně dostupné, přičemž použití právě těchto
+ nástrojů není povinné, tj.
+ stejných výsledků lze dosáhnout s jinými podobnými nástroji.
+ Cílem práce není popis práce s konkrétními nástroji, proto se o nich práce
+ zmiňuje jenom okrajově.
+ Data použitá při aplikaci metody jsou veřejně dostupná a neobsahují žádné
+ osobní ani citlivé údaje (jména, adresy atd.).
+ Data pochází z jednoho zdroje.
+\end_layout
+
+\begin_layout Standard
+Teoretická část práce se věnuje doposud proběhlému výzkumu v oblasti a literatuř
+e, která se zabývá dobýváním informací z textu.
+ Tato část setaké věnuje pojmům služba, hodnocení služeb a zpětná vazba.
+ V praktické části je stanovena metoda, která bude v práci použita.
+ Praktická část dále obsahuje popis dat, na které bude metoda aplikována
+ a stručý popis použitých nástrojů.
+\end_layout
+
+\begin_layout Standard
+Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků, vyvození
+ závěrů z tohoto vyhodnocení.
+ Práce se také vyjadřuje k užitečnosti metody, navrhuje způsoby reálného
+ využití a poskytuje náměty pro další práci v oblasti.
 \end_layout
 
 \begin_layout Part
