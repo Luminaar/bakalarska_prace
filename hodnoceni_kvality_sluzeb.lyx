@@ -12,8 +12,8 @@
 \language_package babel
 \inputencoding utf8
 \fontencoding global
-\font_roman default
-\font_sans default
+\font_roman lmodern
+\font_sans lmss
 \font_typewriter default
 \font_math auto
 \font_default_family default
@@ -27,7 +27,7 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize default
@@ -62,7 +62,7 @@
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation skip
-\defskip smallskip
+\defskip medskip
 \quotes_language german
 \papercolumns 1
 \papersides 1
@@ -202,6 +202,12 @@ Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků
  závěrů z tohoto vyhodnocení.
  Práce se také vyjadřuje k užitečnosti metody, navrhuje způsoby reálného
  využití a poskytuje náměty pro další práci v oblasti.
+\end_layout
+
+\begin_layout Standard
+Hlavním přínosem této práce by mělo být ověření, zda jsou doposud vypracované
+ metody připraveny k praktickému použití, popřípdě určit oblasti, ve kterých
+ je potřeba provést další výzkum.
 \end_layout
 
 \begin_layout Part
