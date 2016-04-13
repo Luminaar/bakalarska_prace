@@ -252,6 +252,642 @@ Praktická
 \end_layout
 
 \begin_layout Section
+Použité nástroje
+\end_layout
+
+\begin_layout Standard
+Při zpracování této práce byly primárně použity dva nástroje: KNIME Analytics
+ Platform a programovací jazyk Python.
+ Pro dosažení stejných výsledků ale použít jakékoliv jiné, analogické nástroje.
+ Tato práce proto neposkytne podrobné návody pro práci s jednotlivými nástroji,
+ ale zaměří se na jednolivé úlohy, které byly řešeny.
+\end_layout
+
+\begin_layout Standard
+Přesto, jsou oba nástroje představeny aby bylo zřejmé, jak právě tyto nástroje
+ řešily konrétní úlohy a popřípadě, jak zvolit jiný, vhodný nástroj.
+\end_layout
+
+\begin_layout Subsection
+KNIME Analytics Platform
+\end_layout
+
+\begin_layout Standard
+KNIME AP je volně dostupný, open source program určený ke zpracování a analýze
+ dat.
+ Práce v tomto programu probíhá prostřednictvím grafického rozhraní, ve
+ kterém uživatel z předem dostupných uzlů (angl.
+ node) sestavuje tzv.
+ 
+\emph on
+work flow.
+
+\emph default
+ Tento výraz lze volně přeložit jako 
+\emph on
+roura
+\emph default
+.
+ Touto rourou pak prochází data, přičemž každý uzel nad těmito daty provádí
+ určité operace
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Stejný koncept se využívá například v operačních systémech Linux, kdy výstupy
+ z programu lze posílat přímo do vstupů jiného programu.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Program již v základu obsahuje většinu potřebných uzlů, které umožňují pracovat
+ se všemi běžnými druhy dat (text, obrázky, databáze, dokumenty atd.) a provádět
+ nad nimi různé operace včetně transformace, úpravy, statisických výpočtu,
+ strojového učení.
+ KNIME AP také umožňuje vytvářet vlastní uzly a spuštět uživatelské programy
+ napsané v různých jazycích (R, Python, Java, Pearl).
+ Výsledná data lze ukládat do databází nebo běžných typů souborů.
+\end_layout
+
+\begin_layout Standard
+KNIME AP poskytuje také základní reportovací funkce, které však nejsou příliš
+ pokročilé.
+\end_layout
+
+\begin_layout Standard
+Díky grafickému rozhraní je práce s tímto programem jednoduchá a jediné
+ speciální znalosti, které jsou potřeba se týkají konkrétních uzlů a jejich
+ použití.
+ Grafické rozhraní také přehledně zobrazuje celý work flow a je jednoduché
+ se v něm orientovat (viz.
+ přílohy) 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Přidat přílohy - jednotlivé části workflow
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Popis uzlu
+\end_layout
+
+\begin_layout Standard
+Výhodou KNIME AP je, že i při neznalosti postupů práce s tím to programem,
+ poskytuje grafické rozhraní přehledné schéma, podle kterého práce s daty
+ probíhá.
+ Části tohoto schématu budou v následujících částech této práce uvedeny
+ pro ilustraci.
+ Níže je uveden popis jednoho uzlu programu KNIME AP.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/node.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Popis uzlu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\noindent
+
+\series bold
+Název
+\begin_inset space ~
+\end_inset
+
+uzlu
+\series default
+ Uzly stejného typu mají stenný název
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+Vstup
+\series default
+ Každý uzel má jeden nebo více vstupů.
+ Do jednoho vstupu může vést maximálně jeden výstup z jiného uzlu
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+Výstup
+\series default
+ Každý uzel může ale nemusí mít jeden či více vstupů.
+ Data z jednoho výstupu lze směřovat zároveň do několika vstupů jiného uzlu.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+Stav
+\begin_inset space ~
+\end_inset
+
+uzlu
+\series default
+ Indikátor stavu uzlu.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+Popisek
+\begin_inset space ~
+\end_inset
+
+uzlu
+\series default
+ Popisek konkrétního uzlu.
+\end_layout
+
+\begin_layout Standard
+V našem work flow můžeme spouštět jednotlivé uzly, skupinu označených uzlů,
+ nebo všechny uzly.
+ Při spuštění, příjme uzel vstupní data a provede určenou operaci.
+ U uzlu, který dokončil provádění operace můžeme zobrazit jeho výstupní
+ data.
+ Díky tomu, můžeme sledovat, co se s daty dějě na při každém kroku.
+\end_layout
+
+\begin_layout Standard
+Pokud je spuštěno několik propojených uzlů najednou, po skončení operace
+ v jednom uzlu, jsou výstupní data ihned poslána do vstupu dalšího uzlu,
+ který zahájí další operaci atd.
+ Dokud neproběhnou všechny spuštěné uzly.
+\end_layout
+
+\begin_layout Standard
+Pokud se work flow větví, obě větve při spuštění budou probíhat paralelně.
+\end_layout
+
+\begin_layout Standard
+Jednotlivé uzly lze konfigurovat (podle jejich specifikace).
+ Pro každý základní uzel lze přímo v programu zobrazit dokumentaci, která
+ popisuje funkci uzlu, jeho vstupy, výstupy a možná nastavení.
+\end_layout
+
+\begin_layout Subsubsection
+Příklad work flow
+\end_layout
+
+\begin_layout Standard
+Pro lepší pochopení základů práce s KNIME AP, je dále uveden příklad jednoduchéh
+o work flow (Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Příklad-work-flow"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+V tomto příkladě, pracujeme s daty ze skladu.
+ V tabulce jsou uloženy jednotlivé výrobky.
+ U každého výrobku je uložen název, typ a počet dostupných kusů výrobku
+ na skladě.
+ Potřebujeme zjistit, kolik výrobků je dohromady pro každý typ.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/example_workflow.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Příklad-work-flow"
+
+\end_inset
+
+Příklad work flow
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+1.
+\begin_inset space ~
+\end_inset
+
+Ruční
+\begin_inset space ~
+\end_inset
+
+vytvoření
+\begin_inset space ~
+\end_inset
+
+tabulky Uvnitř tohoto uzlu lze ručně zadávat data.
+ Ručně vytvoříme potřebnou tabulku (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Ručně-vytvořená-tabulka"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+2.
+\begin_inset space ~
+\end_inset
+
+Seskupení
+\begin_inset space ~
+\end_inset
+
+podle
+\begin_inset space ~
+\end_inset
+
+typu
+\begin_inset space ~
+\end_inset
+
+výrobku Tento uzel seskupí výrobku podle typu a sečte jednotlivé počty dostupnýc
+h kusů
+\end_layout
+
+\begin_layout Description
+3a.
+\begin_inset space ~
+\end_inset
+
+Uložení
+\begin_inset space ~
+\end_inset
+
+dat
+\begin_inset space ~
+\end_inset
+
+do
+\begin_inset space ~
+\end_inset
+
+databáze Tento uzel se připojí k databázi (která je předem nakonfigurována
+ uvnitř uzlu) a uloží do ní výstupní data
+\end_layout
+
+\begin_layout Description
+3b.
+\begin_inset space ~
+\end_inset
+
+Uložení
+\begin_inset space ~
+\end_inset
+
+tabulky
+\begin_inset space ~
+\end_inset
+
+do
+\begin_inset space ~
+\end_inset
+
+PDF
+\begin_inset space ~
+\end_inset
+
+souboru Tento uzel vytvoří PSD soubor ve kterém bude tabulka s výstupními
+ daty
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/example_table.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ručně-vytvořená-tabulka"
+
+\end_inset
+
+Ručně vytvořená tabulka
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Výsledek můžeme sledovat ve vzniklém PDF souboru, v databázi, nebo přímo
+ v programu, zobrazením výstupních dat uzlu Group By (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Výstupní-tabulka"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/example_output.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Výstupní-tabulka"
+
+\end_inset
+
+Výstupní tabulka
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Python
+\end_layout
+
+\begin_layout Standard
+Python je interpretovaný, objektově orientovaný, skriptovací programovací
+ jazyk
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+https://docs.python.org/2/faq/general.html#what-is-python
+\end_layout
+
+\end_inset
+
+, který je oblíbený ve velkém množství různých oblastí
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+https://www.python.org/about/success/
+\end_layout
+
+\end_inset
+
+, díky rychlosti a jednoduchosti vývoje programů a velkému množství knihoven
+ (jak standartních tak i třetích stran
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Index knihoven (https://pypi.python.org/pypi) pro Python v době psaná této
+ práce obsahoval více než 78000 knihoven.
+\end_layout
+
+\end_inset
+
+).
+ Python je standartně dodáván se všemi distribucemi operačního systému Linux
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+GNU/Linux??? Fact check
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tento programovací jazyk byl použit při zpracování práce jak při vytvoření
+ samostatného programu, tak i v rámci práce s KNIME AP.
+\end_layout
+
+\begin_layout Subsubsection
+Použité knihovny
+\end_layout
+
+\begin_layout Standard
+Jak již bylo uvedeno výše, programovací jazyk umožňuje používat celou řadu
+ knihoven třetích stran.
+ Řada z nich je zaměřena přímo na práci s daty.
+ Při zpracování této práce byly využity následující knihovny třetích stran.
+\end_layout
+
+\begin_layout Paragraph
+Requests
+\end_layout
+
+\begin_layout Standard
+Tato knihovna umoňujě posílat poždavky na webové servery přes HTTP protokol
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Reference https://pypi.python.org/pypi/requests
+\end_layout
+
+\end_inset
+
+.
+ Python sice poskytuje vestavěnou HTTP knihovnu, ovšem práce s touto knihovnou
+ je mnohem komplikvanější a méně efektivní.
+\end_layout
+
+\begin_layout Standard
+Knihovna Requests byla použita při získávání dat internetu (viz 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Přidat cross referenci na sekci s web scrapingem
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Paragraph
+Beautiful Soup
+\end_layout
+
+\begin_layout Standard
+Tato knihovna je určena k syntaktické analýze HTML.
+ Umožňuje získávat data z zdrojového kódu webové stránky.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Reference https://www.crummy.com/software/BeautifulSoup/bs4/doc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Knihovna byla použita při získávání dat internetu (viz 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Přidat cross referenci na sekci s web scrapingem
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Paragraph
+Matplotlib
+\end_layout
+
+\begin_layout Standard
+Tato knihovna slouží k vytváření grafů z poskytnutých dat.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Reference http://matplotlib.org/
+\end_layout
+
+\end_inset
+
+.
+ Tato knihovna byla použita v rámci KNIME AP pro tvorbu grafů z výsledných
+ dat.
+\end_layout
+
+\begin_layout Section
 Vyhodnocení aspektů on-line bankovnictví CIBC
 \end_layout
 
@@ -268,15 +904,11 @@ použitá metoda
 \end_layout
 
 \begin_layout Standard
-popis použitých nástrojů - KNIME, Python a knihovny
-\end_layout
-
-\begin_layout Standard
-popis jednotlivých kroků (uzlů v KNIME)
+Postup při zpracování dat
 \end_layout
 
 \begin_layout Section
-Závěr
+Závěr 
 \end_layout
 
 \begin_layout Standard
