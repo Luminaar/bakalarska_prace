@@ -159,7 +159,7 @@ LatexCommand tableofcontents
 Abstract
 \end_layout
 
-\begin_layout Section
+\begin_layout Section*
 Úvod
 \end_layout
 
@@ -217,40 +217,58 @@ Teoretická
 \end_layout
 
 \begin_layout Section
-Rešerše
+Základní terminologie
 \end_layout
 
 \begin_layout Standard
-kdo a co všechno napsal k tématu.
- Jaké jsou trendy
+Zde vybrat podstatné termíny, která se objevují dále v práci: aspekt, aspekt
+ mining, text mining, web crawling a web scraping
 \end_layout
 
 \begin_layout Standard
-co o tom napsal Bing Liu
+Jednotlivé termíny by měly být popsány srozumitelně, ale bez velkých návazností.
 \end_layout
 
 \begin_layout Section
-Hodnocení služeb
+Popis oblasti a rešerše
 \end_layout
 
 \begin_layout Standard
-co je to služba, IT služba, jak se hodnotí, zpětná vazba od uživaele,...
-\end_layout
-
-\begin_layout Section
-Zpracování textu obecně
-\end_layout
-
-\begin_layout Section
-Aspect mining
+popis řešené oblasti a rešerše
 \end_layout
 
 \begin_layout Standard
-různé přístupy, rozdíl mezi aspect a topic miningem, 
+navazuje na popsanou terminologii, dává termíny do souvislostí, 
+\end_layout
+
+\begin_layout Standard
+Vybrat všechny relevantní zdroje a popsat, co se v nich říká, zároveň se
+ tím popíše celá oblast.
+\end_layout
+
+\begin_layout Standard
+Rozepsat se o tom, co všechno do této oblasti spadá: služby (co to je služba,
+ jak se dá hodnotit, zpětná vazba od zákazníků), získávání strukturovaných
+ dat (web crawling a scraping, přístup k databázi), dobývání znalostí z
+ textu (analýza přirozeného jazyka)
+\end_layout
+
+\begin_layout Standard
+Různé přístupy k problematice
+\end_layout
+
+\begin_layout Standard
+Rozepsat se, jaké jsou trendy.
+ Mělo by to být trošku zajímavější povídání, aby se někdo alespoň něco dozvěděl.
 \end_layout
 
 \begin_layout Part
 Praktická
+\end_layout
+
+\begin_layout Standard
+Trochu nějaký úvod, co bude následovat.
+ Ještě jednou shrnout, jaké jsme si daly cíle.
 \end_layout
 
 \begin_layout Section
@@ -1511,23 +1529,44 @@ Jednotlivé recenze jsou uložené na samostatných řádcích.
 \end_layout
 
 \begin_layout Section
-Vyhodnocení aspektů on-line bankovnictví CIBC
+Přesné stanovení metody
 \end_layout
 
 \begin_layout Standard
-co je CIBC
+Podle toho, co mám v knime, ale zatím jeno hodně obecně, co všechno se s
+ daty stalo, aby z nich vylezly výsledky: Jak se hledaly aspekty, že se
+ recenze pak indexovaly a v nich se ty aspekty hledaly, že se hodnotily
+ sentimenty podle slovníků.
+ Jednotlivé tagery, filtry, stemmery apod.
+\end_layout
+
+\begin_layout Section
+Popis implemetnace v KNIME
 \end_layout
 
 \begin_layout Standard
-jaká data použijeme
+Podrobný popis jednotlivých kroků při implementaci, jak byly aplikovány
+ jednotlivé kroky z metody na data
+\end_layout
+
+\begin_layout Section
+Interpretace výstupů
 \end_layout
 
 \begin_layout Standard
-použitá metoda
+Co jsme zjistili, jak by se dala zjištění použít, kdo by je mohl využít,
+ jaké nedostatky má naše metoda (třeba to, že při celkovém hodnocení nezvažujeme
+ čas - okecat to: v reálné situaci bych měl hromady recenzí během krátké
+ doby).
+ Co by se dalo udělat ještě lépe.
 \end_layout
 
 \begin_layout Standard
-Postup při zpracování dat
+Tyhle věci rozepsat podrobně, do závěru pak jenom výcuc.
+\end_layout
+
+\begin_layout Standard
+Tady by měly být všechny výstupy jako tabulky a obrázky.
 \end_layout
 
 \begin_layout Section
