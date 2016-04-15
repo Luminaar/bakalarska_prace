@@ -5,6 +5,8 @@
 \textclass article
 \begin_preamble
 \usepackage[czech]{babel}
+\usepackage{algorithm,algpseudocode}
+\definecolor{mygray}{gray}{0.95}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -804,7 +806,8 @@ Requests
 \end_layout
 
 \begin_layout Standard
-Tato knihovna umoňujě posílat poždavky na webové servery přes HTTP protokol
+Tato knihovna umoňujě posílat poždavky na webové servery přes HTTP (Hypertext
+ Transfer Protocol) protokol
 \begin_inset Note Note
 status open
 
@@ -853,7 +856,7 @@ Reference https://www.crummy.com/software/BeautifulSoup/bs4/doc
 \end_layout
 
 \begin_layout Standard
-Knihovna byla použita při získávání dat internetu (viz 
+Knihovna byla použita při získávání dat z webové stránky (viz 
 \begin_inset Note Note
 status open
 
@@ -883,8 +886,628 @@ Reference http://matplotlib.org/
 \end_inset
 
 .
- Tato knihovna byla použita v rámci KNIME AP pro tvorbu grafů z výsledných
+ Tato knihovna byla použita v rámci KNIME AP.
+\end_layout
+
+\begin_layout Section
+Získání strukturovaných dat
+\end_layout
+
+\begin_layout Standard
+Při zpracování dat byla využita veřejná data, dostupná z webových stránek
+ banky CIBC 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+https://www.cibc.com/ca/how-to-bank/online-banking/reviews-olb.html
+\end_layout
+
+\end_inset
+
+.
+ Jedná se o uživatelské recenze na služby této banky.
+ V době psaní práce, obsahovala tato webová stránka více než 2600 recenzí.
+\end_layout
+
+\begin_layout Standard
+Tato data jsou však dostupná jen jako součást webové stránky a nelze je
+ proto jednoduše analyzovat.
+ Přesto jsou to data strukturovaná.
+ Protože se jedná o dynamicky generovanou webovou stránku (zobrazují se
+ pouze požadované recenze od uživatelů), je zřejmé, že na straně webového
+ serveru jsou tato data uložena v databázi (ať už relační, či jiné), odkud
+ jsou vkládána do zdrojového kódu samotné webové stránky.
+ Pokud je možné přistupovat k této databázi přímo, lze strukturovaná data
+ ihned analyzovat.
+ Bez přístupu k databázi, je nejdříve nutné tato data získat.
+\end_layout
+
+\begin_layout Standard
+Pro tyto účely byl při zpracování práce vytvořen počítačový program
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Zdrojový kód programu, včetně podrobných komentářů je přiložen jako Příloha
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-crawleru"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, který data z webové stránky získal a připravil je k dalšímu zpracování.
+ Tento počítačový program a principy podle kterých funguje je popsán v této
+ kapitole.
+\end_layout
+
+\begin_layout Subsection
+Web scraping
+\end_layout
+
+\begin_layout Standard
+Proces získání dat z webové stránky se nazývá 
+\emph on
+web scraping
+\emph default
+ a programu 
+\emph on
+scraper.
+
+\emph default
+ K získání dat je možné přistupovat několika způsoby
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Reference na Bing Liu - Exploring hypertext, str.363
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Description
+Manuální
+\begin_inset space ~
+\end_inset
+
+zpracování Při tomto přístupu, programátor ručně hledá opakující se vzory
+ ve zdrojovém kódu a poté píše program, který podle těchto vzoru extrahuje
+ data
+\end_layout
+
+\begin_layout Description
+Poloautomatické
+\begin_inset space ~
+\end_inset
+
+zpracování Tato metoda spočívá v učení s učitelem (angl.
+ 
+\emph on
+supervised learning
+\emph default
+), kdy se program nejdříve učí na ručně označkovaných datech a podle naučených
+ pravidel poté extrahuje data z podobně formátovaných stránek.
+\end_layout
+
+\begin_layout Description
+Automatické
+\begin_inset space ~
+\end_inset
+
+extrakce Podobně jako při poloautomatickém zpracování, progam extrahuje
+ podle naučených pravidel, ale tato providla se učí automaticky z trénovacích
  dat.
+\end_layout
+
+\begin_layout Standard
+Při zpracování této práce byl použit první přístup.
+ Výhodou tohoto přístupu je, že je nejjednodušší, nevyžaduje žádné speciální
+ softwarové vybavení a je snadné ho aplikovat s pomocí běžných nástrojů
+ (v tomto případě programovací jazyk Python).
+ Nevýhodou je, že vytvořený program (scraper) nelze využít pro extrakci
+ dat z jiného zdroje.
+ Pro každou nový zdroj (webovou stránku) je nutné znovu ručně vyhledávat
+ vzory ve zdrojovém kódu.
+ V případě této práce, tato nevýhoda není omezující, protože jsou analyzována
+ data pouze z jednoho zdroje.
+\end_layout
+
+\begin_layout Subsection
+Získání zdrojového kódu stránky
+\end_layout
+
+\begin_layout Standard
+Proces získání dat z webové stránky lze rozdělit na několik kroků.
+ Je nutné podotknout, že se následující popis týká jenom jednoho konkrítního
+ zdroje.
+ Pro jiné webové stránky bude postup ale obdobný.
+\end_layout
+
+\begin_layout Standard
+Jako první, je nutné určit, z jaké stránky budou data získávána.
+ V tomto případě, se jedná o stránku s uživatelskými recenzemi na webové
+ stránce banky.
+ Na této stránce si lze ihned všimnout, že jednotlivé recenze jsou zobrazovány
+ na stránkách po 10.
+ Dále si lze všimnout, že číslo stránku není uvedeno v URL (Uniform Resource
+ Locator - jednotná adresa zdroje) stránky (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Stránka-s-recenzemi"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/review_page.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Stránka-s-recenzemi"
+
+\end_inset
+
+Stránka s recenzemi, červeně označeno URL a číslování stránek.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Scraper musí projít každou stránku a uložit její zdrojový kód.
+ Aby to bylo možné, musí mít scraper URL každé z nich.
+ Podrobnějším prozkoumáním webové stránky lze zjistit, že při řechodu na
+ další stránku s recenzemi, nedochází k načtení celé stránky, ale pouze
+ nových recenzí.
+ To poukazuje na využití webových technologií AJAX (Asynchronous JavaScript
+ and XML)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+https://courses.cs.washington.edu/courses/cse490h/07sp/readings/ajax_adaptive_path.p
+df
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Ke zjištění URL jednotlivých stránek stačí sledovat HTTP požadavky, které
+ probíhají mezi klientem a serverem při přecházení mezi jednotlivými stránkami.
+ Toto umožňuje celá řada nástrojů, včetně většiny běžných webových prohlížečů.
+\end_layout
+
+\begin_layout Standard
+Pozorováním proběhlých požadavků lze zjistit, na jaké URL je zdrojový kód
+ dostupný (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:HTTP-požadavky"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované stránky
+ (URL zkráceno pro přehlednost):
+\end_layout
+
+\begin_layout Verbatim
+
+https://cibc-secure.ugc.bazaarvoice.com/...page=5...
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/developer_tools.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:HTTP-požadavky"
+
+\end_inset
+
+HTTP požadavky
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Scraper nyní může projít všechny stránky podle čísla, dosazením tohoto čísla
+ do URL.
+ Program projde všechny stránky s recenzemi jednu po druhé a uloží jejich
+ zdrojové kódy.
+ V této implementaci byla pro zásílání HTTP požadavků použita knihovna Requests
+ (viz.
+ Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-crawleru"
+
+\end_inset
+
+, funkce 
+\family typewriter
+get_data
+\family default
+).
+\end_layout
+
+\begin_layout Subsection
+Extrakce dat
+\end_layout
+
+\begin_layout Standard
+Před tím než je možné data extrahovat, je nutné ručně projít strukturu dat
+ a určit vzory, podle kterých budou data extrahována.
+ Nejdříve určíme, které části recenze jsou podstatné.
+ V tomto případě jde o titulek recenze, text recenze, celkové hodnocení
+ a datum vložení recenze (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Uživatelská-recenze"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/review.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Uživatelská-recenze"
+
+\end_inset
+
+Uživatelská recenze
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ve zdrojovém kódu se určí část, kde je popsána jedna samostatná recenze.
+ V případě této stránky, jsou potřebná data obsažena v HTML prvcích, které
+ mají přiřazené třídy s konzistentními názvy (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zdrojový-kód-recenze."
+
+\end_inset
+
+).
+ Podle těchto prvků bude scraper hledat a ukládat data:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family typewriter
+BVRRConentReview
+\family default
+ prvky s touto třídou obsahují jednotlivá review
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family typewriter
+BVRROverallRatingContainer
+\family default
+ prvky s touto třídou obsahují celkové hodnocení od uživatele
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family typewriter
+BVRRReviewTitleContainer
+\family default
+ prvky s touto třídou obsahují titulek review
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family typewriter
+BVRRReviewDateContainer
+\family default
+ prvky s touto třídou obsahují datum vložení review
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family typewriter
+BVRRReviewTextContainer
+\family default
+ prvky s touto třídou obsahují text review
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/review_html.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zdrojový kód recenze.
+ Červeně vyznačené: relevantní HTML prvky.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zdrojový-kód-recenze."
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Scraper nejdříve provede syntaktickou analýzu zdrojového kódu s pomocí knihovny
+ BeautifulSoup.
+ To umožní jednoduše procházet a vyhledávat ve stromu HTML prvků.
+ Scraper nejdříve vyhledá jednotlivé recenze.
+ Uvnitř každé recenze pak vyhledává prvky, obsahující potřebná data.
+\end_layout
+
+\begin_layout Standard
+V případě titulku a textu recenze, stačí pouze uložit text uvnitř patřičného
+ prvku.
+ V případě datumu, je navíc nutné ho převést do standartního formátu.
+ Programovací jazyk Python toto umoňuje pomocí vestavěné knihovny 
+\family typewriter
+DateTime
+\family default
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+https://docs.python.org/2/library/datetime.html
+\end_layout
+
+\end_inset
+
+(viz.
+ Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-crawleru"
+
+\end_inset
+
+, funkce 
+\family typewriter
+parse_date
+\family default
+).
+\end_layout
+
+\begin_layout Standard
+Uživatelské hodnocení je zapsáno jako text (př.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+5 out of 5
+\begin_inset Quotes grd
+\end_inset
+
+).
+ S pomocí regulárních výrazů stačí vyextrahovat první číslo v textu.
+ Python toto umožňuje pomocí vestavěné knihovny 
+\family typewriter
+Re
+\family default
+ (viz.
+ Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-crawleru"
+
+\end_inset
+
+, funkce 
+\family typewriter
+get_rating
+\family default
+).
+\end_layout
+
+\begin_layout Standard
+Vyextrahovaná data jsou poté uložena ve formátu JSON (Javascript Object
+ Notation) do textového souboru:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Nějaká reference, co to je, možná poznámka pod čarou??
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Verbatim
+
+{
+\end_layout
+
+\begin_layout Verbatim
+
+  "title": "Online Access via Safari",
+\end_layout
+
+\begin_layout Verbatim
+
+  "text":  "I am not able to access online banking
+\end_layout
+
+\begin_layout Verbatim
+
+	   using the Safari browser on a Mac.
+ This
+\end_layout
+
+\begin_layout Verbatim
+
+	   has been ongoing for a number of days.",
+\end_layout
+
+\begin_layout Verbatim
+
+  "hodnoceni": 1,
+\end_layout
+
+\begin_layout Verbatim
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jednotlivé recenze jsou uložené na samostatných řádcích.
+ Data v tomto formátu potom lze načíst do KNIME Application Platform.
 \end_layout
 
 \begin_layout Section
@@ -926,6 +1549,942 @@ zhodnocení využitelnosti dosažených výsledků, příp.
 
 \begin_layout Standard
 oblasti.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Přílohy
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+Zdrojový kód scraperu
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Zdrojový-kód-crawleru"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,numbers=left,numberstyle={\scriptsize},stepnumber=5,basicstyle={\footnotesize\ttfamily},backgroundcolor={\color{mygray}},stringstyle={\color{green}},keywordstyle={\color{blue}},commentstyle={\color{red}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#! /usr/bin/python
+\end_layout
+
+\begin_layout Plain Layout
+
+# -*- coding:utf8 -*-
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+import json
+\end_layout
+
+\begin_layout Plain Layout
+
+import re
+\end_layout
+
+\begin_layout Plain Layout
+
+import locale
+\end_layout
+
+\begin_layout Plain Layout
+
+from datetime import datetime
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+import requests
+\end_layout
+
+\begin_layout Plain Layout
+
+from bs4 import BeautifulSoup
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def get_text(review, class_):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """Funkce vrací obsah (text) HTML elementu, který má třídu 'class_'
+\end_layout
+
+\begin_layout Plain Layout
+
+    a je obsažen v recenzi 'review'.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Argumenty:
+\end_layout
+
+\begin_layout Plain Layout
+
+        review - objekt typu Tag
+\end_layout
+
+\begin_layout Plain Layout
+
+        class_ - textový řetězec s názvem třídy elementu
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Vrací:
+\end_layout
+
+\begin_layout Plain Layout
+
+        textový řetězec s obsahem elementu, nebo 'N/A'
+\end_layout
+
+\begin_layout Plain Layout
+
+        pokud prvek nebyl nalezen
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    try:
+\end_layout
+
+\begin_layout Plain Layout
+
+        return review.find(attrs={'class':class_}).get_text()
+\end_layout
+
+\begin_layout Plain Layout
+
+    except AttributeError:
+\end_layout
+
+\begin_layout Plain Layout
+
+        return 'N/A'
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def get_rating(review):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """Vrací hodnotu celkového uživatelského hodnocení.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Argumenty:
+\end_layout
+
+\begin_layout Plain Layout
+
+        review - objekt typu Tag
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Vrací:
+\end_layout
+
+\begin_layout Plain Layout
+
+        textový řetězec obsahující hodnotu uživatelského hodnocení
+\end_layout
+
+\begin_layout Plain Layout
+
+    """
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # Text elementu, který obsahuje hodnocení
+\end_layout
+
+\begin_layout Plain Layout
+
+    text = get_text(review, 'BVRRReviewRatingsContainer')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # Provedení regulárního výracu, který vyhledává
+\end_layout
+
+\begin_layout Plain Layout
+
+    # řetězec 'Overall Rating' a ukládá číslo, které
+\end_layout
+
+\begin_layout Plain Layout
+
+    # po něm následuje.
+\end_layout
+
+\begin_layout Plain Layout
+
+    prog = re.compile('Overall
+\backslash
+s*Rating
+\backslash
+s*(
+\backslash
+d).*')
+\end_layout
+
+\begin_layout Plain Layout
+
+    result = prog.search(text)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    overall = result.group(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return str(overall)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def parse_date(date):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """Vrací datum ve standartním formátu RRRR-MM-DD.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Argumenty:
+\end_layout
+
+\begin_layout Plain Layout
+
+        date - textový řetězec obsahující datum
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Vrací:
+\end_layout
+
+\begin_layout Plain Layout
+
+        textový řetězec s datem ve standartním formátu"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # nastevení lokalizace na anglický jazyk, aby
+\end_layout
+
+\begin_layout Plain Layout
+
+    # bylo možné používat anglické názvy měsíců
+\end_layout
+
+\begin_layout Plain Layout
+
+    locale.setlocale(locale.LC_TIME,'en_US.UTF-8')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # načtení datumu z textu podle zadaného formáru:
+\end_layout
+
+\begin_layout Plain Layout
+
+    # 'nazev měsice anglicky' 'číslo dne', 'číslo roku'
+\end_layout
+
+\begin_layout Plain Layout
+
+    date_obj = datetime.strptime(date, '%B %d, %Y')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # vytvoření textového řetězce ve standartním formátu
+\end_layout
+
+\begin_layout Plain Layout
+
+    new_date = datetime.strftime(date_obj, '%Y-%m-%d')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return new_date
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def get_info(review):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """Vrací všechna potřebná data z 'review' v objektu
+\end_layout
+
+\begin_layout Plain Layout
+
+    typu dictionaru (hašovací tabulka).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Argumenty:
+\end_layout
+
+\begin_layout Plain Layout
+
+        review - objekt typu Tag
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Vrací:
+\end_layout
+
+\begin_layout Plain Layout
+
+        objekt typu dictionary, který obsahuje data
+\end_layout
+
+\begin_layout Plain Layout
+
+        vyextrahovaná z review"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    d = {
+\end_layout
+
+\begin_layout Plain Layout
+
+        'title': get_text(review, 'BVRRReviewTitleContainer'),
+\end_layout
+
+\begin_layout Plain Layout
+
+        'text': get_text(review, 'BVRRReviewTextContainer'),
+\end_layout
+
+\begin_layout Plain Layout
+
+        'ratings':get_rating(review),
+\end_layout
+
+\begin_layout Plain Layout
+
+        'date': parse_date(get_text(review, 'BVRRReviewDate')),
+\end_layout
+
+\begin_layout Plain Layout
+
+        }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    return d
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def get_data(pages=264):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """Generátor, který při iteraci vrací data z jednotlvých
+\end_layout
+
+\begin_layout Plain Layout
+
+    review.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Generátorové funkce se chovají jako iterátory, tzn.
+ lze
+\end_layout
+
+\begin_layout Plain Layout
+
+    je používat ve smyčkách.
+ Při každé iteraci, vrací taková
+\end_layout
+
+\begin_layout Plain Layout
+
+    funkce určitou hodnotu.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Výhodou generátorových funkcí je, že (narozdíl od jiných iterátorů)
+\end_layout
+
+\begin_layout Plain Layout
+
+    hodnotu vypočítává až při zavolání, tj.
+ není potřeba, aby
+\end_layout
+
+\begin_layout Plain Layout
+
+    všechny hodnoty (kterých může být i nekonečné množství)
+\end_layout
+
+\begin_layout Plain Layout
+
+    byly uloženy najednou v paměti.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Přijámá jako argument počet stránek, které je potřeba projít.
+ Poté
+\end_layout
+
+\begin_layout Plain Layout
+
+    prochází jednotlivé stránky s recenzemi, dosazením čísla do URL.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Funkce stahuje a parsuje zdrojový kód stránky a poté pro
+\end_layout
+
+\begin_layout Plain Layout
+
+    každou nalezenou recenzi vrací data v objektu typu dictionary.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Argumentu:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pages - počet stránek ke stažení.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Vrací:
+\end_layout
+
+\begin_layout Plain Layout
+
+        postupně pro každou recenci objekt dictionary, ve kterém
+\end_layout
+
+\begin_layout Plain Layout
+
+        jsou obsažena potřebná data pro tuto recenzi"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    base_url = ('https://cibc-secure.ugc.bazaarvoice.com/'
+\end_layout
+
+\begin_layout Plain Layout
+
+    		'0510-en_ca/2676-en/reviews.djs?'
+\end_layout
+
+\begin_layout Plain Layout
+
+		'format=embeddedhtml&page={page}&scrollToTop=true')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    page_counter = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+    review_counter = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    for page_num in xrange(1,pages+1):
+\end_layout
+
+\begin_layout Plain Layout
+
+        page_counter += 1
+\end_layout
+
+\begin_layout Plain Layout
+
+        print 'Page: {}'.format(page_counter)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        try:
+\end_layout
+
+\begin_layout Plain Layout
+
+            url = base_url.format(page=page_num)  # dosazení čísla stránky
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+            r = requests.get(url)  # uložení zdrojového kódu stránky
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+            # očištění od escapovacích znaků
+\end_layout
+
+\begin_layout Plain Layout
+
+            t = r.content
+\end_layout
+
+\begin_layout Plain Layout
+
+            t = t.replace(r"
+\backslash
+'", "'").replace(r'
+\backslash
+n', '')
+\end_layout
+
+\begin_layout Plain Layout
+
+            t = t.replace(r'
+\backslash
+"', '"').replace('
+\backslash
+
+\backslash
+', '')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+            # parsování zdrojového kódu
+\end_layout
+
+\begin_layout Plain Layout
+
+            soup = BeautifulSoup(t, 'lxml')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+            # všechna review jsou v elementech s touto třídou
+\end_layout
+
+\begin_layout Plain Layout
+
+            cls = 'BVRRContentReview'
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+            # extrakce všech reveiw
+\end_layout
+
+\begin_layout Plain Layout
+
+            reviews = soup.find_all(attrs={'class':cls})
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+            for review in reviews:
+\end_layout
+
+\begin_layout Plain Layout
+
+                yield get_info(review)  # vracení dat
+\end_layout
+
+\begin_layout Plain Layout
+
+                review_counter += 1
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        except Exception as e:
+\end_layout
+
+\begin_layout Plain Layout
+
+            # Při jakékoliv chybě vrátí řětězec popisujícíc chybu a
+\end_layout
+
+\begin_layout Plain Layout
+
+            # číslo stránky na které k chybě došlo
+\end_layout
+
+\begin_layout Plain Layout
+
+            yield 'Error {}, {}'.format(page_counter, e)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    print 'Downloaded pages: {}'.format(page_counter)
+\end_layout
+
+\begin_layout Plain Layout
+
+    print 'Downloaded reviews: {}'.format(review_counter)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def save_as_json(iterator, file_='/tmp/data.json'):
+\end_layout
+
+\begin_layout Plain Layout
+
+    """Ukládá data z jakéhokoliv iterátoru do textového
+\end_layout
+
+\begin_layout Plain Layout
+
+    souboru ve formáru JSON.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    Argumenty:
+\end_layout
+
+\begin_layout Plain Layout
+
+        iterator - jakýkoliv objekt který umonuje iteraci
+\end_layout
+
+\begin_layout Plain Layout
+
+        file_ - nepovinný argument určující cestu k souboru"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    with open(file_, 'w') as json_file:  # otevření souboru
+\end_layout
+
+\begin_layout Plain Layout
+
+        for review in iterator:
+\end_layout
+
+\begin_layout Plain Layout
+
+            json_data = json.dumps(review)  # serializace objektu do JSON
+\end_layout
+
+\begin_layout Plain Layout
+
+            json_file.write(json_data+'
+\backslash
+r
+\backslash
+n')  # uložení do souboru
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+if __name__=='__main__':
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    iterator = get_data(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+    save_as_json(iterator)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
