@@ -947,7 +947,7 @@ Reference http://matplotlib.org/
 \end_layout
 
 \begin_layout Section
-Získání strukturovaných dat
+Získání nestrukturovaných dat
 \end_layout
 
 \begin_layout Standard
@@ -1274,8 +1274,8 @@ Extrakce dat
 Před tím než je možné data extrahovat, je nutné ručně projít strukturu dat
  a určit vzory, podle kterých budou data extrahována.
  Nejdříve určíme, které části recenze jsou podstatné.
- V tomto případě jde o titulek recenze, text recenze, celkové hodnocení
- a datum vložení recenze (viz Obrázek 
+ V tomto případě jde o titulek recenze, text recenze a celkové hodnocení
+ (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Uživatelská-recenze"
@@ -1365,15 +1365,6 @@ BVRROverallRatingContainer
 BVRRReviewTitleContainer
 \family default
  prvky s touto třídou obsahují titulek review
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-
-\family typewriter
-BVRRReviewDateContainer
-\family default
- prvky s touto třídou obsahují datum vložení review
 \end_layout
 
 \begin_layout Labeling
@@ -2581,113 +2572,6 @@ d).*')
 
 \begin_layout Plain Layout
 
-def parse_date(date):
-\end_layout
-
-\begin_layout Plain Layout
-
-    """Vrací datum ve standartním formátu RRRR-MM-DD.
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-    Argumenty:
-\end_layout
-
-\begin_layout Plain Layout
-
-        date - textový řetězec obsahující datum
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-    Vrací:
-\end_layout
-
-\begin_layout Plain Layout
-
-        textový řetězec s datem ve standartním formátu"""
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-    # nastevení lokalizace na anglický jazyk, aby
-\end_layout
-
-\begin_layout Plain Layout
-
-    # bylo možné používat anglické názvy měsíců
-\end_layout
-
-\begin_layout Plain Layout
-
-    locale.setlocale(locale.LC_TIME,'en_US.UTF-8')
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-    # načtení datumu z textu podle zadaného formáru:
-\end_layout
-
-\begin_layout Plain Layout
-
-    # 'nazev měsice anglicky' 'číslo dne', 'číslo roku'
-\end_layout
-
-\begin_layout Plain Layout
-
-    date_obj = datetime.strptime(date, '%B %d, %Y')
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-    # vytvoření textového řetězce ve standartním formátu
-\end_layout
-
-\begin_layout Plain Layout
-
-    new_date = datetime.strftime(date_obj, '%Y-%m-%d')
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-    return new_date
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
 def get_info(review):
 \end_layout
 
@@ -2756,11 +2640,6 @@ def get_info(review):
 \begin_layout Plain Layout
 
         'ratings':get_rating(review),
-\end_layout
-
-\begin_layout Plain Layout
-
-        'date': parse_date(get_text(review, 'BVRRReviewDate')),
 \end_layout
 
 \begin_layout Plain Layout
