@@ -30,7 +30,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize 12
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \papersize default
 \use_geometry true
@@ -1187,6 +1187,7 @@ Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované
 \end_layout
 
 \begin_layout Verbatim
+
 https://cibc-secure.ugc.bazaarvoice.com/...page=5...
 \end_layout
 
@@ -1559,29 +1560,25 @@ Stanovení metody
 \end_layout
 
 \begin_layout Standard
+V této kapitole je popsána metoda, která byla použita pro získání informací
+ z dostupných dat.
+ Tato metoda byla vypracována na základě předchozí práce v a [
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Podle toho, co mám v knime, ale zatím jeno hodně obecně, co všechno se s
- daty stalo, aby z nich vylezly výsledky: Jak se hledaly aspekty, že se
- recenze pak indexovaly a v nich se ty aspekty hledaly, že se hodnotily
- sentimenty podle slovníků.
- Jednotlivé tagery, filtry, stemmery apod.
+Mining opinion features ins customer revies
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-V této kapitole jsou popsány jednotlivé kroky aplikované na získaná data,
- bez ohledu na konkrétní implementaci.
- Tento popis by měl umožnit postup zopakovat s pomocí jakéhokoliv vhodného
- nástroje.
- Manipulaci s daty lze rozdělit na tři jednotlivé části: předzpracování
- texu
+].
+ Metoda není závislá na konkrétní implementaci (popis implementace je uveden
+ v následující kapitole).
+ Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
+h nástrojů.
+ Metody lze rozdělit na tři hlavní části: předzpracování textu, extrakce
+ aspektů a vyhodnocení aspektů.
 \end_layout
 
 \begin_layout Subsection
@@ -1589,44 +1586,64 @@ Předzpracování textu
 \end_layout
 
 \begin_layout Standard
-Aby bylo možné ze souvislého textu získávat informace za pomoci automatizovaných
- prostředků, je nutné tento text rozdělit na jednotlivé jednotky, jako jsou
- věty a slova.
- Toto může být netriviálním úkolem.
- V závislosti na jazyku, oddělení jednolivých slov a vět může být pro počítačévý
- program více či méně obtížné, nebo téměř nemožné.
+Předzpracování textu je důležitou operací ve všech oblastech, které pracují
+ s textem jako je text mining, vyhledávání informací, zpracovíní přirozeného
+ jazyka apod.
+ Jedná se o soubor postupů, při kterých je text upraven tak, aby ho bylo
+ možné zpracovávat strojově a aby obsahoval co nejméně triviálních a irelevantní
+ch informací.
+ Pro účely této metody, byly na text jednotlivých recenzí aplikovány následující
+ postupy.
+\end_layout
+
+\begin_layout Subsubsection
+Tokenizace
 \end_layout
 
 \begin_layout Standard
-Počítačový porgram se při řešení této úlohy řídí předem danými oddělovači.
+Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
+ Tyto znaky lze dělit na jednotlivé smysluplné celky jako jsou slova, fráze
+ nebo věty.
+ Tento proces dělení se nazývá tokenizace.
+ Při čtení textu je pro člověka tekenizace samozřejmosí.
+ Při strojovém zpracování se může jednat o netriviální úkol.
+\end_layout
+
+\begin_layout Standard
+Tokenizační algoritmy se většinou řídí oddělovači, které se jsou pro daný
+ jazyk běžné.
  Ve většině jazyků jsou slova oddělena mezerou (toto neplatí například u
  Čínského jazyka).
  Proto lze říci, že jakákoliv mezera (běžná mezera, tabulátor, atd.) je oddělovač.
  Dalšími oddělovači jsou speciální znaky jako jsou tečka, čárka, dvojtečka,
- středník, závorky, vykřičník, otzník a další.
+ středník, závorky, vykřičník, otazník a další.
  Některé z nich jsou oddělovači vždy, některé v závislosti na kontextu (např.
  tečka ve slově Ph.D není oddělovačem).
  Všechny tyto komplikace je nutné v tomto kroce zvažovat.
 \end_layout
 
 \begin_layout Standard
-Pro účely této metody, se každá uživatelská recenze uloží jako dokument,
- u kterého je jasně daná struktura (například ve formátu XML - extensible
- markup language).
- Pro každou recenzi se uloží titulek, text a uživatelské hodnocení.
- Text každé recenze je třeba rozdělit na věty a slova a tuto strukturu uložit.
+Pro účely této metody je každá recenze rozdělena na jednotlivé věty a slova.
+ Každá recenze je pak uložena jako dokument tak, aby byla zachována její
+ struktura.
+ S uloženými dokumenty by mělo být možné pracovat jak na úrovni celé recenze,
+ jednotlivých vět (např.
+ vyhledávání výskytů slov ve větě) i jednotlivých slov (např.
+ označení slovních druhů).
+\end_layout
+
+\begin_layout Subsubsection
+Odstranění stop slov
 \end_layout
 
 \begin_layout Standard
-Dále je zřejmé, že ne všechna slova (nebo jiné části) obsažené v textu mají
- význam.
- Tzv.
+Tzv.
  stop slova, jsou taková slova, která se v textu vyskytují nejčastěji a
- přitom nenesou žádnou informaci.
+ přitom nenesou žádnou relevantní informaci.
  Tato slova lze z textu vyřadit, aniž by se zmenšila jeho informační hodnota.
- Seznamy stop slov nejčastěji vytvářejí speciálně pro každý soubor textů,
- na základě frekvence slov a ručního výběru.
- Mezi stop slova nejčastěji patří předložky, spojky, členy (
+ Seznamy stop slov se vytvářejí na základě frekvence slov a ručního výběru.
+ Mezi stop slova nejčastěji patří předložky, spojky, členy (např.
+ 
 \emph on
 the 
 \emph default
@@ -1634,8 +1651,28 @@ v anglickém jazyce) apod.
 \end_layout
 
 \begin_layout Standard
-Dalším krokem je určení slovních druhů pro každé slovo v uživatelské recenzi.
- K tomu slouží tzv.
+Odstraněním stop slov se také zmenší objem textu, což může být u velkého
+ množství dat stěžejní (až 30% slov v textu může být označeno jako stop
+ slova
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace https://www.researchgate.net/publication/273127322_Preprocessing_Techniques
+_for_Text_Mining
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Určení slovních druhů
+\end_layout
+
+\begin_layout Standard
+K určování (značkování) slovních druhů slouží tzv.
  značkovače (angl.
  
 \emph on
@@ -1646,37 +1683,46 @@ part-of-speech
 POS tagger
 \emph default
 ).
- Jedná se o algoritmy, které pomocí strojového učení z existujících textových
- korpů (ve kterých byla slova předem označkována ručně) a statistických
- metod určují slovní druhy u jednotlivých slov, včetně sporných příkladů
+ Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
  (např.
+ Brown korpus, který obsahuje více než 1 000 000 slov
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace http://www.hit.uib.no/icame/brown/bcm.html
+\end_layout
+
+\end_inset
+
+) a s pomocí statistických metod s co největší přesností určují slovní druh
+ pro každé slovo, včetně vyřešení sporných příkladů (např.
  slovo "stav" může být jak podstatným jménem tak i slovesem).
 \end_layout
 
 \begin_layout Standard
+V anglickém jazyce se rozlišuje 8 až 9 slovních druhů.
+ Pro účely strojového zpracování textu se pro dosažení větší přesnosti rozlišují
+ také poddruhy.
+ Nejčastěji se používá seznam slovní druhů vypracovaný v rámci projektu
+ Penn Treebank 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Penn tree bank - jaké jsou slovní druhy, že jich je víc.
+reference https://www.cis.upenn.edu/~treebank/
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Uvést příklady různých algoritmů
-\end_layout
+, viz Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seznam-slovních-druhů"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsection
@@ -1684,15 +1730,19 @@ Extrakce aspektů
 \end_layout
 
 \begin_layout Standard
-Před zahájením extrakce aspektů, je nutné provést ještě některé úpravy textu.
- Jako první jsou na základě značek slovních druhů (z minulé operace) odstraněny
- slova, která nespadají pod podstatná jména (značky NN, NNP, NNS, NNPS).
- To proto, že aspekty jsou zřídka kdy označovány jinými slovními druhy 
+Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či frázemi,
+ které se z podstatných jmén skládají.
+ Text může obsahovat i jiná podstatná jména, která nejsou aspekty, ale lze
+ předpokládat, že irelevantní slova se budou vyskytovat méně častěji (každý
+ uživatel zmiňuje ve své recenzi různé věci), kdežto slova značící aspekty
+ se budou v různých recenzích překrývat.
+ Tato slova se budou vyskytovat s vyšší frekvencí.
+ 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-tady může být citace na něco co říkal Bing Liu.
+citace Bing Liu - summarizing customer reviews
 \end_layout
 
 \end_inset
@@ -1700,21 +1750,34 @@ tady může být citace na něco co říkal Bing Liu.
 .
 \end_layout
 
+\begin_layout Subsubsection
+Filtrace a stematizace
+\end_layout
+
 \begin_layout Standard
-Dalším krokem tzv.
+Před extrakcí aspektů jsou provedeny další úpravy textu.
+ Nejdříve jsou z vět odstraněna slova, která nejsou podstatnými jmény.
+ Na základě značek slovních druhů, jsou ponechána pouze ta slova, která
+ spadají do kategorie NN nebo NNP (podstatné jméno, resp.
+ množné podstatné jméno).
+\end_layout
+
+\begin_layout Standard
+Dalším krokem je tzv.
  stematizace (angl.
  
 \emph on
 stemming
 \emph default
 ) slov.
- Tento proces spočívá v nalezení kmene slova, odstraněním koncovek slova.
+ Tento proces spočívá v nalezení kmene slova, odstraněním koncovek, popř.
+ i přípon.
  
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Developing a stemming algorithm
+Developing a stemming algorithm, Modern information retrieval
 \end_layout
 
 \end_inset
@@ -1725,24 +1788,47 @@ Developing a stemming algorithm
  frekvence výskytu tohoto aspektu.
  Např.
  slova "pohodlnost" a "pohodlí" mohou být vyhodnocena jako dva různé aspekty,
- idkyž se ve skutečnosti týkají jednoho a toho samého aspektu.
+ ikdyž se ve skutečnosti týkají jednoho a toho samého aspektu.
  Stematizací těchto slov vzniká kmen "pohod" a tak jsou výskyty obou slov
  počítány společne.
 \end_layout
 
+\begin_layout Subsubsection
+Nalezení častých slov a frází
+\end_layout
+
 \begin_layout Standard
-Extrakce aspektů pak spočívá v hledání nejčastějších slov nebo dvouslovných
- frází pomocí algoritmu Apriori, který se používá k hledání hledání častých
- sestav položek a určování asociačních pravidel (v tomto případě je použita
- pouze první část olgoritmu).
+Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
+ skupin slov, s pomocí algoritmu Apriori, který se používá k hledání hledání
+ častých sestav položek a určování asociačních pravidel (v tomto případě
+ je použita pouze první část algoritmu).
+ Tento algorimus vyhledává položky, které se vyskytují s minimální danou
+ podporou (tzn.
+ vyskytují se v daném minimálním procentu transakcí).
+ Mezi těmito položkami pak vyhledává ty, které se vyskytují společně, opět
+ s danou minimální podporou.
+ Při každé iteraci zvyšuje počet položek ve skupině.
+ Algoritmus končí, kdy se již nenajde žádná skupina položek, která by se
+ vyskytovala s danou podporou.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace Fast algorithms for mining association rules
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Algoritmus Apriori se nejčastěji používá při analýze transakcí, jako je
  například spotřební koš zákazníků supermarketů.
- Algoritmus umoňuje určit, které položky se často vyskytují společně v jedné
- transakci a tyto informace pak využít při předpovědích pro další transakce
- (např.
+ Algoritmus umožňuje určit, které položky se často vyskytují společně v
+ jedné transakci (při jednom nákupu) a tyto informace pak využít při předpovědíc
+h pro další transakce (např.
  spotřebitel, který koupil položku X, s velkou pravděpodobností koupí položku
  Y).
  Takové předpovědi se v praxi používají pro rozmísťování zboží v obchodech,
@@ -1761,8 +1847,8 @@ V tomto případě jsou transakcemi jednotlivé věty ze všech uživatelských
 Použitý algoritmus pracuje s minimální podporou, kterou určuje uživatel.
  V tomto případě je minimální podpora nastavena na 1%, tzn.
  slova nebo fráze (položky nebo sada položek), které se vyskytují v méně
- než 1% všech vět, jsou považovány za nedostatečně časté a tak ani nejsou
- zvažovány jako možné aspekty.
+ než 1% všech vět, jsou považovány za nedostatečně časté a tak nejsou zvažovány
+ jako možné aspekty.
 \end_layout
 
 \begin_layout Standard
@@ -1778,73 +1864,62 @@ Vyhodnocení aspektů
 \begin_layout Standard
 Poslední částí stanovené metody je určení, zda jsou jednotlivé aspekty hodnoceny
  kladně, či záporně.
- Za tímto účel jsem zvolena dvě kritéria.
- Prvním z nich je celkové hodnocení, které je stanveno uživatelem služby
- u každé recenze.
- Pro každý stanovený aspekt je pak stanoveno průměrné hodnocení, které je
- získáno zprůměrováním hodnocení všech recenzí, ve kterých se aspekt vyskytuje.
+ Za tímto účel jsou zvolena dvě kritéria: celkový sentiment a uživatelské
+ hodnocení.
+\end_layout
+
+\begin_layout Subsubsection
+Celkový sentiment
 \end_layout
 
 \begin_layout Standard
-Druhým je hodnoceným kritériem je sentiment.
- K vyhodnocení tohoto kritéria je nejdříve nutné určit, jak se o daném aspektu
- vyjadřují jednotlivé recenze, tedy zda ho hodnotí kladně či záporně.
- Jedna recenze se však může týkat více aspektů, a tak jsou při určování
- sentimentů hodnoceny jednotlivé věty.
- Pro každý aspekt jsou nejdříve nalezeny všechny věty ve kterých se vyskytuje.
- Z těchto vět jsou ponechána jenom slova, která jsou hodnotící, tj.
- přídavná jména, popř.
- příslovce.
- Ostatní slova jsou odstraněna.
+Celkový sentiment vyjadřuje převládající názor uživatelů na daný aspekt.
+ K vyhodnocení této metriky je nejdříve nutné určit, která review se k danému
+ aspektu vyjadřují, a jaký postoj zaujímají (kladný, resp.
+ záporný).
+ Postoj hodnotitele k aspektu je možné stanovit podle přítomnosti slov vyjadřují
+cích názor (hodnotící slova).
+ Těmito slovy jsou většinou přídavná jména nebo příslovce.
+ Přítomnost kladně orientovaných slov ve větě značí kladný postoj hodnotitele.
+ Naopak přítomnost záporných slov značí negativní postoj.
 \end_layout
 
 \begin_layout Standard
-U zbylých slov se pak stanoví jejich sémantická orientace, tzn.
- zda vyjadřují kladný, nebo záporný názor.
- Za tímto účelem jsou vytvořeny dva slovníky, které obsahují běžná pozitivně,
- resp.
- záporně orientovaná slova.
-\end_layout
-
-\begin_layout Subsubsection*
-Vytvoření slovníků
-\end_layout
-
-\begin_layout Standard
+Zda je slovo orientováno kladně nebo záporně je určeno na základě souborů
+ předem označených slov.
+ Pro účely této práce byly použity soubory SentiWordNet 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Mining and summarizing customer reviews
+http://sentiwordnet.isti.cnr.it/
 \end_layout
 
 \end_inset
 
-
+, které obsahují více než 100 000 slov, u kterých jsou stanoveny sémantické
+ orientace.
 \end_layout
 
 \begin_layout Standard
-Pomocí těchto slovníků jsou pak stanoveny názorové orientace pro všechna
- slova.
- Slova, která nebyla nalezena ve slovníku lze považovat za neutální, nebo
- dostatečně ojedinělá.
- Taková slova jsou vyloučena.
+Při výpočtu celkového sentimentu pro daný aspekt tedy stačí najít věty ve
+ kterých se vyskytuje a poté spočítat, kolik kladně, resp.
+ záporně orientovaných slov tyto věty obsahují.
+ Při hledání výskytů aspektů se hledí na věty a ne na celé recenze, protože
+ jedna recenze se může vyjadřovat k více aspektům, kdežto jednotlivé věty
+ se budou vyjadřovat spíše k jednotlivým aspektům.
 \end_layout
 
-\begin_layout Subsubsection*
-Vyhodnocení sentimentů
+\begin_layout Paragraph
+Hodnocení aspektů podle sentimentů
 \end_layout
 
 \begin_layout Standard
-Jednotlivá slova mají buď kladnou, nebo zápornou orientaci.
- Každý aspekt je zmíněn v určitém počtu vět.
- Každému aspektu lze tedy přiřadit určitý počet kladně, resp.
- záporně orientovaných slov (např.
- aspekt "pohodlí" byl zmíněn celkem ve 100 větách.
- V těchto větách bylo obsaženo 80 kladně a 10 záporně orientovaných slov,
- některé věty měli neutrální orientaci).
- Na základě těchto binárních hodnocení mohou být aspekty seřazeny od nejlépe
- hodnoceného, podle skóre 
+Pro každý aspekt je dostupný údaj o počtu kladných a záporných "bodů".
+ To však nestačí k tomu, aby šlo tyto aspekty porovnávat mezi sebou (př.
+ není zřejmé, zda je aspekt se 100 kladnými a 10 zápornými body hodnocen
+ lépe, než aspekt se 10 kladnými a 4 zápornými body).
+ Pořadí aspektů lze určit například vypočtením skóre 
 \emph on
 s
 \emph default
@@ -1938,15 +2013,11 @@ citace na How to count thumbs ups
 \end_inset
 
 .
- Skóre 
-\emph on
-s
-\emph default
- je vypočítáno pro každý aspekt.
+ Podle takto vypočítaného skóre lze aspekty seřadit.
 \end_layout
 
-\begin_layout Subsubsection*
-Vyhodnocení uživatelského hodnocení
+\begin_layout Subsubsection
+Uživatelské hodnocení
 \end_layout
 
 \begin_layout Standard
@@ -3118,6 +3189,2450 @@ if __name__=='__main__':
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Seznam slovních druhů podle Penn Treebank
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Seznam-slovních-druhů"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="37" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="80line%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Č.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Značka
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Slovní druh
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+CC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Coordinating conjunction (Koordinační konjunkce)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+CD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Cardinal number (Základní číslovka)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+DT
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Determiner (Člen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+EX
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Existential there (Existenční "there")
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+FW
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Foreign word (Cizí slovo)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+IN
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Preposition or subord.
+ conj.
+ (Předložka nebo subordinační konjunkce)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+JJ
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Adjective (Přídavné jméno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+JJR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Adjective, comparative (Srovnávací přídavné jméno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+JJS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Adjective, superlative (Superlativní přídavné jméno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+LS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+List item marker (Označení položky výčtu)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+MD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Modal (Způsobové sloveso)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+NN
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Noun, singular or mass (Jednotné nebo pomnožné podstatné jméno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+13.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+NNS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Noun, plural (Množné podstatné jméno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+NNP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Proper noun, singular (Vlastní jméno jednotné)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+NNPS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Proper noun, plural (Vlastní jméno množné)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+16.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+PDT
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Predeterminer (před-člen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+POS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Possessive ending (Přivlastňovací zakončení)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+18.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+PRP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Personal pronoun (Osobní zájmeno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+19.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+PRP$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Possessive pronoun (Přivlastňovací zájmeno)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+20.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+RB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Adverb (Příslovce)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+21.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+RBR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Adverb, comparative (Srovnávací příslovce)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+22.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+RBS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Adverb, superlative (Superlativní příslovce)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+23.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+RP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Particle (Částice)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+24.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+SYM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Symbol
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+25.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+TO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+to (Slovo "to", nezávisle na kontextu)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+26.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+UH
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Interjection (Citoslovce)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+27.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+VB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Verb, base form (Sloveso v základním tvaru)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+28.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+VBD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Verb, past tense (Sloveso v minulém čase)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+29.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+VBG
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Verb, gerund or present participle (Sloveso v infinitivu nebo v přítomném
+ prostém čase)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+30.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+VBN
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Verb, past participle (Sloveso v příčestí minulém)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+31.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+VBP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Verb, non-3rd person singular present (Sloveso, singulární přítomné, ne
+ v 1.
+ nebo 2.
+ osobě)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+32.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+VBZ
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Verb, 3rd person singular present (Sloveso, singulární přítomné ve 3.
+ osobě)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+33.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+WDT
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Wh-determiner (slova "which" a "that" v relativní formě)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+34.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+WP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Wh-pronoun (zájmena "what", "who" a "whom")
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+35.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+WP$
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Possessive wh-pronoun (zájmeno "whose")
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+36.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+WRB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Wh-adverb (příslovce "how", "where", "why")
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+Zdroj: 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+citace https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
