@@ -230,7 +230,19 @@ Zde vybrat podstatné termíny, která se objevují dále v práci: aspekt, aspe
 \end_layout
 
 \begin_layout Plain Layout
-Jednotlivé termíny by měly být popsány srozumitelně, ale bez velkých návazností.
+Jednotlivé termíny by měly být popsány srozumitelně, ale bez velkých návazností:
+\end_layout
+
+\begin_layout Plain Layout
+Sentiment, sentiment analysis
+\end_layout
+
+\begin_layout Plain Layout
+Aspekt, aspekt mining
+\end_layout
+
+\begin_layout Plain Layout
+Text mining
 \end_layout
 
 \end_inset
@@ -1605,8 +1617,20 @@ Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
  Tyto znaky lze dělit na jednotlivé smysluplné celky jako jsou slova, fráze
  nebo věty.
  Tento proces dělení se nazývá tokenizace.
- Při čtení textu je pro člověka tekenizace samozřejmosí.
+ Při čtení textu je pro člověka tokenizace (rozlišení smysluplných celků)
+ samozřejmosí.
  Při strojovém zpracování se může jednat o netriviální úkol.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokenization?l
+ang=en
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1731,11 +1755,11 @@ Extrakce aspektů
 
 \begin_layout Standard
 Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či frázemi,
- které se z podstatných jmén skládají.
+ které se z podstatných jmen skládají.
  Text může obsahovat i jiná podstatná jména, která nejsou aspekty, ale lze
  předpokládat, že irelevantní slova se budou vyskytovat méně častěji (každý
- uživatel zmiňuje ve své recenzi různé věci), kdežto slova značící aspekty
- se budou v různých recenzích překrývat.
+ uživatel zmiňuje ve své recenzi odlišné irelevantní věci), kdežto slova
+ značící aspekty se budou v různých recenzích překrývat.
  Tato slova se budou vyskytovat s vyšší frekvencí.
  
 \begin_inset Note Note
@@ -1799,9 +1823,9 @@ Nalezení častých slov a frází
 
 \begin_layout Standard
 Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
- skupin slov, s pomocí algoritmu Apriori, který se používá k hledání hledání
- častých sestav položek a určování asociačních pravidel (v tomto případě
- je použita pouze první část algoritmu).
+ skupin slov, s pomocí algoritmu Apriori, který se používá k hledání častých
+ sestav položek a určování asociačních pravidel (v tomto případě je použita
+ pouze první část algoritmu).
  Tento algorimus vyhledává položky, které se vyskytují s minimální danou
  podporou (tzn.
  vyskytují se v daném minimálním procentu transakcí).
@@ -1873,7 +1897,8 @@ Celkový sentiment
 \end_layout
 
 \begin_layout Standard
-Celkový sentiment vyjadřuje převládající názor uživatelů na daný aspekt.
+Celkový sentiment vyjadřuje převládající (subjektivní) názor uživatelů na
+ daný aspekt.
  K vyhodnocení této metriky je nejdříve nutné určit, která review se k danému
  aspektu vyjadřují, a jaký postoj zaujímají (kladný, resp.
  záporný).
@@ -2013,7 +2038,7 @@ citace na How to count thumbs ups
 \end_inset
 
 .
- Podle takto vypočítaného skóre lze aspekty seřadit.
+ Podle takto vypočítaného skóre lze aspekty seřadit od nejlepšího.
 \end_layout
 
 \begin_layout Subsubsection
