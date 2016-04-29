@@ -221,12 +221,21 @@ Základní terminologie
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Zde vybrat podstatné termíny, která se objevují dále v práci: aspekt, aspekt
  mining, text mining, web crawling a web scraping
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Jednotlivé termíny by měly být popsány srozumitelně, ale bez velkých návazností.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -234,32 +243,41 @@ Popis oblasti a rešerše
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 popis řešené oblasti a rešerše
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 navazuje na popsanou terminologii, dává termíny do souvislostí, 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Vybrat všechny relevantní zdroje a popsat, co se v nich říká, zároveň se
  tím popíše celá oblast.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Rozepsat se o tom, co všechno do této oblasti spadá: služby (co to je služba,
  jak se dá hodnotit, zpětná vazba od zákazníků), získávání strukturovaných
  dat (web crawling a scraping, přístup k databázi), dobývání znalostí z
  textu (analýza přirozeného jazyka)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Různé přístupy k problematice
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Rozepsat se, jaké jsou trendy.
  Mělo by to být trošku zajímavější povídání, aby se někdo alespoň něco dozvěděl.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Part
@@ -267,8 +285,17 @@ Praktická
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Trochu nějaký úvod, co bude následovat.
  Ještě jednou shrnout, jaké jsme si daly cíle.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1160,7 +1187,6 @@ Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované
 \end_layout
 
 \begin_layout Verbatim
-
 https://cibc-secure.ugc.bazaarvoice.com/...page=5...
 \end_layout
 
@@ -1529,10 +1555,14 @@ Jednotlivé recenze jsou uložené na samostatných řádcích.
 \end_layout
 
 \begin_layout Section
-Přesné stanovení metody
+Stanovení metody
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Podle toho, co mám v knime, ale zatím jeno hodně obecně, co všechno se s
  daty stalo, aby z nich vylezly výsledky: Jak se hledaly aspekty, že se
  recenze pak indexovaly a v nich se ty aspekty hledaly, že se hodnotily
@@ -1540,13 +1570,426 @@ Podle toho, co mám v knime, ale zatím jeno hodně obecně, co všechno se s
  Jednotlivé tagery, filtry, stemmery apod.
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V této kapitole jsou popsány jednotlivé kroky aplikované na získaná data,
+ bez ohledu na konkrétní implementaci.
+ Tento popis by měl umožnit postup zopakovat s pomocí jakéhokoliv vhodného
+ nástroje.
+ Manipulaci s daty lze rozdělit na tři jednotlivé části: předzpracování
+ texu
+\end_layout
+
+\begin_layout Subsection
+Předzpracování textu
+\end_layout
+
+\begin_layout Standard
+Aby bylo možné ze souvislého textu získávat informace za pomoci automatizovaných
+ prostředků, je nutné tento text rozdělit na jednotlivé jednotky, jako jsou
+ věty a slova.
+ Toto může být netriviálním úkolem.
+ V závislosti na jazyku, oddělení jednolivých slov a vět může být pro počítačévý
+ program více či méně obtížné, nebo téměř nemožné.
+\end_layout
+
+\begin_layout Standard
+Počítačový porgram se při řešení této úlohy řídí předem danými oddělovači.
+ Ve většině jazyků jsou slova oddělena mezerou (toto neplatí například u
+ Čínského jazyka).
+ Proto lze říci, že jakákoliv mezera (běžná mezera, tabulátor, atd.) je oddělovač.
+ Dalšími oddělovači jsou speciální znaky jako jsou tečka, čárka, dvojtečka,
+ středník, závorky, vykřičník, otzník a další.
+ Některé z nich jsou oddělovači vždy, některé v závislosti na kontextu (např.
+ tečka ve slově Ph.D není oddělovačem).
+ Všechny tyto komplikace je nutné v tomto kroce zvažovat.
+\end_layout
+
+\begin_layout Standard
+Pro účely této metody, se každá uživatelská recenze uloží jako dokument,
+ u kterého je jasně daná struktura (například ve formátu XML - extensible
+ markup language).
+ Pro každou recenzi se uloží titulek, text a uživatelské hodnocení.
+ Text každé recenze je třeba rozdělit na věty a slova a tuto strukturu uložit.
+\end_layout
+
+\begin_layout Standard
+Dále je zřejmé, že ne všechna slova (nebo jiné části) obsažené v textu mají
+ význam.
+ Tzv.
+ stop slova, jsou taková slova, která se v textu vyskytují nejčastěji a
+ přitom nenesou žádnou informaci.
+ Tato slova lze z textu vyřadit, aniž by se zmenšila jeho informační hodnota.
+ Seznamy stop slov nejčastěji vytvářejí speciálně pro každý soubor textů,
+ na základě frekvence slov a ručního výběru.
+ Mezi stop slova nejčastěji patří předložky, spojky, členy (
+\emph on
+the 
+\emph default
+v anglickém jazyce) apod.
+\end_layout
+
+\begin_layout Standard
+Dalším krokem je určení slovních druhů pro každé slovo v uživatelské recenzi.
+ K tomu slouží tzv.
+ značkovače (angl.
+ 
+\emph on
+part-of-speech
+\emph default
+ nebo 
+\emph on
+POS tagger
+\emph default
+).
+ Jedná se o algoritmy, které pomocí strojového učení z existujících textových
+ korpů (ve kterých byla slova předem označkována ručně) a statistických
+ metod určují slovní druhy u jednotlivých slov, včetně sporných příkladů
+ (např.
+ slovo "stav" může být jak podstatným jménem tak i slovesem).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Penn tree bank - jaké jsou slovní druhy, že jich je víc.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Uvést příklady různých algoritmů
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Extrakce aspektů
+\end_layout
+
+\begin_layout Standard
+Před zahájením extrakce aspektů, je nutné provést ještě některé úpravy textu.
+ Jako první jsou na základě značek slovních druhů (z minulé operace) odstraněny
+ slova, která nespadají pod podstatná jména (značky NN, NNP, NNS, NNPS).
+ To proto, že aspekty jsou zřídka kdy označovány jinými slovními druhy 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+tady může být citace na něco co říkal Bing Liu.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dalším krokem tzv.
+ stematizace (angl.
+ 
+\emph on
+stemming
+\emph default
+) slov.
+ Tento proces spočívá v nalezení kmene slova, odstraněním koncovek slova.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Developing a stemming algorithm
+\end_layout
+
+\end_inset
+
+.
+ Stematizace slov umožňuje zamezit zbytečnému tříštění aspektů, kdy je jeden
+ aspekt označován podobnýmy slovy a tím dochází k nepřesnostem při měření
+ frekvence výskytu tohoto aspektu.
+ Např.
+ slova "pohodlnost" a "pohodlí" mohou být vyhodnocena jako dva různé aspekty,
+ idkyž se ve skutečnosti týkají jednoho a toho samého aspektu.
+ Stematizací těchto slov vzniká kmen "pohod" a tak jsou výskyty obou slov
+ počítány společne.
+\end_layout
+
+\begin_layout Standard
+Extrakce aspektů pak spočívá v hledání nejčastějších slov nebo dvouslovných
+ frází pomocí algoritmu Apriori, který se používá k hledání hledání častých
+ sestav položek a určování asociačních pravidel (v tomto případě je použita
+ pouze první část olgoritmu).
+\end_layout
+
+\begin_layout Standard
+Algoritmus Apriori se nejčastěji používá při analýze transakcí, jako je
+ například spotřební koš zákazníků supermarketů.
+ Algoritmus umoňuje určit, které položky se často vyskytují společně v jedné
+ transakci a tyto informace pak využít při předpovědích pro další transakce
+ (např.
+ spotřebitel, který koupil položku X, s velkou pravděpodobností koupí položku
+ Y).
+ Takové předpovědi se v praxi používají pro rozmísťování zboží v obchodech,
+ nebo zaměřování reklamy na určité zákazníky.
+\end_layout
+
+\begin_layout Standard
+V tomto případě jsou transakcemi jednotlivé věty ze všech uživatelských
+ recenzí.
+ Uvažujeme jednotlivé věty a ne celé recenze, protože jedna recenze se může
+ týkat více aspektů, kdežto jednotlivé věty se budou nejčastěji týkat jednoho
+ aspektu.
+\end_layout
+
+\begin_layout Standard
+Použitý algoritmus pracuje s minimální podporou, kterou určuje uživatel.
+ V tomto případě je minimální podpora nastavena na 1%, tzn.
+ slova nebo fráze (položky nebo sada položek), které se vyskytují v méně
+ než 1% všech vět, jsou považovány za nedostatečně časté a tak ani nejsou
+ zvažovány jako možné aspekty.
+\end_layout
+
+\begin_layout Standard
+Protože algoritmus není zcela přesný, posledním krokem je ruční vyřazení
+ zjevně irelevantních slov a frází.
+ Takto vzniká seznam aspektů, u kterých se může dále hodnotit sentiment.
+\end_layout
+
+\begin_layout Subsection
+Vyhodnocení aspektů
+\end_layout
+
+\begin_layout Standard
+Poslední částí stanovené metody je určení, zda jsou jednotlivé aspekty hodnoceny
+ kladně, či záporně.
+ Za tímto účel jsem zvolena dvě kritéria.
+ Prvním z nich je celkové hodnocení, které je stanveno uživatelem služby
+ u každé recenze.
+ Pro každý stanovený aspekt je pak stanoveno průměrné hodnocení, které je
+ získáno zprůměrováním hodnocení všech recenzí, ve kterých se aspekt vyskytuje.
+\end_layout
+
+\begin_layout Standard
+Druhým je hodnoceným kritériem je sentiment.
+ K vyhodnocení tohoto kritéria je nejdříve nutné určit, jak se o daném aspektu
+ vyjadřují jednotlivé recenze, tedy zda ho hodnotí kladně či záporně.
+ Jedna recenze se však může týkat více aspektů, a tak jsou při určování
+ sentimentů hodnoceny jednotlivé věty.
+ Pro každý aspekt jsou nejdříve nalezeny všechny věty ve kterých se vyskytuje.
+ Z těchto vět jsou ponechána jenom slova, která jsou hodnotící, tj.
+ přídavná jména, popř.
+ příslovce.
+ Ostatní slova jsou odstraněna.
+\end_layout
+
+\begin_layout Standard
+U zbylých slov se pak stanoví jejich sémantická orientace, tzn.
+ zda vyjadřují kladný, nebo záporný názor.
+ Za tímto účelem jsou vytvořeny dva slovníky, které obsahují běžná pozitivně,
+ resp.
+ záporně orientovaná slova.
+\end_layout
+
+\begin_layout Subsubsection*
+Vytvoření slovníků
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Mining and summarizing customer reviews
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pomocí těchto slovníků jsou pak stanoveny názorové orientace pro všechna
+ slova.
+ Slova, která nebyla nalezena ve slovníku lze považovat za neutální, nebo
+ dostatečně ojedinělá.
+ Taková slova jsou vyloučena.
+\end_layout
+
+\begin_layout Subsubsection*
+Vyhodnocení sentimentů
+\end_layout
+
+\begin_layout Standard
+Jednotlivá slova mají buď kladnou, nebo zápornou orientaci.
+ Každý aspekt je zmíněn v určitém počtu vět.
+ Každému aspektu lze tedy přiřadit určitý počet kladně, resp.
+ záporně orientovaných slov (např.
+ aspekt "pohodlí" byl zmíněn celkem ve 100 větách.
+ V těchto větách bylo obsaženo 80 kladně a 10 záporně orientovaných slov,
+ některé věty měli neutrální orientaci).
+ Na základě těchto binárních hodnocení mohou být aspekty seřazeny od nejlépe
+ hodnoceného, podle skóre 
+\emph on
+s
+\emph default
+, které lze spočítat podle následujicího vzorce:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Formula $s=\frac{n_{pos}}{n_{pos}+n_{neg}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Kde 
+\begin_inset Formula $n_{pos}$
+\end_inset
+
+ je počtem positivně orientovaných slov a 
+\begin_inset Formula $n_{neg}$
+\end_inset
+
+ je počtem negativně orientovaných slov.
+ Tento přístup však může být nepřesný v případech, kdy se 
+\begin_inset Formula $n_{pos}$
+\end_inset
+
+ nebo 
+\begin_inset Formula $n_{neg}$
+\end_inset
+
+ rovná 0.
+ Např.
+ pokud aspekt 
+\emph on
+i 
+\emph default
+obdržel 300 kladných a 2 záporná hodnocení a aspekt 
+\emph on
+j
+\emph default
+ obdržel 3 kladná a 0 záporných hodnocení, bude aspekt 
+\emph on
+j 
+\emph default
+hodnocen výše (
+\begin_inset Formula $s_{j}=1,0$
+\end_inset
+
+) než aspekt 
+\emph on
+i
+\emph default
+ (
+\begin_inset Formula $s_{i}=0,993$
+\end_inset
+
+), i když je zjevné, že aspekt 
+\emph on
+i 
+\emph default
+byl hodnocen kladněji.
+ Tento problém lze vyřešit použitím, tzv.
+ vyhlazení Lidstone:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Formula $s=\frac{n_{pos}+\varepsilon}{(n_{pos}+\varepsilon)+(n_{neg}+\varepsilon)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Kde 
+\begin_inset Formula $0<\varepsilon<1$
+\end_inset
+
+ je parametrem 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace na How to count thumbs ups
+\end_layout
+
+\end_inset
+
+.
+ Skóre 
+\emph on
+s
+\emph default
+ je vypočítáno pro každý aspekt.
+\end_layout
+
+\begin_layout Subsubsection*
+Vyhodnocení uživatelského hodnocení
+\end_layout
+
+\begin_layout Standard
+Každé recenzi je uživatelem přiřazeno celkové hodnocení od 1 (nejhorší)
+ do 5 (nejlepší).
+ Aspekty jsou na základě tohoto kritéria hodnoceny vypočítáním skóre 
+\emph on
+s
+\emph default
+ z uživatelských hodnocení všech recenzí, ve kterých se daný aspekt objevuje.
+ Skóre pro jednotlivé aspekty je vypočítáno podobně jako u vyhodnocování
+ sentimentů.
+ Aby bylo možné použít stejný vzorec, je každé hodnocení na 5 bodové škále
+ považováno za sobubor několika binárních hodnocení (např.
+ hodnocení 3 je považováno za 3 kladná a 5-3=2 záporná hodnocení).
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace na How to count thumbs ups
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Popis implemetnace v KNIME
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Podrobný popis jednotlivých kroků při implementaci, jak byly aplikovány
  jednotlivé kroky z metody na data
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1554,6 +1997,10 @@ Interpretace výstupů
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Co jsme zjistili, jak by se dala zjištění použít, kdo by je mohl využít,
  jaké nedostatky má naše metoda (třeba to, že při celkovém hodnocení nezvažujeme
  čas - okecat to: v reálné situaci bych měl hromady recenzí během krátké
@@ -1561,12 +2008,156 @@ Co jsme zjistili, jak by se dala zjištění použít, kdo by je mohl využít,
  Co by se dalo udělat ještě lépe.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Tyhle věci rozepsat podrobně, do závěru pak jenom výcuc.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Tady by měly být všechny výstupy jako tabulky a obrázky.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aplikací popsané metody na konkrétní data byly získnány informace, které
+ je nutné interpretovat.
+ Získané znalosti pak lze využít při rozhodování.
+ V této kapitole jsou popsány získané výstupy, jsou navrženy jejich možné
+ interpretace a způsoby jakým lze využít získané znalosti na příkladu konkrétní
+ společnosti, od které data pochází.
+\end_layout
+
+\begin_layout Subsection
+Aspekty
+\end_layout
+
+\begin_layout Standard
+Jedním z výstupů při použití popsané metody jsou aspekty služby, o kterých
+ se v uživatelských recenzích hovoří nejčastěji.
+ Z těchto spektů se dá odvodit, které služby/funkce jsou nejvíce používány
+ zákazníky.
+ Tato informace může být důležitá při rozhodování, na které funkce se zaměřit
+ a do jejichž údržby/vývoje investovat prostředky.
+ Z těchto informací však nijak nevyplývá, které aspekty jsou hodnoceny kladně
+ a které záporně.
+ Tyto informace na poskytnou následující výstupy.
+\end_layout
+
+\begin_layout Standard
+V praxi by měl poskytovatel služby mít přehled o tom jaké služby poskytuje,
+ nebo jaké funkce má poskytovaný produkt.
+ Zísakné aspekty by měly odpovídat tomuto seznamu (buď zcela, nebo z části
+ - z toho by vyplývalo, že uživatelé některé služby/funkce nevyužívají,
+ nebo o nich nevědí).
+ Získané aspekty mohou doplnit znalosti, které byly získány z jiných zdrojů
+ - například sledování návštěvnosti jednotlivých stránek, rozbor dotazů
+ zákazníků na pobočce apod.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Učesat, přidat příklady jak lze analyzovat chování uživatele.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Průměrný sentiment a uživatelské hodnocení
+\end_layout
+
+\begin_layout Standard
+Aby bylo možné určit, které aspekty jsou hodnoceny kladně a které záporně,
+ je nutné zvolit určité kritérium, podle kterého se budou hodnotit.
+ V tomto případě, byla zvolena dvě kritéria - uživatelské hodnocení a celkový
+ sentiment recenze.
+ Určení těchto hodnot u každého aspektu umožnuje seřadit je od nejzáporněji
+ hodnoceného k nejkladněji hodnocenému.
+ Z tabulky 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+vložit tabulku s hodnotami
+\end_layout
+
+\end_inset
+
+ je zřejmé, že při seřazení aspektů podle průměrného sentimentu i podle
+ průměrného uživatelského hodnocení, zůstává pořadí téměř stejné (v tomto
+ případě se pořadí liší pouze u dvou aspektů a to o jednu pozici v tabulce
+ - viz 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+vložit tabulku z porovnáním pořadí aspektů 
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Z grafů v příloze 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+přidat grafy s rozložením hodnocení jednotlivých aspektů
+\end_layout
+
+\end_inset
+
+ je dále zřejmé, že uživatelské hodnocení sleduje rozložení tvaru J.
+ To znamená, že lidé při hodnocení nejčastěji používají extrémy (tj.
+ nejnižší nebo nejvyšší možné hodnocení) a zřídka používají střední hodnocení.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace - něco kde je popsnáno J rozložení https://www.researchgate.net/publication
+/228604596_Why_Do_Online_Product_Reviews_Have_a_J-Shaped_Distribution_Overcoming
+_Biases_in_Online_Word-of-Mouth_Communication
+\end_layout
+
+\end_inset
+
+.
+ Z toho vyplývá, že uživatelský review jsou nečastěji spíše kladná, nebo
+ spíše záporná, ale méně častěji neutrální (lidé s neutrálním názorem mají
+ zřídka kdy potřebu jej vyjadřovat 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace - zkusit najít něco kde se tohle tvrdí
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Hodnocení aspektů podle těchto kritérií je pouze relativní.
+ Tzn.
+ lze soudit o tom, který aspekt je lépe a který hůře hodnocení, nevypovídá
+ však o absolutní kvalitě aspektů.
+ Proto hlavním vypovídajícím výsledkem je právě pořadí aspektů.
+\end_layout
+
+\begin_layout Standard
+V praxi lze pořadí aspektů využít při rozhodování, do kterých částí služby/funkc
+í je nutné investovat nejvíce prostředků.
 \end_layout
 
 \begin_layout Section
@@ -1574,20 +2165,29 @@ Závěr
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 shrnutí výsledků, ke kterým autor dospěl,
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 přínos autora práce k řešené problematice (co je v práci původní),
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 zhodnocení využitelnosti dosažených výsledků, příp.
  další náměty pro řešení v uvedené
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 oblasti.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
