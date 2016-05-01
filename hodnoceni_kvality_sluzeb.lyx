@@ -795,23 +795,17 @@ Python
 
 \begin_layout Standard
 Python je interpretovaný, objektově orientovaný, skriptovací programovací
- jazyk
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-https://docs.python.org/2/faq/general.html#what-is-python
-\end_layout
+ jazyk 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "General Python FAQ"
 
 \end_inset
 
 , který je oblíbený ve velkém množství různých oblastí
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-https://www.python.org/about/success/
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Python Success Stories"
 
 \end_inset
 
@@ -828,18 +822,7 @@ Index knihoven (https://pypi.python.org/pypi) pro Python v době psaná této
 \end_inset
 
 ).
- Python je standartně dodáván se všemi distribucemi operačního systému Linux
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-GNU/Linux??? Fact check
-\end_layout
-
-\end_inset
-
-
+ Python je standartně dodáván se všemi distribucemi operačního systému Linux.
 \end_layout
 
 \begin_layout Standard
@@ -865,12 +848,9 @@ Requests
 \begin_layout Standard
 Tato knihovna umoňujě posílat poždavky na webové servery přes HTTP (Hypertext
  Transfer Protocol) protokol
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Reference https://pypi.python.org/pypi/requests
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Requests library"
 
 \end_inset
 
@@ -881,12 +861,9 @@ Reference https://pypi.python.org/pypi/requests
 
 \begin_layout Standard
 Knihovna Requests byla použita při získávání dat internetu (viz 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Přidat cross referenci na sekci s web scrapingem
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Získání-zdrojového-kódu"
 
 \end_inset
 
@@ -899,27 +876,21 @@ Beautiful Soup
 
 \begin_layout Standard
 Tato knihovna je určena k syntaktické analýze HTML.
- Umožňuje získávat data z zdrojového kódu webové stránky.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Reference https://www.crummy.com/software/BeautifulSoup/bs4/doc
-\end_layout
+ Umožňuje získávat data z zdrojového kódu webové stránky
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Beautiful soup documentation"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 Knihovna byla použita při získávání dat z webové stránky (viz 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Přidat cross referenci na sekci s web scrapingem
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Extrakce-dat"
 
 \end_inset
 
@@ -931,14 +902,10 @@ Matplotlib
 \end_layout
 
 \begin_layout Standard
-Tato knihovna slouží k vytváření grafů z poskytnutých dat.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Reference http://matplotlib.org/
-\end_layout
+Tato knihovna slouží k vytváření grafů z poskytnutých dat 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Matplotlib"
 
 \end_inset
 
@@ -953,12 +920,9 @@ Získání nestrukturovaných dat
 \begin_layout Standard
 Při zpracování dat byla využita veřejná data, dostupná z webových stránek
  banky CIBC 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-https://www.cibc.com/ca/how-to-bank/online-banking/reviews-olb.html
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CIBC Customer Reviews"
 
 \end_inset
 
@@ -1019,12 +983,10 @@ scraper.
 
 \emph default
  K získání dat je možné přistupovat několika způsoby
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Reference na Bing Liu - Exploring hypertext, str.363
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 363"
+key "Bing Liu Exploring hyperlinks"
 
 \end_inset
 
@@ -1080,6 +1042,13 @@ Při zpracování této práce byl použit první přístup.
 
 \begin_layout Subsection
 Získání zdrojového kódu stránky
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Získání-zdrojového-kódu"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1162,13 +1131,9 @@ Scraper musí projít každou stránku a uložit její zdrojový kód.
  nových recenzí.
  To poukazuje na využití webových technologií AJAX (Asynchronous JavaScript
  and XML)
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-https://courses.cs.washington.edu/courses/cse490h/07sp/readings/ajax_adaptive_path.p
-df
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AJAX"
 
 \end_inset
 
@@ -1268,6 +1233,13 @@ get_data
 
 \begin_layout Subsection
 Extrakce dat
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Extrakce-dat"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1436,12 +1408,9 @@ V případě titulku a textu recenze, stačí pouze uložit text uvnitř patři�
 DateTime
 \family default
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-https://docs.python.org/2/library/datetime.html
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Datetime"
 
 \end_inset
 
@@ -1565,7 +1534,7 @@ Stanovení metody
 \begin_layout Standard
 V této kapitole je popsána metoda, která byla použita pro získání informací
  z dostupných dat.
- Tato metoda byla vypracována na základě předchozí práce v a [
+ Tato metoda byla vypracována na základě předchozí práce v [
 \begin_inset Note Note
 status open
 
@@ -2275,6 +2244,140 @@ oblasti.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "General Python FAQ"
+
+\end_inset
+
+General Python FAQ.
+ Docs.python.org [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://docs.python.org/2/faq/general.html#what-is-python 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Python Success Stories"
+
+\end_inset
+
+Python Success Stories.
+ Python.org [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://www.python.org/about/success
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Requests library"
+
+\end_inset
+
+Requests 2.10.0.
+ Pypi.python.org [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://pypi.python.org/pypi/requests
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Beautiful soup documentation"
+
+\end_inset
+
+Beautiful Soup Documentation.
+ Crummy.com [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://www.crummy.com/software/BeautifulSoup/bs4/doc
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Matplotlib"
+
+\end_inset
+
+Matplotlib: python plotting.
+ Matplotlib.org [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: http://matplotlib.org
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "CIBC Customer Reviews"
+
+\end_inset
+
+CIBC Online Banking Customer Reviews.
+ Cibc.com [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://www.cibc.com/ca/how-to-bank/online-banking/reviews-olb.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Bing Liu Exploring hyperlinks"
+
+\end_inset
+
+LIU, Bing.
+ Web data mining: exploring hyperlinks, contents, and usage data.
+ 2nd ed.
+ Berlin: Springer, 2011.
+ ISBN 978-3-642-19459-7.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "AJAX"
+
+\end_inset
+
+GARRETT, Jesse James.
+ Ajax: A New Approach to Web Applications [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://courses.cs.washington.edu/courses/cse490h/07sp/readings/ajax_a
+daptive_path.pdf
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Datetime"
+
+\end_inset
+
+8.1 datetime: Basic date and time types.
+ Docs.python.org [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://docs.python.org/2/library/datetime.html 
 \end_layout
 
 \begin_layout Standard
