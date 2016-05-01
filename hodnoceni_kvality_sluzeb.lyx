@@ -2627,39 +2627,44 @@ reference "fig:Větev-A"
 
 ).
  Meta-uzel 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-přidat do popisu KNIME co je to meta uzel
-\end_layout
-
-\end_inset
-
- 
 \emph on
 Sentiment Tagger 
 \emph default
-určuje sémantickou orientaci jednotlivých slov.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Přidat podrobný popis a obrázek
-\end_layout
+určuje sémantickou orientaci jednotlivých slov (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Meta-uzel-Sentiment-Tagger"
 
 \end_inset
 
+).
+ Uvnitř meta-uzlu je nejdříve odstraněn sloupec se zdrojovým dokumentem
+ (uzel 
+\emph on
+Column Filter
+\emph default
+).
+ Následují tři dvojice uzlů 
+\emph on
+File Reader
+\emph default
+, které načítají slovníky obsahující slova s označenou sémantickou orientací
+ a 
+\emph on
+Dictionary Tagger
+\emph default
+, které podle těchto slovníků značkují slova obsažená v recenzích.
+ Neutrálně značkovaná slova jsou značkována pro přehled, i když jejich počet
+ nehraje roli při určování skóre.
+\end_layout
+
+\begin_layout Standard
 Uzel 
 \emph on
 Bag of Words Creator
 \emph default
  vytváří soubor slov ze všech vět, ve kterých se aspekt vyskytuje.
-\end_layout
-
-\begin_layout Standard
-Uzel 
+ Uzel 
 \emph on
 Python Script
 \emph default
@@ -2703,6 +2708,49 @@ Větev a.: Vyhodnocení aspektu podle sentimentů
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Větev-A"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/metanode.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Meta-uzel Sentiment Tagger
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Meta-uzel-Sentiment-Tagger"
 
 \end_inset
 
@@ -2820,11 +2868,19 @@ reference "fig:Větev-C"
 \end_layout
 
 \begin_layout Standard
+Při každé iteraci vznikne tabulka o jednom řádku, který obsahuje sloupce
+ s názvem aspektu, procentem vět obsahující daný aspekt, skóre vypočítané
+ ze sentimentů vět a skóre vypočítané z uživatelského hodnocení.
+ Jednotlivé tabulky jsou poté spojeny do výstupní tabulky celé smyčky.
+ Tyto výsledky mohou být dále interpretovány.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -2860,14 +2916,6 @@ name "fig:Větev-C"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Při každé iteraci vznikne tabulka o jednom řádku, který obsahuje sloupce
- s názvem aspektu, procentem vět obsahující daný aspekt, skóre vypočítané
- ze sentimentů vět a skóre vypočítané z uživatelského hodnocení.
- Jednotlivé tabulky jsou poté spojeny do výstupní tabulky celé smyčky.
- Tyto výsledky mohou být dále interpretovány.
 \end_layout
 
 \begin_layout Section
