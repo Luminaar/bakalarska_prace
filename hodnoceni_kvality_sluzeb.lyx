@@ -911,7 +911,15 @@ key "Python Pandas"
 \end_inset
 
 .
- Knihovna byla použita při práci s tabulkami v rámci KNIME AP.
+ Knihovna byla použita při práci s tabulkami v rámci KNIME AP (viz Příloha
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-Python-Script"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Paragraph
@@ -6514,6 +6522,23 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
+# Při použití Python skriptů jsou KNIME tabulky uloženy
+\end_layout
+
+\begin_layout Plain Layout
+
+# jako objekty DataFrame z knihovny Pandas.
+ To umožňuje
+\end_layout
+
+\begin_layout Plain Layout
+
+# provádět s daty vysokoúrovňové operace.
+\end_layout
+
+\begin_layout Plain Layout
+
 from pandas import DataFrame as df
 \end_layout
 
@@ -6522,14 +6547,17 @@ from pandas import DataFrame as df
 \end_layout
 
 \begin_layout Plain Layout
+
 def get_sentiment(row):
 \end_layout
 
 \begin_layout Plain Layout
+
 	"""Převedení značek semantické orientace na čísla."""
 \end_layout
 
 \begin_layout Plain Layout
+
 	term = row['Term']
 \end_layout
 
@@ -6538,34 +6566,42 @@ def get_sentiment(row):
 \end_layout
 
 \begin_layout Plain Layout
+
 	if 'POSITIVE' in term:
 \end_layout
 
 \begin_layout Plain Layout
+
 		return 1
 \end_layout
 
 \begin_layout Plain Layout
+
 	elif 'NEGATIVE' in term:
 \end_layout
 
 \begin_layout Plain Layout
+
 		return -1
 \end_layout
 
 \begin_layout Plain Layout
+
 	elif 'NEUTRAL' in term:
 \end_layout
 
 \begin_layout Plain Layout
+
 		return 0
 \end_layout
 
 \begin_layout Plain Layout
+
 	else:
 \end_layout
 
 \begin_layout Plain Layout
+
 		return 2
 \end_layout
 
@@ -6574,30 +6610,37 @@ def get_sentiment(row):
 \end_layout
 
 \begin_layout Plain Layout
+
 def lidstone_smooth(pos, neg, n, e=0.3):
 \end_layout
 
 \begin_layout Plain Layout
+
 	"""Výpočet skóre pomocí pomětu kladných a záporných 
 \end_layout
 
 \begin_layout Plain Layout
+
 	hodnocení s aplikací vyhlazení Lidstone.
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
 \begin_layout Plain Layout
+
 	Parametr e nastaven na 0.3"""
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
 \begin_layout Plain Layout
+
 	return (pos+e)/((pos+e)+(neg+e))
 \end_layout
 
@@ -6606,10 +6649,12 @@ def lidstone_smooth(pos, neg, n, e=0.3):
 \end_layout
 
 \begin_layout Plain Layout
+
 # Přidání sloupce s číselnou hodnotou sentimentu
 \end_layout
 
 \begin_layout Plain Layout
+
 input_table['Sentiment'] = input_table.apply(get_sentiment,1)
 \end_layout
 
@@ -6618,10 +6663,12 @@ input_table['Sentiment'] = input_table.apply(get_sentiment,1)
 \end_layout
 
 \begin_layout Plain Layout
+
 # Výpočet výskutů jednotlivých číselných hodnot sentimentu
 \end_layout
 
 \begin_layout Plain Layout
+
 counts = input_table['Sentiment'].value_counts()
 \end_layout
 
@@ -6630,14 +6677,17 @@ counts = input_table['Sentiment'].value_counts()
 \end_layout
 
 \begin_layout Plain Layout
+
 positive = counts[1]
 \end_layout
 
 \begin_layout Plain Layout
+
 negative = counts[-1]
 \end_layout
 
 \begin_layout Plain Layout
+
 total = positive + negative
 \end_layout
 
@@ -6646,10 +6696,12 @@ total = positive + negative
 \end_layout
 
 \begin_layout Plain Layout
+
 # Výpočet skóre
 \end_layout
 
 \begin_layout Plain Layout
+
 score = lidstone_smooth(positive, negative, total)
 \end_layout
 
@@ -6658,10 +6710,12 @@ score = lidstone_smooth(positive, negative, total)
 \end_layout
 
 \begin_layout Plain Layout
+
 # Vytvoření výstupní tabulky
 \end_layout
 
 \begin_layout Plain Layout
+
 output_table = df({'score':[score]})
 \end_layout
 
@@ -6670,10 +6724,12 @@ output_table = df({'score':[score]})
 \end_layout
 
 \begin_layout Plain Layout
+
 # Přidání názvu aspektu do sloupce tabulky
 \end_layout
 
 \begin_layout Plain Layout
+
 output_table['aspekt'] = flow_variables['aspect']
 \end_layout
 
