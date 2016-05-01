@@ -1402,35 +1402,7 @@ Scraper nejdříve provede syntaktickou analýzu zdrojového kódu s pomocí kni
 \begin_layout Standard
 V případě titulku a textu recenze, stačí pouze uložit text uvnitř patřičného
  prvku.
- V případě datumu, je navíc nutné ho převést do standartního formátu.
- Programovací jazyk Python toto umoňuje pomocí vestavěné knihovny 
-\family typewriter
-DateTime
-\family default
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Datetime"
-
-\end_inset
-
-(viz.
- Příloha 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Zdrojový-kód-crawleru"
-
-\end_inset
-
-, funkce 
-\family typewriter
-parse_date
-\family default
-).
-\end_layout
-
-\begin_layout Standard
-Uživatelské hodnocení je zapsáno jako text (př.
+ Uživatelské hodnocení je zapsáno jako text (př.
  
 \begin_inset Quotes gld
 \end_inset
