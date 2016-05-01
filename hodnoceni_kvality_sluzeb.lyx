@@ -830,6 +830,28 @@ Tento programovací jazyk byl použit při zpracování práce jak při vytvoře
  samostatného programu, tak i v rámci práce s KNIME AP.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Většina potřebných operací lze v tomto programu provádět díky předdefinovaným
+ uzlům.
+ Funkce, které nejsou dostupné lze implementovat jako vlastní uzly v jazyce
+ Java, nebo spouštěním skriptů v jazyce Python, pomocí uzlů 
+\emph on
+Python Script.
+ 
+\emph default
+Tyto uzly umožňují pracovat s vstupními tabulkami a vytvářet výstupní tabulky
+ stejně jako ostatní uzly.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Použité knihovny
 \end_layout
@@ -2048,20 +2070,7 @@ Podrobný popis jednotlivých kroků při implementaci, jak byly aplikovány
 \begin_layout Standard
 V této kapitole je popsána implementace (KNIME workflow) stanovené metody
  pomocí KNIME AP.
- Většina potřebných operací lze v tomto programu provádět díky předdefinovaným
- uzlům.
- Funkce, které nejsou dostupné lze implementovat jako vlastní uzly v jazyce
- Java, nebo spouštěním skriptů v jazyce Python, pomocí uzlů 
-\emph on
-Python Script.
- 
-\emph default
-Tyto uzly umožňují pracovat s vstupními tabulkami a vytvářet výstupní tabulky
- stejně jako ostatní uzly.
-\end_layout
-
-\begin_layout Standard
-Workflow je rozdělen na 4 části: načtení textových dat ze souboru (který
+ Workflow je rozdělen na 4 části: načtení textových dat ze souboru (který
  je výstupem scrapperu, viz 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2071,7 +2080,14 @@ reference "sub:Extrakce-dat"
 
 ), předzpracování textu, extrakce aspektů a hodnocení aspektů.
  Ke každé části je uveden popis použitých uzlů a schéma workflow.
- Zdrojové kódy vytvořených skritpů jsou přiloženy jako příloha.
+ Zdrojové kódy vytvořených skritpů jsou přiloženy jako Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-Python-Script"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -2640,7 +2656,11 @@ Bag of Words Creator
 \end_layout
 
 \begin_layout Standard
-Tento konkrétní uzel se stará o výpočet skóre ze semantické orientace slov.
+Uzel 
+\emph on
+Python Script
+\emph default
+ vypočítává skóre ze semantické orientace slov.
  Výstupní tabulka obsahuje jediný řádek, ve kterém je uložen název aspektu
  a skóre tohoto aspektu.
  Okomentovaný zdrojový kód je přiložen jako Příloha 
