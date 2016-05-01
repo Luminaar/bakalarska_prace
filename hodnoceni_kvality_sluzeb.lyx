@@ -352,9 +352,9 @@ roura
 \begin_layout Standard
 Program již v základu obsahuje většinu potřebných uzlů, které umožňují pracovat
  se všemi běžnými druhy dat (text, obrázky, databáze, dokumenty atd.) a provádět
- nad nimi různé operace včetně transformace, úpravy, statisických výpočtu,
- strojového učení.
- KNIME AP také umožňuje vytvářet vlastní uzly a spuštět uživatelské programy
+ nad nimi různé operace jako jsou transformace, úpravy, statisické výpočty,
+ strojové učení aj.
+ KNIME AP také umožňuje vytvářet vlastní uzly a spouštět uživatelské programy
  napsané v různých jazycích (R, Python, Java, Pearl).
  Výsledná data lze ukládat do databází nebo běžných typů souborů.
 \end_layout
@@ -368,19 +368,8 @@ KNIME AP poskytuje také základní reportovací funkce, které však nejsou př
 Díky grafickému rozhraní je práce s tímto programem jednoduchá a jediné
  speciální znalosti, které jsou potřeba se týkají konkrétních uzlů a jejich
  použití.
- Grafické rozhraní také přehledně zobrazuje celý work flow a je jednoduché
- se v něm orientovat (viz.
- přílohy) 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Přidat přílohy - jednotlivé části workflow
-\end_layout
-
-\end_inset
-
-
+ Grafické rozhraní také přehledně zobrazuje celý workflow a je jednoduché
+ se v něm orientovat.
 \end_layout
 
 \begin_layout Subsubsection
@@ -835,7 +824,7 @@ key "General Python FAQ"
 
 \end_inset
 
-, který je oblíbený ve velkém množství různých oblastí
+, který nachází využití ve velkém množství různých oblastí
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Python Success Stories"
@@ -860,29 +849,10 @@ Index knihoven (https://pypi.python.org/pypi) pro Python v době psaná této
 
 \begin_layout Standard
 Tento programovací jazyk byl použit při zpracování práce jak při vytvoření
- samostatného programu, tak i v rámci práce s KNIME AP.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Většina potřebných operací lze v tomto programu provádět díky předdefinovaným
- uzlům.
- Funkce, které nejsou dostupné lze implementovat jako vlastní uzly v jazyce
- Java, nebo spouštěním skriptů v jazyce Python, pomocí uzlů 
+ samostatného programu, tak i v rámci práce s KNIME AP pro vytváření skriptů
+ pro manipulaci s daty, prostřednictvím uzlů 
 \emph on
 Python Script.
- 
-\emph default
-Tyto uzly umožňují pracovat s vstupními tabulkami a vytvářet výstupní tabulky
- stejně jako ostatní uzly.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
