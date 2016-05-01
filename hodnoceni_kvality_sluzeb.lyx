@@ -898,6 +898,23 @@ reference "sub:Extrakce-dat"
 \end_layout
 
 \begin_layout Paragraph
+Pandas
+\end_layout
+
+\begin_layout Standard
+Tato knihovna poskytuje pokročilé datové struktury a nástroje pro analýzu
+ dat
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Python Pandas"
+
+\end_inset
+
+.
+ Knihovna byla použita při práci s tabulkami v rámci KNIME AP.
+\end_layout
+
+\begin_layout Paragraph
 Matplotlib
 \end_layout
 
@@ -910,7 +927,7 @@ key "Matplotlib"
 \end_inset
 
 .
- Tato knihovna byla použita v rámci KNIME AP.
+ Knihovna byla použita v rámci KNIME AP.
 \end_layout
 
 \begin_layout Section
@@ -3081,6 +3098,20 @@ Beautiful Soup Documentation.
  [cit.
  2016-04-30].
  Dostupné z: https://www.crummy.com/software/BeautifulSoup/bs4/doc
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Python Pandas"
+
+\end_inset
+
+Pandas: powerful Python data analysis toolkit.
+ Pandas.pydata.org [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://pandas.pydata.org/pandas-docs/stable
 \end_layout
 
 \begin_layout Bibliography
