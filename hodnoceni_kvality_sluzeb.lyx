@@ -2866,7 +2866,7 @@ Při každé iteraci vznikne tabulka o jednom řádku, který obsahuje sloupce
 placement h
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -2904,8 +2904,27 @@ name "fig:Větev-C"
 
 \end_layout
 
+\begin_layout Standard
+Pro účely této práce byly na také z výstupních dat s pomocí knihovny Matplotlib
+ vygenerovány grafy použité při interpretaci výsledků (viz 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Interpretace-výstupů"
+
+\end_inset
+
+).
+\end_layout
+
 \begin_layout Section
 Interpretace výstupů
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Interpretace-výstupů"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
