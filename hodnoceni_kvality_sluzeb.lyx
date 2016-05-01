@@ -1575,8 +1575,7 @@ Mining opinion features ins customer revies
 \end_inset
 
 ].
- Metoda není závislá na konkrétní implementaci (popis implementace je uveden
- v následující kapitole).
+ Metoda není závislá na konkrétní implementaci.
  Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
 h nástrojů.
  Metody lze rozdělit na tři hlavní části: předzpracování textu, extrakce
@@ -1589,7 +1588,7 @@ Předzpracování textu
 
 \begin_layout Standard
 Předzpracování textu je důležitou operací ve všech oblastech, které pracují
- s textem jako je text mining, vyhledávání informací, zpracovíní přirozeného
+ s textem jako je text mining, vyhledávání informací, zpracování přirozeného
  jazyka apod.
  Jedná se o soubor postupů, při kterých je text upraven tak, aby ho bylo
  možné zpracovávat strojově a aby obsahoval co nejméně triviálních a irelevantní
@@ -1610,13 +1609,6 @@ Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
  Při čtení textu je pro člověka tokenizace (rozlišení smysluplných celků)
  samozřejmosí.
  Při strojovém zpracování se může jednat o netriviální úkol.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Art of tokenization"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1630,6 +1622,13 @@ Tokenizační algoritmy se většinou řídí oddělovači, které se jsou pro d
  Některé z nich jsou oddělovači vždy, některé v závislosti na kontextu (např.
  tečka ve slově Ph.D není oddělovačem).
  Všechny tyto komplikace je nutné v tomto kroce zvažovat.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Art of tokenization"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1691,16 +1690,24 @@ POS tagger
 ).
  Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
  (např.
- Brown korpus, který obsahuje více než 1 000 000 slov 
+ korpus Brown, který obsahuje více než 1 000 000 slov 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Brown Corpus Manual"
 
 \end_inset
 
-) a s pomocí statistických metod s co největší přesností určují slovní druh
- pro každé slovo, včetně vyřešení sporných příkladů (např.
+) a na základě předem předem stanovených pravidel a statistických metod
+ s co největší přesností určují slovní druh pro každé slovo, včetně vyřešení
+ sporných příkladů (např.
  slovo "stav" může být jak podstatným jménem tak i slovesem).
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Oxford handbook of computational linguistics"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1844,7 +1851,7 @@ Použitý algoritmus pracuje s minimální podporou, kterou určuje uživatel.
 \end_layout
 
 \begin_layout Standard
-Protože algoritmus není zcela přesný, posledním krokem je ruční vyřazení
+Protože algoritmus není zcela přesný, je posledním krokem ruční vyřazení
  zjevně irelevantních slov a frází.
  Takto vzniká seznam aspektů, u kterých se může dále hodnotit sentiment.
 \end_layout
@@ -1872,14 +1879,22 @@ Celkový sentiment vyjadřuje převládající (subjektivní) názor uživatelů
  záporný).
  Postoj hodnotitele k aspektu je možné stanovit podle přítomnosti slov vyjadřují
 cích názor (hodnotící slova).
- Těmito slovy jsou většinou přídavná jména nebo příslovce.
+ Těmito slovy jsou většinou přídavná jména nebo příslovce
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 171"
+key "Mining and summarizing customer reviews"
+
+\end_inset
+
+.
  Přítomnost kladně orientovaných slov ve větě značí kladný postoj hodnotitele.
  Naopak přítomnost záporných slov značí negativní postoj.
 \end_layout
 
 \begin_layout Standard
-Zda je slovo orientováno kladně nebo záporně je určeno na základě souborů
- předem označených slov.
+Zda je slovo orientováno kladně nebo záporně (tzv.
+ sémantická orientace) je určeno na základě souborů předem označených slov.
  Pro účely této práce byly použity soubory SentiWordNet 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1905,7 +1920,7 @@ Hodnocení aspektů podle sentimentů
 \end_layout
 
 \begin_layout Standard
-Pro každý aspekt je dostupný údaj o počtu kladných a záporných "bodů".
+Pro každý aspekt je nalezen počet kladných a záporných "bodů".
  To však nestačí k tomu, aby šlo tyto aspekty porovnávat mezi sebou (př.
  není zřejmé, zda je aspekt se 100 kladnými a 10 zápornými body hodnocen
  lépe, než aspekt se 10 kladnými a 4 zápornými body).
@@ -1969,7 +1984,7 @@ i
 \begin_inset Formula $s_{i}=0,993$
 \end_inset
 
-), i když je zjevné, že aspekt 
+), i když je intuitivní, že aspekt 
 \emph on
 i 
 \emph default
@@ -2019,7 +2034,7 @@ s
  Skóre pro jednotlivé aspekty je vypočítáno podobně jako u vyhodnocování
  sentimentů.
  Aby bylo možné použít stejný vzorec, je každé hodnocení na 5 bodové škále
- považováno za sobubor několika binárních hodnocení (např.
+ považováno za soubor několika binárních hodnocení (např.
  hodnocení 3 je považováno za 3 kladná a 5-3=2 záporná hodnocení).
  
 \begin_inset CommandInset citation
@@ -3289,7 +3304,20 @@ key "Brown Corpus Manual"
 BROWN CORPUS MANUAL [online].
  [cit.
  2016-05-01].
- Dostupné z: http://www.hit.uib.no/icame/brown/bcm.html 
+ Dostupné z: http://www.hit.uib.no/icame/brown/bcm.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Oxford handbook of computational linguistics"
+
+\end_inset
+
+MITKOV Ruslan.
+ The Oxford handbook of computational linguistics.
+ Oxford: Oxford University Press, 2003.
+ ISBN 978-0-19-927634-9.
 \end_layout
 
 \begin_layout Bibliography
