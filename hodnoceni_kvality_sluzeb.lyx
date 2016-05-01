@@ -6583,10 +6583,6 @@ def get_sentiment(row):
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 	if 'POSITIVE' in term:
 \end_layout
 
@@ -6646,12 +6642,7 @@ def lidstone_smooth(pos, neg, n, e=0.3):
 
 \begin_layout Plain Layout
 
-	
-\end_layout
-
-\begin_layout Plain Layout
-
-	Parametr e nastaven na 0.3"""
+	Parametr e je nastaven na 0.3"""
 \end_layout
 
 \begin_layout Plain Layout
@@ -6727,20 +6718,12 @@ score = lidstone_smooth(positive, negative, total)
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 # Vytvoření výstupní tabulky
 \end_layout
 
 \begin_layout Plain Layout
 
 output_table = df({'score':[score]})
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
