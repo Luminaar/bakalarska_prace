@@ -2048,6 +2048,808 @@ Podrobný popis jednotlivých kroků při implementaci, jak byly aplikovány
 
 \end_layout
 
+\begin_layout Standard
+V této kapitole je popsána implementace (KNIME workflow) stanovené metody
+ pomocí KNIME AP.
+ Většina potřebných operací lze v tomto programu provádět díky předdefinovaným
+ uzlům.
+ Funkce, které nejsou dostupné lze implementovat jako vlastní uzly v jazyce
+ Java, nebo vytvořením skritpů s pomocí speciálního uzlu, který umožňuje
+ uvnitř programu spouštět zdrojový kód jazyka Python.
+ Pro účely této práce byl zvolen druhý přístup.
+\end_layout
+
+\begin_layout Standard
+Workflow je rozdělen na 4 části: načtení textových dat ze souboru (získaný
+ z crawleru), předzpracování textu, extrakce aspektů a hodnocení aspektů.
+\end_layout
+
+\begin_layout Subsection
+Načtení dat
+\end_layout
+
+\begin_layout Standard
+Data získaná z webové stránky jsou uložena v souboru jako prostý text.
+ Každý řádek obsahuje jednu recenzi a je formátován do JSON.
+ Workflow nejdříve načte jednotlivé řádky pomocí uzlu 
+\emph on
+Line Reader 
+\emph default
+(viz.
+ Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Implementace 1"
+
+\end_inset
+
+) a pomocí uzlu 
+\emph on
+String to JSON
+\emph default
+ je převádí do formátu JSON.
+ Data jsou pak převedena do tabulky (uzel 
+\emph on
+JSON to Table
+\emph default
+).
+ Uzel 
+\emph on
+RowID 
+\emph default
+přiřazuje každé recenzi (řádku v tabulce) čísellný identifikátor (ID).
+ Uzel 
+\emph on
+String To Document 
+\emph default
+provádí tokenizaci jednotlivých recenzí a ukládá je jako dokumenty.
+ Dokumenty v KNIME AP jsou uloženy v interním formátu.
+ Pro každý dokument lze nastavit autora, datum vytvoření, titulek, text
+ a další údaje.
+ Titulek a text dokumentu jsou zároveň tokenizovány a lze s nimi provádět
+ další operace.
+\end_layout
+
+\begin_layout Standard
+V tomto případě je v dokumentu uložen také údaj o celkovém hodnocení uživatele
+ a jeho ID.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Část workflow odpovídající za načtení dat
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Implementace 1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Předzpracování textu
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Předzpracování-textu"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V této části jsou na titulek a text každé recenze aplikovány postupy pro
+ předzpracování textu (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:implementace 2"
+
+\end_inset
+
+).
+ Uzel 
+\emph on
+Case Converter 
+\emph default
+sjednocuje velikost písmen.
+ Uzel 
+\emph on
+Stop word filter 
+\emph default
+odtraňuje stop slova na základě vestavěného seznamu slov.
+ Uzel 
+\emph on
+Punctuation Erasure 
+\emph default
+z textu odstraňuje punktuaci.
+\end_layout
+
+\begin_layout Standard
+Konkrétní data obsahují velké množtví slov, které obsahují číslice (př.
+ 2nd, 3rd apod) nebo větší množství pomlček (s největší pravděpodobností
+ jde o překlepy).
+ Uzly 
+\emph on
+RegEx Filter 
+\emph default
+tato slova odstraňují s pomocí regulárních výrazů.
+\end_layout
+
+\begin_layout Standard
+Posledním krokem je označní slovních druhů (uzel 
+\emph on
+POS tagger
+\emph default
+).
+ Označování slovních druhů je postaveno na Apache OpenNLP, což je open source
+ knihovna pro jazyk Java, která zahrnuje nástroje pro strojové učení a zpracován
+í přirozeného jazyka 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace https://opennlp.apache.org/documentation/1.6.0/manual/opennlp.html#opennlp
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Část workflow odpovídající za předzpracování textu
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:implementace 2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Výstupy z tohoto kroku jsou použity v obou následujících částech.
+\end_layout
+
+\begin_layout Subsection
+Extrakce aspektů
+\end_layout
+
+\begin_layout Standard
+Pro extrakci aspektů jsou v dokumentech ponechána pouze podstatná jména.
+ Uzel 
+\emph on
+Tag Filter
+\emph default
+ filtruje slova na základě různých značek (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:implementace 3"
+
+\end_inset
+
+).
+ V tomto případě jde o značky, které vytvořil uzel 
+\emph on
+POS Tagger 
+\emph default
+v minulé části.
+\end_layout
+
+\begin_layout Standard
+Následuje stematizace slov.
+ Uzel 
+\emph on
+Snowball Stemmer
+\emph default
+, který stematizaci provádí používá Snowball algoritmus 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace http://snowball.tartarus.org/algorithms/english/stemmer.html
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_4.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Část workflow odpovídající za extrakci aspektů
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:implementace 3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Před extrakcí aspektů jsou recenze rozdělený na jednotlivé věty (uzel 
+\emph on
+Sentence Extractor
+\emph default
+) a z vět jsou vytvořeny "transakce" v podobě řady slov (uzel 
+\emph on
+Cell Splitter
+\emph default
+).
+ Následně jsou ve vytvořených transakcích vyhledány často se vyskytující
+ položky (slova) pomocí uzlu 
+\emph on
+Item Set Finder
+\emph default
+, který používá implementaci algoritmu Apriori v jazyce C 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+citace http://www.borgelt.net/fpm.html
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Z výdledné tabulky jsou poté ručně vybrány aspekty.
+\end_layout
+
+\begin_layout Subsection
+Hodnocení aspektů
+\end_layout
+
+\begin_layout Standard
+V poslední, nejrozsáhlejší části workflow jsou vybrané aspekty vyhodnoceny.
+ Je zde opět použity předzpracované dokumenty (viz 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Předzpracování-textu"
+
+\end_inset
+
+).
+ Nejdříve jsou z dokumentů ponechána pouze podstatná a přídavná jména a
+ příslovce (uzel 
+\emph on
+Tag Filter
+\emph default
+, viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:implementace 5"
+
+\end_inset
+
+).
+ Tedy slova která buď značí aspekty, nebo jsou hodnotícími slovy.
+ Recenze jsou poté rozděleny na jednotlivé věty (uzel 
+\emph on
+Sentence Extractor
+\emph default
+).
+ Uzel 
+\emph on
+Document Data Extractor
+\emph default
+ extrahuje metadata každé recenze (celkové hodnocení a ID dokumentu) a přidává
+ je každému řádku (každé větě) jako sloupec.
+ Tyto údaje budou využity dále.
+ Uzel 
+\emph on
+Column Rename 
+\emph default
+přejmenovává jeden ze sloupců pro větší následnou přehlednost.
+ Uzel 
+\emph on
+String To Number 
+\emph default
+převádí uživatelské číslo z textového řetězce na číslo, aby s ním bylo možné
+ provádět výpočty.
+ 
+\emph on
+Table Indexer 
+\emph default
+vytváří index všech vět, který umožňuje vyhledávání slov a frází ve větách.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_5.png
+	lyxscale 70
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Část workflow připravující data na hodnocení aspektů
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:implementace 5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Princip práce KNIME je podobný funkčnímu programování, kdy každá funkce
+ (uzel) přijímá vstupy (vstupní tabulka), provádí nad nimi operace a vrací
+ výstupy (výstupní tabulka).
+ Funkce (uzly) nemají žádné vedlejší účinky, tzn.
+ nemění žádné globální proměnné.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Tohle možná dát do popoisu KNIME.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V dalším kroku je vyhodnocen každý aspekt.
+ KNIME workflow umožňuje vytvářet různé druhy smyček.
+ V této části je použita smyčka, která načítá řádky tabulky (v tomto případě
+ ručně vytvořená tabulka s aspekty - uzel 
+\emph on
+Table Creator
+\emph default
+) a jednotlivé řádky pak ukládá to globální proměnné, která je dostupná
+ všem ostatním uzlům.
+\end_layout
+
+\begin_layout Standard
+Smyčka začíná uzlem 
+\emph on
+Table Row To Variable Loop Start
+\emph default
+ a končí uzelm 
+\emph on
+Loop End 
+\emph default
+(viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:implementace 6"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_6_brief.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Smyčka ve workflow, zkráceno pro přehlednost.
+ Písmena a., b., c., značí jednotivé větve worflow.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:implementace 6"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V každé iteraci nejdříve proběhne vyhledávání aspektu (slova nebo fráze)
+ ve větách (uzel 
+\emph on
+Index Query
+\emph default
+).
+ Výstupem je tabulka s větami, který daný aspekt obsahují.
+ Poté se worflow rozděluje na tři větve.
+\end_layout
+
+\begin_layout Standard
+Ve větvi 
+\emph on
+a.
+
+\emph default
+ probíhá vyhodnocení aspektů podle sentimentů (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Větev-A"
+
+\end_inset
+
+).
+ Meta-uzel 
+\emph on
+Sentimen Tagger 
+\emph default
+určuje sémantickou orientaci jednotlivých slov.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Přidat podrobný popis a obrázek
+\end_layout
+
+\end_inset
+
+Uzel 
+\emph on
+Bag of Words Creator
+\emph default
+ vytváří soubor slov ze všech vět, ve kterých se aspekt vyskytuje.
+\end_layout
+
+\begin_layout Standard
+Uzel 
+\emph on
+Python Script 
+\emph default
+umožňuje spouštět zdrojový kód napsaný v jazyce Python, pracovat se vstupními
+ tabulkami, a vytvářet výstupní tabulky, se kterými mohou dále pracovat
+ jiné uzly.
+ Tento konkrétní uzel se stará o výpočet skóre ze semantické orientace slov.
+ Výstupní tabulka obsahuje jediný řádek, ve kterém je uložen název aspektu
+ a skóre tohoto aspektu
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Přidat zdrojový kód
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_6_a.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Větev a.: Vyhodnocení aspektu podle sentimentů
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Větev-A"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ve větvi 
+\emph on
+b.
+ 
+\emph default
+je vypočteno skóre z uživatelského hodnocení (viz Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Větev-B"
+
+\end_inset
+
+).
+ Jednotlivé věty jsou nejprve seskupeny podle zdrojového dokumentu, tedy
+ podle recenze, ze které pochází (uzel 
+\emph on
+GroupBy
+\emph default
+).
+ Uzel 
+\emph on
+Python Script 
+\emph default
+pak vypočítává skóre z uživatelských hodnocení.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Přidat zdrojový kód?? Možná odkázat na to, že to vypočítává podobně, jako
+ ve větvi A a stačí přidat jenom jednu přílohu??
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_6_b.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Větev b.: Výpočet skóre z uživatelského hodnocení
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Větev-B"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ve větvi 
+\emph on
+c.
+ 
+\emph default
+je vypočítáno procento vět, ve kterém se daný aspekt vyskytuje (viz Obrázek
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Větev-C"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/implementace_6_c.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Větev c.: Výpočet procenta výskytu aspektu
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Větev-C"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Při každé iteraci vznikne tabulka o jednom řádku, který obsahuje sloupce
+ s názvem aspektu, procentem vět obsahující daný aspekt, skóre vypočítané
+ z sentimentů vět a skóre vypočítané z uživatelského hodnocení.
+ Jednotlivé tabulky jsou poté spojeny do výstupní tabulky celé smyčky.
+\end_layout
+
 \begin_layout Section
 Interpretace výstupů
 \end_layout
