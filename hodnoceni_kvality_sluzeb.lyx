@@ -2521,21 +2521,7 @@ V dalším kroku je vyhodnocen každý aspekt.
 \emph on
 Table Creator
 \emph default
-) a jednotlivé řádky pak ukládá to globální proměnné (
-\emph on
-flow variables
-\emph default
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-přidat do popisu KNIME, co jsou to flow variables
-\end_layout
-
-\end_inset
-
-), která je dostupná všem následujícím uzlům.
+) a jednotlivé řádky pak ukládá do globálních proměnných (flow variables).
 \end_layout
 
 \begin_layout Standard
