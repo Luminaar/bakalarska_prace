@@ -1483,18 +1483,26 @@ get_rating
 \end_layout
 
 \begin_layout Standard
-Vyextrahovaná data jsou poté uložena ve formátu JSON (Javascript Object
- Notation) do textového souboru:
-\begin_inset Note Note
+Vyextrahovaná data jsou poté uložena ve formátu JSON
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Nějaká reference, co to je, možná poznámka pod čarou??
+JSON (Javascript Object Notation) je univerzální formát pro přenost dat,
+ kdetý je nezávislý na jazyku a je snadno čitelný a zapisovatelný pro člověka
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JSON"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
-:
+ do textového souboru:
 \end_layout
 
 \begin_layout Standard
@@ -3258,15 +3266,15 @@ daptive_path.pdf
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Datetime"
+key "JSON"
 
 \end_inset
 
-8.1 datetime: Basic date and time types.
- Docs.python.org [online].
+JSON.
+ Json.org [online].
  [cit.
- 2016-04-30].
- Dostupné z: https://docs.python.org/2/library/datetime.html
+ 2016-05-01].
+ Dostupné z: http://www.json.org/json-cz.html
 \end_layout
 
 \begin_layout Bibliography
