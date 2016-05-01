@@ -183,8 +183,7 @@ Cílem této práce je popsat některé dostupné metody pro dobývání informa
  Všechny použité nástroje jsou volně dostupné, přičemž použití právě těchto
  nástrojů není povinné, tj.
  stejných výsledků lze dosáhnout s jinými podobnými nástroji.
- Cílem práce není popis práce s konkrétními nástroji, proto se o nich práce
- zmiňuje jenom okrajově.
+ Cílem práce není popis práce s konkrétními nástroji.
  Data použitá při aplikaci metody jsou veřejně dostupná a neobsahují žádné
  osobní ani citlivé údaje (jména, adresy atd.).
  Data pochází z jednoho zdroje.
@@ -193,10 +192,9 @@ Cílem této práce je popsat některé dostupné metody pro dobývání informa
 \begin_layout Standard
 Teoretická část práce se věnuje doposud proběhlému výzkumu v oblasti a literatuř
 e, která se zabývá dobýváním informací z textu.
- Tato část setaké věnuje pojmům služba, hodnocení služeb a zpětná vazba.
- V praktické části je stanovena metoda, která bude v práci použita.
- Praktická část dále obsahuje popis dat, na které bude metoda aplikována
- a stručý popis použitých nástrojů.
+ Tato část se také věnuje pojmům služba, hodnocení služeb a zpětná vazba.
+ V praktické části jsou popsány použité nástroje, zkoumaná dat, získání
+ těchto dat a implementace metody.
 \end_layout
 
 \begin_layout Standard
@@ -208,7 +206,7 @@ Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků
 
 \begin_layout Standard
 Hlavním přínosem této práce by mělo být ověření, zda jsou doposud vypracované
- metody připraveny k praktickému použití, popřípdě určit oblasti, ve kterých
+ metody připraveny k praktickému použití, popřípadě určit oblasti, ve kterých
  je potřeba provést další výzkum.
 \end_layout
 
