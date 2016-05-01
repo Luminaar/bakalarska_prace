@@ -1610,13 +1610,9 @@ Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
  Při čtení textu je pro člověka tokenizace (rozlišení smysluplných celků)
  samozřejmosí.
  Při strojovém zpracování se může jednat o netriviální úkol.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokenization?l
-ang=en
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Art of tokenization"
 
 \end_inset
 
@@ -1667,18 +1663,14 @@ v anglickém jazyce) apod.
 \begin_layout Standard
 Odstraněním stop slov se také zmenší objem textu, což může být u velkého
  množství dat stěžejní (až 30% slov v textu může být označeno jako stop
- slova
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace https://www.researchgate.net/publication/273127322_Preprocessing_Techniques
-_for_Text_Mining
-\end_layout
+ slova)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Preprocessing techniques"
 
 \end_inset
 
-).
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1699,13 +1691,10 @@ POS tagger
 ).
  Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
  (např.
- Brown korpus, který obsahuje více než 1 000 000 slov
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace http://www.hit.uib.no/icame/brown/bcm.html
-\end_layout
+ Brown korpus, který obsahuje více než 1 000 000 slov 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brown Corpus Manual"
 
 \end_inset
 
@@ -1720,12 +1709,9 @@ V anglickém jazyce se rozlišuje 8 až 9 slovních druhů.
  také poddruhy.
  Nejčastěji se používá seznam slovní druhů vypracovaný v rámci projektu
  Penn Treebank 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-reference https://www.cis.upenn.edu/~treebank/
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Penn Treebank"
 
 \end_inset
 
@@ -1752,16 +1738,14 @@ Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či fr
  značící aspekty se budou v různých recenzích překrývat.
  Tato slova se budou vyskytovat s vyšší frekvencí.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace Bing Liu - summarizing customer reviews
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 171"
+key "Mining and summarizing customer reviews"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -1786,17 +1770,6 @@ stemming
 ) slov.
  Tento proces spočívá v nalezení kmene slova, odstraněním koncovek, popř.
  i přípon.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Developing a stemming algorithm, Modern information retrieval
-\end_layout
-
-\end_inset
-
-.
  Stematizace slov umožňuje zamezit zbytečnému tříštění aspektů, kdy je jeden
  aspekt označován podobnýmy slovy a tím dochází k nepřesnostem při měření
  frekvence výskytu tohoto aspektu.
@@ -1805,6 +1778,14 @@ Developing a stemming algorithm, Modern information retrieval
  ikdyž se ve skutečnosti týkají jednoho a toho samého aspektu.
  Stematizací těchto slov vzniká kmen "pohod" a tak jsou výskyty obou slov
  počítány společne.
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 168"
+key "Modern information retrieval"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -1825,12 +1806,9 @@ Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
  Algoritmus končí, kdy se již nenajde žádná skupina položek, která by se
  vyskytovala s danou podporou.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace Fast algorithms for mining association rules
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fast algorithms Apriori"
 
 \end_inset
 
@@ -1903,12 +1881,9 @@ cích názor (hodnotící slova).
 Zda je slovo orientováno kladně nebo záporně je určeno na základě souborů
  předem označených slov.
  Pro účely této práce byly použity soubory SentiWordNet 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-http://sentiwordnet.isti.cnr.it/
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SentiWordNet"
 
 \end_inset
 
@@ -2018,12 +1993,10 @@ Kde
 \end_inset
 
  je parametrem 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace na How to count thumbs ups
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 6"
+key "how to count thumb ups"
 
 \end_inset
 
@@ -2048,12 +2021,11 @@ s
  Aby bylo možné použít stejný vzorec, je každé hodnocení na 5 bodové škále
  považováno za sobubor několika binárních hodnocení (např.
  hodnocení 3 je považováno za 3 kladná a 5-3=2 záporná hodnocení).
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace na How to count thumbs ups
-\end_layout
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 8"
+key "how to count thumb ups"
 
 \end_inset
 
@@ -3275,6 +3247,136 @@ JSON.
  [cit.
  2016-05-01].
  Dostupné z: http://www.json.org/json-cz.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Art of tokenization"
+
+\end_inset
+
+The Art of Tokenization (Language Preprocessing) [online].
+ 2013 [cit.
+ 2016-05-01].
+ Dostupné z: https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokeniza
+tion?lang=en 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Preprocessing techniques"
+
+\end_inset
+
+GURUSAMY Vairaprakash, Subbu KANNAN.
+ Preprocessing Techniques for Text Mining.
+ Conference paper- October 2014 [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://www.researchgate.net/publication/273127322_Preprocessing_Tech
+niques_for_Text_Mining
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Brown Corpus Manual"
+
+\end_inset
+
+BROWN CORPUS MANUAL [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://www.hit.uib.no/icame/brown/bcm.html 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Penn Treebank"
+
+\end_inset
+
+The Penn Treebank Project [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: https://www.cis.upenn.edu/~treebank 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Mining and summarizing customer reviews"
+
+\end_inset
+
+HU Minqing a Liu BING.
+ Mining and summarizing customer reviews.
+ In Proceedings of the tenth ACM SIGKDD international conference on Knowledge
+ discovery and data mining.
+ ACM, 2004.
+ p.
+ 168-177.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Modern information retrieval"
+
+\end_inset
+
+BAEZA-YATES, R.
+ a Berthier de Araújo Neto RIBEIRO.
+ Modern information retrieval.
+ New York: ACM Press, 1999.
+ ISBN 0-201-39829-X.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Fast algorithms Apriori"
+
+\end_inset
+
+ARGWAL Rakesh and Ramakrishnan SRIKANT.
+ Fast Algorithms for Mining Association Rules in Large Databases.
+ In Proceedings of the 20th International Conference on Very Large Data
+ Bases (VLDB '94), Jorge B.
+ Bocca, Matthias Jarke, and Carlo Zaniolo (Eds.).
+ Morgan Kaufmann Publishers Inc., 1994, 487-499.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "SentiWordNet"
+
+\end_inset
+
+SentiWordNet [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://sentiwordnet.isti.cnr.it
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "how to count thumb ups"
+
+\end_inset
+
+ZHANG, Dell a Robert MAO.
+ How to count thumb-ups and thumb-downs: user-rating based ranking of items
+ from an axiomatic perspective.
+ ICTIR'11 Proceedings of the Third international conference on Advances
+ in information retrieval theory.
+ Springer-Verlag Berlin, Heidelberg, 2011, 238-249.
 \end_layout
 
 \begin_layout Bibliography
