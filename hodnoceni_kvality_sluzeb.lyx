@@ -2054,14 +2054,27 @@ V této kapitole je popsána implementace (KNIME workflow) stanovené metody
  Většina potřebných operací lze v tomto programu provádět díky předdefinovaným
  uzlům.
  Funkce, které nejsou dostupné lze implementovat jako vlastní uzly v jazyce
- Java, nebo vytvořením skritpů s pomocí speciálního uzlu, který umožňuje
- uvnitř programu spouštět zdrojový kód jazyka Python.
- Pro účely této práce byl zvolen druhý přístup.
+ Java, nebo spouštěním skriptů v jazyce Python, pomocí uzlů 
+\emph on
+Python Script.
+ 
+\emph default
+Tyto uzly umožňují pracovat s vstupními tabulkami a vytvářet výstupní tabulky
+ stejně jako ostatní uzly.
 \end_layout
 
 \begin_layout Standard
-Workflow je rozdělen na 4 části: načtení textových dat ze souboru (získaný
- z crawleru), předzpracování textu, extrakce aspektů a hodnocení aspektů.
+Workflow je rozdělen na 4 části: načtení textových dat ze souboru (který
+ je výstupem scrapperu, viz 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Extrakce-dat"
+
+\end_inset
+
+), předzpracování textu, extrakce aspektů a hodnocení aspektů.
+ Ke každé části je uveden popis použitých uzlů a schéma workflow.
+ Zdrojové kódy vytvořených skritpů jsou přiloženy jako příloha.
 \end_layout
 
 \begin_layout Subsection
@@ -2087,7 +2100,7 @@ reference "fig:Implementace 1"
 \emph on
 String to JSON
 \emph default
- je převádí do formátu JSON.
+ provede parsování textových řetězců do JSON.
  Data jsou pak převedena do tabulky (uzel 
 \emph on
 JSON to Table
@@ -2097,7 +2110,7 @@ JSON to Table
 \emph on
 RowID 
 \emph default
-přiřazuje každé recenzi (řádku v tabulce) čísellný identifikátor (ID).
+přiřazuje každé recenzi (řádku v tabulce) číselný identifikátor (ID).
  Uzel 
 \emph on
 String To Document 
@@ -2105,14 +2118,11 @@ String To Document
 provádí tokenizaci jednotlivých recenzí a ukládá je jako dokumenty.
  Dokumenty v KNIME AP jsou uloženy v interním formátu.
  Pro každý dokument lze nastavit autora, datum vytvoření, titulek, text
- a další údaje.
+ a další metadata.
  Titulek a text dokumentu jsou zároveň tokenizovány a lze s nimi provádět
- další operace.
-\end_layout
-
-\begin_layout Standard
-V tomto případě je v dokumentu uložen také údaj o celkovém hodnocení uživatele
- a jeho ID.
+ další operace, jako je značkování nebo vyhledávání.
+ Pro každý dokument je uloženo uživatelské hodnocení recenze a vytvořené
+ ID.
 \end_layout
 
 \begin_layout Standard
@@ -2186,9 +2196,9 @@ Case Converter
 sjednocuje velikost písmen.
  Uzel 
 \emph on
-Stop word filter 
+Stop word Filter 
 \emph default
-odtraňuje stop slova na základě vestavěného seznamu slov.
+odstraňuje stop slova na základě vestavěného seznamu slov.
  Uzel 
 \emph on
 Punctuation Erasure 
@@ -2197,14 +2207,15 @@ z textu odstraňuje punktuaci.
 \end_layout
 
 \begin_layout Standard
-Konkrétní data obsahují velké množtví slov, které obsahují číslice (př.
+Ukázalo se, že získaná data obsahují velké množtví slov, které obsahují
+ číslice (př.
  2nd, 3rd apod) nebo větší množství pomlček (s největší pravděpodobností
  jde o překlepy).
  Uzly 
 \emph on
 RegEx Filter 
 \emph default
-tato slova odstraňují s pomocí regulárních výrazů.
+tato slova odstraňují pomocí regulárních výrazů.
 \end_layout
 
 \begin_layout Standard
@@ -2216,12 +2227,9 @@ POS tagger
  Označování slovních druhů je postaveno na Apache OpenNLP, což je open source
  knihovna pro jazyk Java, která zahrnuje nástroje pro strojové učení a zpracován
 í přirozeného jazyka 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace https://opennlp.apache.org/documentation/1.6.0/manual/opennlp.html#opennlp
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apache OpenNLP"
 
 \end_inset
 
@@ -2269,7 +2277,7 @@ name "fig:implementace 2"
 \end_layout
 
 \begin_layout Standard
-Výstupy z tohoto kroku jsou použity v obou následujících částech.
+Výstupy z této části jsou použity v obou následujících částech.
 \end_layout
 
 \begin_layout Subsection
@@ -2304,12 +2312,9 @@ Následuje stematizace slov.
 Snowball Stemmer
 \emph default
 , který stematizaci provádí používá Snowball algoritmus 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace http://snowball.tartarus.org/algorithms/english/stemmer.html
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Snowball stemmer"
 
 \end_inset
 
@@ -2360,11 +2365,11 @@ name "fig:implementace 3"
 \end_layout
 
 \begin_layout Standard
-Před extrakcí aspektů jsou recenze rozdělený na jednotlivé věty (uzel 
+Před extrakcí aspektů jsou recenze rozděleny na jednotlivé věty (uzel 
 \emph on
 Sentence Extractor
 \emph default
-) a z vět jsou vytvořeny "transakce" v podobě řady slov (uzel 
+) a z vět jsou vytvořeny "transakce" v podobě pole slov (uzel 
 \emph on
 Cell Splitter
 \emph default
@@ -2375,12 +2380,9 @@ Cell Splitter
 Item Set Finder
 \emph default
 , který používá implementaci algoritmu Apriori v jazyce C 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace http://www.borgelt.net/fpm.html
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Borgelt Apriori"
 
 \end_inset
 
@@ -2397,7 +2399,7 @@ Hodnocení aspektů
 
 \begin_layout Standard
 V poslední, nejrozsáhlejší části workflow jsou vybrané aspekty vyhodnoceny.
- Je zde opět použity předzpracované dokumenty (viz 
+ Opět jsou zde použity předzpracované dokumenty (viz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Předzpracování-textu"
@@ -2405,8 +2407,8 @@ reference "sub:Předzpracování-textu"
 \end_inset
 
 ).
- Nejdříve jsou z dokumentů ponechána pouze podstatná a přídavná jména a
- příslovce (uzel 
+ Nejdříve jsou z dokumentů ponechána pouze podstatná jména, přídavná jména
+ a příslovce (uzel 
 \emph on
 Tag Filter
 \emph default
@@ -2440,8 +2442,8 @@ přejmenovává jeden ze sloupců pro větší následnou přehlednost.
 \emph on
 String To Number 
 \emph default
-převádí uživatelské číslo z textového řetězce na číslo, aby s ním bylo možné
- provádět výpočty.
+převádí uživatelské hodnocení z textového řetězce na číslo, aby s ním bylo
+ možné provádět výpočty.
  
 \emph on
 Table Indexer 
@@ -2496,24 +2498,6 @@ name "fig:implementace 5"
 \end_layout
 
 \begin_layout Standard
-Princip práce KNIME je podobný funkčnímu programování, kdy každá funkce
- (uzel) přijímá vstupy (vstupní tabulka), provádí nad nimi operace a vrací
- výstupy (výstupní tabulka).
- Funkce (uzly) nemají žádné vedlejší účinky, tzn.
- nemění žádné globální proměnné.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Tohle možná dát do popoisu KNIME.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 V dalším kroku je vyhodnocen každý aspekt.
  KNIME workflow umožňuje vytvářet různé druhy smyček.
  V této části je použita smyčka, která načítá řádky tabulky (v tomto případě
@@ -2521,8 +2505,21 @@ V dalším kroku je vyhodnocen každý aspekt.
 \emph on
 Table Creator
 \emph default
-) a jednotlivé řádky pak ukládá to globální proměnné, která je dostupná
- všem ostatním uzlům.
+) a jednotlivé řádky pak ukládá to globální proměnné (
+\emph on
+flow variables
+\emph default
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+přidat do popisu KNIME, co jsou to flow variables
+\end_layout
+
+\end_inset
+
+), která je dostupná všem následujícím uzlům.
 \end_layout
 
 \begin_layout Standard
@@ -2596,7 +2593,7 @@ Index Query
 \emph default
 ).
  Výstupem je tabulka s větami, který daný aspekt obsahují.
- Poté se worflow rozděluje na tři větve.
+ Poté se workflow rozděluje na tři větve.
 \end_layout
 
 \begin_layout Standard
@@ -2614,8 +2611,18 @@ reference "fig:Větev-A"
 
 ).
  Meta-uzel 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+přidat do popisu KNIME co je to meta uzel
+\end_layout
+
+\end_inset
+
+ 
 \emph on
-Sentimen Tagger 
+Sentiment Tagger 
 \emph default
 určuje sémantickou orientaci jednotlivých slov.
  
@@ -2636,22 +2643,13 @@ Bag of Words Creator
 \end_layout
 
 \begin_layout Standard
-Uzel 
-\emph on
-Python Script 
-\emph default
-umožňuje spouštět zdrojový kód napsaný v jazyce Python, pracovat se vstupními
- tabulkami, a vytvářet výstupní tabulky, se kterými mohou dále pracovat
- jiné uzly.
- Tento konkrétní uzel se stará o výpočet skóre ze semantické orientace slov.
+Tento konkrétní uzel se stará o výpočet skóre ze semantické orientace slov.
  Výstupní tabulka obsahuje jediný řádek, ve kterém je uložen název aspektu
- a skóre tohoto aspektu
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Přidat zdrojový kód
-\end_layout
+ a skóre tohoto aspektu.
+ Okomentovaný zdrojový kód je přiložen jako Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-Python-Script"
 
 \end_inset
 
@@ -2726,18 +2724,19 @@ GroupBy
 Python Script 
 \emph default
 pak vypočítává skóre z uživatelských hodnocení.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Přidat zdrojový kód?? Možná odkázat na to, že to vypočítává podobně, jako
- ve větvi A a stačí přidat jenom jednu přílohu??
-\end_layout
+ Metoda vypočítání skóre je totožná pro tento uzel i uzel vyhodnocující
+ aspekty (viz Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Zdrojový-kód-Python-Script"
 
 \end_inset
 
-
+, funkce 
+\family typewriter
+lidstone_smooth
+\family default
+).
 \end_layout
 
 \begin_layout Standard
@@ -2846,8 +2845,9 @@ name "fig:Větev-C"
 \begin_layout Standard
 Při každé iteraci vznikne tabulka o jednom řádku, který obsahuje sloupce
  s názvem aspektu, procentem vět obsahující daný aspekt, skóre vypočítané
- z sentimentů vět a skóre vypočítané z uživatelského hodnocení.
+ ze sentimentů vět a skóre vypočítané z uživatelského hodnocení.
  Jednotlivé tabulky jsou poté spojeny do výstupní tabulky celé smyčky.
+ Tyto výsledky mohou být dále interpretovány.
 \end_layout
 
 \begin_layout Section
@@ -3179,7 +3179,50 @@ key "Datetime"
  Docs.python.org [online].
  [cit.
  2016-04-30].
- Dostupné z: https://docs.python.org/2/library/datetime.html 
+ Dostupné z: https://docs.python.org/2/library/datetime.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Apache OpenNLP"
+
+\end_inset
+
+Apache OpenNLP Developer Documentation.
+ Opennlp.apache.org [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: https://opennlp.apache.org/documentation/1.6.0/manual/opennlp.html#openn
+lp
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Snowball stemmer"
+
+\end_inset
+
+The English (Porter2) stemming algorithm.
+ Snowball.tartarus.org [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://snowball.tartarus.org/algorithms/english/stemmer.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Borgelt Apriori"
+
+\end_inset
+
+Christian Borgelt's Web Pages.
+ Borgelt.net [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://www.borgelt.net/fpm.html 
 \end_layout
 
 \begin_layout Standard
@@ -3207,7 +3250,7 @@ name "sec:Zdrojový-kód-crawleru"
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "language=Python,numbers=left,numberstyle={\scriptsize},stepnumber=5,basicstyle={\footnotesize\ttfamily},backgroundcolor={\color{mygray}},stringstyle={\color{green}},keywordstyle={\color{blue}},commentstyle={\color{red}}"
+lstparams "language=Python,numbers=left,numberstyle={\scriptsize},stepnumber=5,basicstyle={\footnotesize\ttfamily},showstringspaces=false,backgroundcolor={\color{mygray}},stringstyle={\color{green}},keywordstyle={\color{blue}},commentstyle={\color{red}}"
 inline false
 status open
 
@@ -6434,7 +6477,7 @@ Wh-adverb (příslovce "how", "where", "why")
 \align center
 Zdroj: 
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 citace https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
@@ -6442,6 +6485,196 @@ citace https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.ht
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Zdrojový kód pro uzel Python Script
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Zdrojový-kód-Python-Script"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,numbers=left,numberstyle={\scriptsize},stepnumber=5,basicstyle={\footnotesize\ttfamily},showstringspaces=false,backgroundcolor={\color{mygray}},stringstyle={\color{green}},keywordstyle={\color{blue}},commentstyle={\color{red}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+from pandas import DataFrame as df
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+def get_sentiment(row):
+\end_layout
+
+\begin_layout Plain Layout
+	"""Převedení značek semantické orientace na čísla."""
+\end_layout
+
+\begin_layout Plain Layout
+	term = row['Term']
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+	if 'POSITIVE' in term:
+\end_layout
+
+\begin_layout Plain Layout
+		return 1
+\end_layout
+
+\begin_layout Plain Layout
+	elif 'NEGATIVE' in term:
+\end_layout
+
+\begin_layout Plain Layout
+		return -1
+\end_layout
+
+\begin_layout Plain Layout
+	elif 'NEUTRAL' in term:
+\end_layout
+
+\begin_layout Plain Layout
+		return 0
+\end_layout
+
+\begin_layout Plain Layout
+	else:
+\end_layout
+
+\begin_layout Plain Layout
+		return 2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+def lidstone_smooth(pos, neg, n, e=0.3):
+\end_layout
+
+\begin_layout Plain Layout
+	"""Výpočet skóre pomocí pomětu kladných a záporných 
+\end_layout
+
+\begin_layout Plain Layout
+	hodnocení s aplikací vyhlazení Lidstone.
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+	Parametr e nastaven na 0.3"""
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+	return (pos+e)/((pos+e)+(neg+e))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# Přidání sloupce s číselnou hodnotou sentimentu
+\end_layout
+
+\begin_layout Plain Layout
+input_table['Sentiment'] = input_table.apply(get_sentiment,1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# Výpočet výskutů jednotlivých číselných hodnot sentimentu
+\end_layout
+
+\begin_layout Plain Layout
+counts = input_table['Sentiment'].value_counts()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+positive = counts[1]
+\end_layout
+
+\begin_layout Plain Layout
+negative = counts[-1]
+\end_layout
+
+\begin_layout Plain Layout
+total = positive + negative
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# Výpočet skóre
+\end_layout
+
+\begin_layout Plain Layout
+score = lidstone_smooth(positive, negative, total)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# Vytvoření výstupní tabulky
+\end_layout
+
+\begin_layout Plain Layout
+output_table = df({'score':[score]})
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+# Přidání názvu aspektu do sloupce tabulky
+\end_layout
+
+\begin_layout Plain Layout
+output_table['aspekt'] = flow_variables['aspect']
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
