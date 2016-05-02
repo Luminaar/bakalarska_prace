@@ -254,41 +254,135 @@ Popis oblasti a rešerše
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
+Základní oblast, které se práce týká je práce s textem a extrakce informací
+ z něj.
+ Tímto tématem se zabývá např.
+ publikace 
+\emph on
+Modern Information Retrieval
+\emph default
+, napsaná Ricardem Baeza-Yatesem v roce 1999 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Modern information retrieval"
 
-\begin_layout Plain Layout
-popis řešené oblasti a rešerše
+\end_inset
+
+.
+ Tato publikace je poměrně rozáshlá a týká se modely pro získání dat, dotazovací
+mi jazyky a operacemi a také vlastnostmi textu a možnostmi jeho zpracování.
+ 
 \end_layout
 
-\begin_layout Plain Layout
-navazuje na popsanou terminologii, dává termíny do souvislostí,
-\end_layout
+\begin_layout Standard
+Další relevantní publikace je 
+\emph on
+Oxford Handbook of Computational Linguistics
+\emph default
+, napsaná kolektivem autorů a zpracovaná Ruslanem Mitkovem v roce 2003 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Oxford handbook of computational linguistics"
 
-\begin_layout Plain Layout
-Vybrat všechny relevantní zdroje a popsat, co se v nich říká, zároveň se
- tím popíše celá oblast.
-\end_layout
+\end_inset
 
-\begin_layout Plain Layout
-Rozepsat se o tom, co všechno do této oblasti spadá: služby (co to je služba,
- jak se dá hodnotit, zpětná vazba od zákazníků), získávání strukturovaných
- dat (web crawling a scraping, přístup k databázi), dobývání znalostí z
- textu (analýza přirozeného jazyka)
-\end_layout
-
-\begin_layout Plain Layout
-Různé přístupy k problematice
-\end_layout
-
-\begin_layout Plain Layout
-Rozepsat se, jaké jsou trendy.
- Mělo by to být trošku zajímavější povídání, aby se někdo alespoň něco dozvěděl.
-\end_layout
+.
+ Tato publikace zabývá se jak základy teorie jazyka (lexikologie, semantika
+ a pod.), operacemi s textem (jako je určování slovních druhů) a možnými
+ aplikacemi počítačového zpracování textu.
+ Podobnými tématy se zabývá také 
+\emph on
+Text Mining Predictive Methods for Analyzing Unstructured Information
+\emph default
+, napsaná Sholomem M.
+ Weissem a kolektivem v roce 2005.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "text mining predictive methods"
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Jednou z hlavních publikací, která se zabývá text miningem, sumarizací textu,
+ získání textu z webových stránek, extrakci a analýze sentimentů je 
+\emph on
+Exploring Hyperlinks
+\emph default
+, napsaná Bingem Liu v roce 2011 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bing Liu Exploring hyperlinks"
+
+\end_inset
+
+.
+ Tato publikace se přímo zabývá některými metodami použitými při zpracování
+ této práce.
+\end_layout
+
+\begin_layout Standard
+Samotná metoda je založena na probíhajícím výzkumu, který je popsán v v
+ publikacích 
+\emph on
+Mining and Summarizing Customer Reviews
+\emph default
+ (Hu Minqing a Bing Liu, 2004) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mining and summarizing customer reviews"
+
+\end_inset
+
+ a 
+\emph on
+Mining Opinion Features in Customer Reviews
+\emph default
+ (Hu Minqing a Bing Liu, 2004).
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mining opinion features in customer reviews"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V této práci jsou taky použity některé veřejné a open source projekty, které
+ se danou oblastí zabývají - Apache OpenNLP 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apache OpenNLP"
+
+\end_inset
+
+ poskytující knihovnu pro zpracování textu, lingvistický korpus Brown 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brown Corpus Manual"
+
+\end_inset
+
+ a Penn TreeBank 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Penn Treebank"
+
+\end_inset
+
+ zabývající se problematikou určování slovních druhů v textu nebo SentiWordNet
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SentiWordNet"
+
+\end_inset
+
+ zabývající se sémantickou orientací slov.
 \end_layout
 
 \begin_layout Part
@@ -5442,6 +5536,154 @@ oblasti.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
+key "Modern information retrieval"
+
+\end_inset
+
+BAEZA-YATES, R.
+ a Berthier de Araújo Neto RIBEIRO.
+ Modern information retrieval.
+ New York: ACM Press, 1999.
+ ISBN 0-201-39829-X.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Oxford handbook of computational linguistics"
+
+\end_inset
+
+MITKOV Ruslan.
+ The Oxford handbook of computational linguistics.
+ Oxford: Oxford University Press, 2003.
+ ISBN 978-0-19-927634-9.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "text mining predictive methods"
+
+\end_inset
+
+WEISS, Sholom M.
+ Text mining: predictive methods for analyzing unstructured information.
+ New York: Springer, c2005.
+ ISBN 0-387-95433-3.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Bing Liu Exploring hyperlinks"
+
+\end_inset
+
+LIU, Bing.
+ Web data mining: exploring hyperlinks, contents, and usage data.
+ 2nd ed.
+ Berlin: Springer, 2011.
+ ISBN 978-3-642-19459-7.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Mining and summarizing customer reviews"
+
+\end_inset
+
+HU Minqing a Liu BING.
+ Mining and summarizing customer reviews.
+ In Proceedings of the tenth ACM SIGKDD international conference on Knowledge
+ discovery and data mining.
+ ACM, 2004, 168-177.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Mining opinion features in customer reviews"
+
+\end_inset
+
+HU, Minqing a Bing LIU.
+ Mining opinion features in customer reviews.
+ Proceedings of the 19th national conference on Artifical intelligence (AAAI'04).
+ AAAI Press, 2004, , 755-760.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Apache OpenNLP"
+
+\end_inset
+
+Apache OpenNLP Developer Documentation.
+ Opennlp.apache.org [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: https://opennlp.apache.org/documentation/1.6.0/manual/opennlp.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Brown Corpus Manual"
+
+\end_inset
+
+BROWN CORPUS MANUAL [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://www.hit.uib.no/icame/brown/bcm.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Penn Treebank"
+
+\end_inset
+
+The Penn Treebank Project [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: https://www.cis.upenn.edu/~treebank
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "SentiWordNet"
+
+\end_inset
+
+SentiWordNet [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://sentiwordnet.isti.cnr.it
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Borgelt Apriori"
+
+\end_inset
+
+Christian Borgelt's Web Pages.
+ Borgelt.net [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://www.borgelt.net/fpm.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
 key "General Python FAQ"
 
 \end_inset
@@ -5540,20 +5782,6 @@ CIBC Online Banking Customer Reviews.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Bing Liu Exploring hyperlinks"
-
-\end_inset
-
-LIU, Bing.
- Web data mining: exploring hyperlinks, contents, and usage data.
- 2nd ed.
- Berlin: Springer, 2011.
- ISBN 978-3-642-19459-7.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
 key "AJAX"
 
 \end_inset
@@ -5613,75 +5841,6 @@ niques_for_Text_Mining
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Brown Corpus Manual"
-
-\end_inset
-
-BROWN CORPUS MANUAL [online].
- [cit.
- 2016-05-01].
- Dostupné z: http://www.hit.uib.no/icame/brown/bcm.html
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Oxford handbook of computational linguistics"
-
-\end_inset
-
-MITKOV Ruslan.
- The Oxford handbook of computational linguistics.
- Oxford: Oxford University Press, 2003.
- ISBN 978-0-19-927634-9.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Penn Treebank"
-
-\end_inset
-
-The Penn Treebank Project [online].
- [cit.
- 2016-05-01].
- Dostupné z: https://www.cis.upenn.edu/~treebank
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Mining and summarizing customer reviews"
-
-\end_inset
-
-HU Minqing a Liu BING.
- Mining and summarizing customer reviews.
- In Proceedings of the tenth ACM SIGKDD international conference on Knowledge
- discovery and data mining.
- ACM, 2004.
- p.
- 168-177.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Modern information retrieval"
-
-\end_inset
-
-BAEZA-YATES, R.
- a Berthier de Araújo Neto RIBEIRO.
- Modern information retrieval.
- New York: ACM Press, 1999.
- ISBN 0-201-39829-X.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
 key "Fast algorithms Apriori"
 
 \end_inset
@@ -5692,19 +5851,6 @@ ARGWAL Rakesh and Ramakrishnan SRIKANT.
  Bases (VLDB '94), Jorge B.
  Bocca, Matthias Jarke, and Carlo Zaniolo (Eds.).
  Morgan Kaufmann Publishers Inc., 1994, 487-499.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "SentiWordNet"
-
-\end_inset
-
-SentiWordNet [online].
- [cit.
- 2016-05-01].
- Dostupné z: http://sentiwordnet.isti.cnr.it
 \end_layout
 
 \begin_layout Bibliography
@@ -5725,21 +5871,6 @@ ZHANG, Dell a Robert MAO.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Apache OpenNLP"
-
-\end_inset
-
-Apache OpenNLP Developer Documentation.
- Opennlp.apache.org [online].
- [cit.
- 2016-05-01].
- Dostupné z: https://opennlp.apache.org/documentation/1.6.0/manual/opennlp.html#openn
-lp
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
 key "Snowball stemmer"
 
 \end_inset
@@ -5754,20 +5885,6 @@ The English (Porter2) stemming algorithm.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Borgelt Apriori"
-
-\end_inset
-
-Christian Borgelt's Web Pages.
- Borgelt.net [online].
- [cit.
- 2016-05-01].
- Dostupné z: http://www.borgelt.net/fpm.html
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
 key "J-shaped-dist"
 
 \end_inset
@@ -5775,11 +5892,10 @@ key "J-shaped-dist"
 HU, Nan, Jie ZHANG a Paul A.
  PAVLOU.
  Overcoming the J-shaped distribution of product reviews.
- Communications of the ACM [online].
- 2009, 52(10), 144- [cit.
+ In Communications of the ACM [online].
+ 2009, 144-147 [cit.
  2016-05-02].
  DOI: 10.1145/1562764.1562800.
- ISSN 00010782.
  Dostupné z: http://portal.acm.org/citation.cfm?doid=1562764.1562800
 \end_layout
 
