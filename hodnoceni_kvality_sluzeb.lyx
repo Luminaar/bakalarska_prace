@@ -1097,7 +1097,7 @@ name "sub:Získání-zdrojového-kódu"
 
 \begin_layout Standard
 Proces získání dat z webové stránky lze rozdělit na několik kroků.
- Je nutné podotknout, že se následující popis týká jenom jednoho konkrítního
+ Je nutné podotknout, že se následující popis týká jenom jednoho konkrétního
  zdroje.
  Pro jiné webové stránky bude postup ale obdobný.
 \end_layout
@@ -1447,7 +1447,8 @@ Scraper nejdříve provede syntaktickou analýzu zdrojového kódu s pomocí kni
 V případě titulku a textu recenze, stačí pouze uložit text uvnitř patřičného
  prvku.
  Uživatelské hodnocení je zapsáno jako text (př.
-\begin_inset Quotes gld
+ 
+\begin_inset Quotes grd
 \end_inset
 
 5 out of 5
@@ -1455,7 +1456,8 @@ V případě titulku a textu recenze, stačí pouze uložit text uvnitř patři�
 \end_inset
 
 ).
- S pomocí regulárních výrazů stačí vyextrahovat první číslo v textu.
+ S pomocí regulárních výrazů stačí vyextrahovat první číslo v textu (uživatelé
+ mohou určovat pouze celočíselná hodnocení).
  Python toto umožňuje pomocí vestavěné knihovny
 \family typewriter
 Re
