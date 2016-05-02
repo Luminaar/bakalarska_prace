@@ -148,11 +148,16 @@ Cílem této práce je popsat některé dostupné metody pro dobývání informa
  z textu (v našem případě zpětné vazby od zákazníků) a jednu z těchto metod
  aplikovat na reálná data.
  Použitá metoda je založena na výsledcích předchozího výzkumu v této oblasti.
- Všechny použité nástroje jsou volně dostupné, přičemž použití právě těchto
- nástrojů není povinné, tj.
- stejných výsledků lze dosáhnout s jinými podobnými nástroji.
- Cílem práce není popis práce s konkrétními nástroji.
- Data použitá při aplikaci metody jsou veřejně dostupná a neobsahují žádné
+ V praktické části této práce bude popsaná metoda implementována s pomocí
+ volně dostupných nástrojů.
+ Cílem není poskytnout vyčerpávající popis práce s těmito nástroji, ale
+ ukázat, jaké typy nástrojů jsou použity pro řešení různých úloh.
+ Na základě této práce by mělo být možné vybrat jiné nástroje, které tyto
+ úlohy řeší.
+\end_layout
+
+\begin_layout Standard
+Data použitá při aplikaci metody jsou veřejně dostupná a neobsahují žádné
  osobní ani citlivé údaje (jména, adresy atd.).
  Data pochází z jednoho zdroje.
 \end_layout
@@ -160,7 +165,7 @@ Cílem této práce je popsat některé dostupné metody pro dobývání informa
 \begin_layout Standard
 Teoretická část práce se věnuje doposud proběhlému výzkumu v oblasti a literatuř
 e, která se zabývá dobýváním informací z textu.
- Tato část se také věnuje pojmům služba, hodnocení služeb a zpětná vazba.
+ V této části je stanovena metoda, která bude na data aplikovaána.
  V praktické části jsou popsány použité nástroje, zkoumaná dat, získání
  těchto dat a implementace metody.
 \end_layout
@@ -168,8 +173,8 @@ e, která se zabývá dobýváním informací z textu.
 \begin_layout Standard
 Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků, vyvození
  závěrů z tohoto vyhodnocení.
- Práce se také vyjadřuje k užitečnosti metody, navrhuje způsoby reálného
- využití a poskytuje náměty pro další práci v oblasti.
+ Práce také navrhuje způsoby reálného využití a poskytuje náměty na další
+ vylepšování použitých postupů.
 \end_layout
 
 \begin_layout Standard
