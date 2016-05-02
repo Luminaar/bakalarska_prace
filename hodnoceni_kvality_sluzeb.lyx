@@ -87,54 +87,9 @@ status open
 
 
 \backslash
-begin{titlepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
 pagenumbering{gobble}
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Title
-Hodnocení IT služeb
-\end_layout
-
-\begin_layout Author
-Maxim Kovykov
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{titlepage}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-pagenumbering{arabic}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -156,11 +111,23 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Section*
-Abstract
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}
 \end_layout
 
-\begin_layout Section*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Úvod
 \end_layout
 
@@ -211,42 +178,15 @@ Hlavním přínosem této práce by mělo být ověření, zda jsou doposud vypr
  je potřeba provést další výzkum.
 \end_layout
 
-\begin_layout Part
-Teoretická
-\end_layout
-
-\begin_layout Section
-Základní terminologie
-\end_layout
-
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Zde vybrat podstatné termíny, která se objevují dále v práci: aspekt, aspekt
- mining, text mining, web crawling a web scraping
-\end_layout
-
-\begin_layout Plain Layout
-Jednotlivé termíny by měly být popsány srozumitelně, ale bez velkých návazností:
-\end_layout
-
-\begin_layout Plain Layout
-Sentiment, sentiment analysis
-\end_layout
-
-\begin_layout Plain Layout
-Aspekt, aspekt mining
-\end_layout
-
-\begin_layout Plain Layout
-Text mining
-\end_layout
-
+\begin_inset Newpage pagebreak
 \end_inset
 
 
+\end_layout
+
+\begin_layout Part
+Teoretická
 \end_layout
 
 \begin_layout Section
@@ -257,11 +197,11 @@ Popis oblasti a rešerše
 Základní oblast, které se práce týká je práce s textem a extrakce informací
  z něj.
  Tímto tématem se zabývá např.
- publikace 
+ publikace
 \emph on
 Modern Information Retrieval
 \emph default
-, napsaná Ricardem Baeza-Yatesem v roce 1999 
+, napsaná Ricardem Baeza-Yatesem v roce 1999
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Modern information retrieval"
@@ -271,15 +211,14 @@ key "Modern information retrieval"
 .
  Tato publikace je poměrně rozáshlá a týká se modely pro získání dat, dotazovací
 mi jazyky a operacemi a také vlastnostmi textu a možnostmi jeho zpracování.
- 
 \end_layout
 
 \begin_layout Standard
-Další relevantní publikace je 
+Další relevantní publikace je
 \emph on
 Oxford Handbook of Computational Linguistics
 \emph default
-, napsaná kolektivem autorů a zpracovaná Ruslanem Mitkovem v roce 2003 
+, napsaná kolektivem autorů a zpracovaná Ruslanem Mitkovem v roce 2003
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Oxford handbook of computational linguistics"
@@ -290,7 +229,7 @@ key "Oxford handbook of computational linguistics"
  Tato publikace zabývá se jak základy teorie jazyka (lexikologie, semantika
  a pod.), operacemi s textem (jako je určování slovních druhů) a možnými
  aplikacemi počítačového zpracování textu.
- Podobnými tématy se zabývá také 
+ Podobnými tématy se zabývá také
 \emph on
 Text Mining Predictive Methods for Analyzing Unstructured Information
 \emph default
@@ -307,11 +246,11 @@ key "text mining predictive methods"
 
 \begin_layout Standard
 Jednou z hlavních publikací, která se zabývá text miningem, sumarizací textu,
- získání textu z webových stránek, extrakci a analýze sentimentů je 
+ získání textu z webových stránek, extrakci a analýze sentimentů je
 \emph on
 Exploring Hyperlinks
 \emph default
-, napsaná Bingem Liu v roce 2011 
+, napsaná Bingem Liu v roce 2011
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bing Liu Exploring hyperlinks"
@@ -325,23 +264,22 @@ key "Bing Liu Exploring hyperlinks"
 
 \begin_layout Standard
 Samotná metoda je založena na probíhajícím výzkumu, který je popsán v v
- publikacích 
+ publikacích
 \emph on
 Mining and Summarizing Customer Reviews
 \emph default
- (Hu Minqing a Bing Liu, 2004) 
+ (Hu Minqing a Bing Liu, 2004)
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Mining and summarizing customer reviews"
 
 \end_inset
 
- a 
+ a
 \emph on
 Mining Opinion Features in Customer Reviews
 \emph default
  (Hu Minqing a Bing Liu, 2004).
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Mining opinion features in customer reviews"
@@ -353,21 +291,21 @@ key "Mining opinion features in customer reviews"
 
 \begin_layout Standard
 V této práci jsou taky použity některé veřejné a open source projekty, které
- se danou oblastí zabývají - Apache OpenNLP 
+ se danou oblastí zabývají - Apache OpenNLP
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Apache OpenNLP"
 
 \end_inset
 
- poskytující knihovnu pro zpracování textu, lingvistický korpus Brown 
+ poskytující knihovnu pro zpracování textu, lingvistický korpus Brown
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Brown Corpus Manual"
 
 \end_inset
 
- a Penn TreeBank 
+ a Penn TreeBank
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Penn Treebank"
@@ -375,7 +313,6 @@ key "Penn Treebank"
 \end_inset
 
  zabývající se problematikou určování slovních druhů v textu nebo SentiWordNet
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "SentiWordNet"
@@ -871,20 +808,6 @@ key "how to count thumb ups"
 
 \begin_layout Part
 Praktická
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Trochu nějaký úvod, co bude následovat.
- Ještě jednou shrnout, jaké jsme si daly cíle.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -1786,7 +1709,6 @@ Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované
 \end_layout
 
 \begin_layout Verbatim
-
 https://cibc-secure.ugc.bazaarvoice.com/...page=5...
 \end_layout
 
@@ -2025,7 +1947,6 @@ Scraper nejdříve provede syntaktickou analýzu zdrojového kódu s pomocí kni
 V případě titulku a textu recenze, stačí pouze uložit text uvnitř patřičného
  prvku.
  Uživatelské hodnocení je zapsáno jako text (př.
- 
 \begin_inset Quotes grd
 \end_inset
 
@@ -2131,20 +2052,6 @@ Jednotlivé recenze jsou uložené na samostatných řádcích.
 
 \begin_layout Section
 Popis implemetnace v KNIME
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Podrobný popis jednotlivých kroků při implementaci, jak byly aplikovány
- jednotlivé kroky z metody na data
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2979,7 +2886,7 @@ name "fig:Větev-C"
 
 \begin_layout Standard
 Pro účely této práce byly na také z výstupních dat s pomocí knihovny Matplotlib
- vygenerovány grafy použité při interpretaci výsledků (viz 
+ vygenerovány grafy použité při interpretaci výsledků (viz
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Interpretace-výstupů"
@@ -3013,7 +2920,7 @@ Výstupy
 
 \begin_layout Standard
 Výstupy jsou pro lepší přehlednost seskupeny do několika tabulek.
- V Tabulce 
+ V Tabulce
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Sentimenty-podle-vyskytu"
@@ -3831,7 +3738,7 @@ end{threeparttable}
 \end_layout
 
 \begin_layout Standard
-V tabulce 
+V tabulce
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Sentimenty-prumerneho-skore"
@@ -4607,7 +4514,7 @@ end{threeparttable}
 \end_layout
 
 \begin_layout Standard
-V tabulce 
+V tabulce
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Porovanání-pořadí-aspektů"
@@ -5394,7 +5301,7 @@ Rozložení uživatelského hodnocení
 Dalším výstupem jsou grafy rozložení uživatelského hodnocení.
  Pro každý aspekt byl vytvořen sloupcový graf, který znázorňuje počty hodnocení
  s různými hodnotami.
- Grafy jsou přiloženy jako Příloha 
+ Grafy jsou přiloženy jako Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Grafy"
@@ -5407,14 +5314,14 @@ reference "sec:Grafy"
 \begin_layout Standard
 Z grafů je zřejmé, že uživatelská hodnocení sledují rozložení ve tvaru U
  (př.
- viz Příloha 
+ viz Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Grafy"
 
 \end_inset
 
-, Obrázek 
+, Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Graf-Security-type-U"
@@ -5422,14 +5329,14 @@ reference "fig:Graf-Security-type-U"
 \end_inset
 
 ), nebo J (př.
- viz Příloha 
+ viz Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Grafy"
 
 \end_inset
 
-, Obrázek 
+, Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Graf-online-banking-type J"
@@ -5524,6 +5431,17 @@ oblasti.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Terminologický slovník
 \end_layout
 
 \begin_layout Standard
@@ -5897,6 +5815,29 @@ HU, Nan, Jie ZHANG a Paul A.
  2016-05-02].
  DOI: 10.1145/1562764.1562800.
  Dostupné z: http://portal.acm.org/citation.cfm?doid=1562764.1562800
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList table
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
