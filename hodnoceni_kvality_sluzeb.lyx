@@ -6,6 +6,7 @@
 \begin_preamble
 \usepackage[czech]{babel}
 \usepackage{algorithm,algpseudocode}
+\usepackage{threeparttable}
 \definecolor{mygray}{gray}{0.95}
 \end_preamble
 \use_default_options true
@@ -261,7 +262,7 @@ popis řešené oblasti a rešerše
 \end_layout
 
 \begin_layout Plain Layout
-navazuje na popsanou terminologii, dává termíny do souvislostí, 
+navazuje na popsanou terminologii, dává termíny do souvislostí,
 \end_layout
 
 \begin_layout Plain Layout
@@ -331,12 +332,11 @@ KNIME AP je volně dostupný, open source program určený ke zpracování a ana
  Práce v tomto programu probíhá prostřednictvím grafického rozhraní, ve
  kterém uživatel z předem dostupných uzlů (angl.
  node) sestavuje tzv.
- 
 \emph on
 work flow.
 
 \emph default
- Tento výraz lze volně přeložit jako 
+ Tento výraz lze volně přeložit jako
 \emph on
 roura
 \emph default
@@ -380,7 +380,7 @@ Výhodou KNIME AP je, že i při neznalosti postupů práce s tím to programem,
  probíhá.
  Části tohoto schématu budou v následujících částech této práce uvedeny
  pro ilustraci.
- Na Obrázku 
+ Na Obrázku
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:popis-uzlu"
@@ -520,7 +520,6 @@ Jednotlivé uzly lze konfigurovat (podle jejich specifikace).
 
 \begin_layout Standard
 Kromě základní konfigurace, mají všechny uzly přístup k tzv.
- 
 \emph on
 flow variables
 \emph default
@@ -549,7 +548,7 @@ Příklad work flow
 
 \begin_layout Standard
 Pro lepší pochopení základů práce s KNIME AP, je dále uveden příklad jednoduchéh
-o work flow (Obrázek 
+o work flow (Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Příklad-work-flow"
@@ -623,7 +622,7 @@ vytvoření
 \end_inset
 
 tabulky Uvnitř tohoto uzlu lze ručně zadávat data.
- Ručně vytvoříme potřebnou tabulku (viz Obrázek 
+ Ručně vytvoříme potřebnou tabulku (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Ručně-vytvořená-tabulka"
@@ -753,7 +752,7 @@ Ručně vytvořená tabulka
 
 \begin_layout Standard
 Výsledek můžeme sledovat ve vzniklém PDF souboru, v databázi, nebo přímo
- v programu, zobrazením výstupní tabulky uzlu Group By (viz Obrázek 
+ v programu, zobrazením výstupní tabulky uzlu Group By (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Výstupní-tabulka"
@@ -815,7 +814,7 @@ Python
 
 \begin_layout Standard
 Python je interpretovaný, objektově orientovaný, skriptovací programovací
- jazyk 
+ jazyk
 \begin_inset CommandInset citation
 LatexCommand cite
 key "General Python FAQ"
@@ -848,7 +847,7 @@ Index knihoven (https://pypi.python.org/pypi) pro Python v době psaná této
 \begin_layout Standard
 Tento programovací jazyk byl použit při zpracování práce jak při vytvoření
  samostatného programu, tak i v rámci práce s KNIME AP pro vytváření skriptů
- pro manipulaci s daty, prostřednictvím uzlů 
+ pro manipulaci s daty, prostřednictvím uzlů
 \emph on
 Python Script.
 \end_layout
@@ -883,7 +882,7 @@ key "Requests library"
 \end_layout
 
 \begin_layout Standard
-Knihovna Requests byla použita při získávání dat internetu (viz 
+Knihovna Requests byla použita při získávání dat internetu (viz
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Získání-zdrojového-kódu"
@@ -910,7 +909,7 @@ key "Beautiful soup documentation"
 \end_layout
 
 \begin_layout Standard
-Knihovna byla použita při získávání dat z webové stránky (viz 
+Knihovna byla použita při získávání dat z webové stránky (viz
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Extrakce-dat"
@@ -935,7 +934,6 @@ key "Python Pandas"
 
 .
  Knihovna byla použita při práci s tabulkami v rámci KNIME AP (viz Příloha
- 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -950,7 +948,7 @@ Matplotlib
 \end_layout
 
 \begin_layout Standard
-Tato knihovna slouží k vytváření grafů z poskytnutých dat 
+Tato knihovna slouží k vytváření grafů z poskytnutých dat
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Matplotlib"
@@ -967,7 +965,7 @@ Získání nestrukturovaných dat
 
 \begin_layout Standard
 Při zpracování dat byla využita veřejná data, dostupná z webových stránek
- banky CIBC 
+ banky CIBC
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CIBC Customer Reviews"
@@ -999,7 +997,6 @@ status open
 
 \begin_layout Plain Layout
 Zdrojový kód programu, včetně podrobných komentářů je přiložen jako Příloha
- 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-crawleru"
@@ -1021,11 +1018,11 @@ Web scraping
 \end_layout
 
 \begin_layout Standard
-Proces získání dat z webové stránky se nazývá 
+Proces získání dat z webové stránky se nazývá
 \emph on
 web scraping
 \emph default
- a programu 
+ a programu
 \emph on
 scraper.
 
@@ -1057,7 +1054,6 @@ Poloautomatické
 \end_inset
 
 zpracování Tato metoda spočívá v učení s učitelem (angl.
- 
 \emph on
 supervised learning
 \emph default
@@ -1113,7 +1109,7 @@ Jako první, je nutné určit, z jaké stránky budou data získávána.
  Na této stránce si lze ihned všimnout, že jednotlivé recenze jsou zobrazovány
  na stránkách po 10.
  Dále si lze všimnout, že číslo stránku není uvedeno v URL (Uniform Resource
- Locator - jednotná adresa zdroje) stránky (viz Obrázek 
+ Locator - jednotná adresa zdroje) stránky (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Stránka-s-recenzemi"
@@ -1196,7 +1192,7 @@ Ke zjištění URL jednotlivých stránek stačí sledovat HTTP požadavky, kter
 
 \begin_layout Standard
 Pozorováním proběhlých požadavků lze zjistit, na jaké URL je zdrojový kód
- dostupný (viz Obrázek 
+ dostupný (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:HTTP-požadavky"
@@ -1265,14 +1261,14 @@ Scraper nyní může projít všechny stránky podle čísla, dosazením tohoto 
  zdrojové kódy.
  V této implementaci byla pro zásílání HTTP požadavků použita knihovna Requests
  (viz.
- Příloha 
+ Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-crawleru"
 
 \end_inset
 
-, funkce 
+, funkce
 \family typewriter
 get_data
 \family default
@@ -1295,7 +1291,7 @@ Před tím než je možné data extrahovat, je nutné ručně projít strukturu 
  a určit vzory, podle kterých budou data extrahována.
  Nejdříve určíme, které části recenze jsou podstatné.
  V tomto případě jde o titulek recenze, text recenze a celkové hodnocení
- (viz Obrázek 
+ (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Uživatelská-recenze"
@@ -1349,7 +1345,7 @@ Uživatelská recenze
 \begin_layout Standard
 Ve zdrojovém kódu se určí část, kde je popsána jedna samostatná recenze.
  V případě této stránky, jsou potřebná data obsažena v HTML prvcích, které
- mají přiřazené třídy s konzistentními názvy (viz Obrázek 
+ mají přiřazené třídy s konzistentními názvy (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Zdrojový-kód-recenze."
@@ -1451,7 +1447,6 @@ Scraper nejdříve provede syntaktickou analýzu zdrojového kódu s pomocí kni
 V případě titulku a textu recenze, stačí pouze uložit text uvnitř patřičného
  prvku.
  Uživatelské hodnocení je zapsáno jako text (př.
- 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1461,19 +1456,19 @@ V případě titulku a textu recenze, stačí pouze uložit text uvnitř patři�
 
 ).
  S pomocí regulárních výrazů stačí vyextrahovat první číslo v textu.
- Python toto umožňuje pomocí vestavěné knihovny 
+ Python toto umožňuje pomocí vestavěné knihovny
 \family typewriter
 Re
 \family default
  (viz.
- Příloha 
+ Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-crawleru"
 
 \end_inset
 
-, funkce 
+, funkce
 \family typewriter
 get_rating
 \family default
@@ -1488,7 +1483,6 @@ status open
 \begin_layout Plain Layout
 JSON (Javascript Object Notation) je univerzální formát pro přenost dat,
  kdetý je nezávislý na jazyku a je snadno čitelný a zapisovatelný pro člověka
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "JSON"
@@ -1650,9 +1644,8 @@ Tzv.
  Tato slova lze z textu vyřadit, aniž by se zmenšila jeho informační hodnota.
  Seznamy stop slov se vytvářejí na základě frekvence slov a ručního výběru.
  Mezi stop slova nejčastěji patří předložky, spojky, členy (např.
- 
 \emph on
-the 
+the
 \emph default
 v anglickém jazyce) apod.
 \end_layout
@@ -1677,18 +1670,17 @@ Určení slovních druhů
 \begin_layout Standard
 K určování (značkování) slovních druhů slouží tzv.
  značkovače (angl.
- 
 \emph on
 part-of-speech
 \emph default
- nebo 
+ nebo
 \emph on
 POS tagger
 \emph default
 ).
  Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
  (např.
- korpus Brown, který obsahuje více než 1 000 000 slov 
+ korpus Brown, který obsahuje více než 1 000 000 slov
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Brown Corpus Manual"
@@ -1713,14 +1705,14 @@ V anglickém jazyce se rozlišuje 8 až 9 slovních druhů.
  Pro účely strojového zpracování textu se pro dosažení větší přesnosti rozlišují
  také poddruhy.
  Nejčastěji se používá seznam slovní druhů vypracovaný v rámci projektu
- Penn Treebank 
+ Penn Treebank
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Penn Treebank"
 
 \end_inset
 
-, viz Příloha 
+, viz Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Seznam-slovních-druhů"
@@ -1742,7 +1734,6 @@ Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či fr
  uživatel zmiňuje ve své recenzi odlišné irelevantní věci), kdežto slova
  značící aspekty se budou v různých recenzích překrývat.
  Tato slova se budou vyskytovat s vyšší frekvencí.
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 171"
@@ -1768,7 +1759,6 @@ Před extrakcí aspektů jsou provedeny další úpravy textu.
 \begin_layout Standard
 Dalším krokem je tzv.
  stematizace (angl.
- 
 \emph on
 stemming
 \emph default
@@ -1810,7 +1800,6 @@ Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
  Při každé iteraci zvyšuje počet položek ve skupině.
  Algoritmus končí, kdy se již nenajde žádná skupina položek, která by se
  vyskytovala s danou podporou.
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Fast algorithms Apriori"
@@ -1893,7 +1882,7 @@ key "Mining and summarizing customer reviews"
 \begin_layout Standard
 Zda je slovo orientováno kladně nebo záporně (tzv.
  sémantická orientace) je určeno na základě souborů předem označených slov.
- Pro účely této práce byly použity soubory SentiWordNet 
+ Pro účely této práce byly použity soubory SentiWordNet
 \begin_inset CommandInset citation
 LatexCommand cite
 key "SentiWordNet"
@@ -1922,7 +1911,7 @@ Pro každý aspekt je nalezen počet kladných a záporných "bodů".
  To však nestačí k tomu, aby šlo tyto aspekty porovnávat mezi sebou (př.
  není zřejmé, zda je aspekt se 100 kladnými a 10 zápornými body hodnocen
  lépe, než aspekt se 10 kladnými a 4 zápornými body).
- Pořadí aspektů lze určit například vypočtením skóre 
+ Pořadí aspektů lze určit například vypočtením skóre
 \emph on
 s
 \emph default
@@ -1939,42 +1928,42 @@ s
 \end_layout
 
 \begin_layout Standard
-Kde 
+Kde
 \begin_inset Formula $n_{pos}$
 \end_inset
 
- je počtem positivně orientovaných slov a 
+ je počtem positivně orientovaných slov a
 \begin_inset Formula $n_{neg}$
 \end_inset
 
  je počtem negativně orientovaných slov.
- Tento přístup však může být nepřesný v případech, kdy se 
+ Tento přístup však může být nepřesný v případech, kdy se
 \begin_inset Formula $n_{pos}$
 \end_inset
 
- nebo 
+ nebo
 \begin_inset Formula $n_{neg}$
 \end_inset
 
  rovná 0.
  Např.
- pokud aspekt 
+ pokud aspekt
 \emph on
-i 
+i
 \emph default
-obdržel 300 kladných a 2 záporná hodnocení a aspekt 
+obdržel 300 kladných a 2 záporná hodnocení a aspekt
 \emph on
 j
 \emph default
- obdržel 3 kladná a 0 záporných hodnocení, bude aspekt 
+ obdržel 3 kladná a 0 záporných hodnocení, bude aspekt
 \emph on
-j 
+j
 \emph default
 hodnocen výše (
 \begin_inset Formula $s_{j}=1,0$
 \end_inset
 
-) než aspekt 
+) než aspekt
 \emph on
 i
 \emph default
@@ -1982,9 +1971,9 @@ i
 \begin_inset Formula $s_{i}=0,993$
 \end_inset
 
-), i když je intuitivní, že aspekt 
+), i když je intuitivní, že aspekt
 \emph on
-i 
+i
 \emph default
 byl hodnocen kladněji.
  Tento problém lze vyřešit použitím, tzv.
@@ -2001,11 +1990,11 @@ byl hodnocen kladněji.
 \end_layout
 
 \begin_layout Standard
-Kde 
+Kde
 \begin_inset Formula $0<\varepsilon<1$
 \end_inset
 
- je parametrem 
+ je parametrem
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 6"
@@ -2024,7 +2013,7 @@ Uživatelské hodnocení
 \begin_layout Standard
 Každé recenzi je uživatelem přiřazeno celkové hodnocení od 1 (nejhorší)
  do 5 (nejlepší).
- Aspekty jsou na základě tohoto kritéria hodnoceny vypočítáním skóre 
+ Aspekty jsou na základě tohoto kritéria hodnoceny vypočítáním skóre
 \emph on
 s
 \emph default
@@ -2034,7 +2023,6 @@ s
  Aby bylo možné použít stejný vzorec, je každé hodnocení na 5 bodové škále
  považováno za soubor několika binárních hodnocení (např.
  hodnocení 3 je považováno za 3 kladná a 5-3=2 záporná hodnocení).
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 8"
@@ -2067,7 +2055,7 @@ Podrobný popis jednotlivých kroků při implementaci, jak byly aplikovány
 V této kapitole je popsána implementace (KNIME workflow) stanovené metody
  pomocí KNIME AP.
  Workflow je rozdělen na 4 části: načtení textových dat ze souboru (který
- je výstupem scrapperu, viz 
+ je výstupem scrapperu, viz
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Extrakce-dat"
@@ -2076,7 +2064,7 @@ reference "sub:Extrakce-dat"
 
 ), předzpracování textu, extrakce aspektů a hodnocení aspektů.
  Ke každé části je uveden popis použitých uzlů a schéma workflow.
- Zdrojové kódy vytvořených skritpů jsou přiloženy jako Příloha 
+ Zdrojové kódy vytvořených skritpů jsou přiloženy jako Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -2093,36 +2081,36 @@ Načtení dat
 \begin_layout Standard
 Data získaná z webové stránky jsou uložena v souboru jako prostý text.
  Každý řádek obsahuje jednu recenzi a je formátován do JSON.
- Workflow nejdříve načte jednotlivé řádky pomocí uzlu 
+ Workflow nejdříve načte jednotlivé řádky pomocí uzlu
 \emph on
-Line Reader 
+Line Reader
 \emph default
 (viz.
- Obrázek 
+ Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Implementace 1"
 
 \end_inset
 
-) a pomocí uzlu 
+) a pomocí uzlu
 \emph on
 String to JSON
 \emph default
  provede parsování textových řetězců do JSON.
- Data jsou pak převedena do tabulky (uzel 
+ Data jsou pak převedena do tabulky (uzel
 \emph on
 JSON to Table
 \emph default
 ).
- Uzel 
+ Uzel
 \emph on
-RowID 
+RowID
 \emph default
 přiřazuje každé recenzi (řádku v tabulce) číselný identifikátor (ID).
- Uzel 
+ Uzel
 \emph on
-String To Document 
+String To Document
 \emph default
 provádí tokenizaci jednotlivých recenzí a ukládá je jako dokumenty.
  Dokumenty v KNIME AP jsou uloženy v interním formátu.
@@ -2190,7 +2178,7 @@ name "sub:Předzpracování-textu"
 
 \begin_layout Standard
 V této části jsou na titulek a text každé recenze aplikovány postupy pro
- předzpracování textu (viz Obrázek 
+ předzpracování textu (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 2"
@@ -2198,19 +2186,19 @@ reference "fig:implementace 2"
 \end_inset
 
 ).
- Uzel 
+ Uzel
 \emph on
-Case Converter 
+Case Converter
 \emph default
 sjednocuje velikost písmen.
- Uzel 
+ Uzel
 \emph on
-Stop word Filter 
+Stop word Filter
 \emph default
 odstraňuje stop slova na základě vestavěného seznamu slov.
- Uzel 
+ Uzel
 \emph on
-Punctuation Erasure 
+Punctuation Erasure
 \emph default
 z textu odstraňuje punktuaci.
 \end_layout
@@ -2220,22 +2208,22 @@ Ukázalo se, že získaná data obsahují velké množtví slov, které obsahuj�
  číslice (př.
  2nd, 3rd apod) nebo větší množství pomlček (s největší pravděpodobností
  jde o překlepy).
- Uzly 
+ Uzly
 \emph on
-RegEx Filter 
+RegEx Filter
 \emph default
 tato slova odstraňují pomocí regulárních výrazů.
 \end_layout
 
 \begin_layout Standard
-Posledním krokem je označní slovních druhů (uzel 
+Posledním krokem je označní slovních druhů (uzel
 \emph on
 POS tagger
 \emph default
 ).
  Označování slovních druhů je postaveno na Apache OpenNLP, což je open source
  knihovna pro jazyk Java, která zahrnuje nástroje pro strojové učení a zpracován
-í přirozeného jazyka 
+í přirozeného jazyka
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Apache OpenNLP"
@@ -2295,11 +2283,11 @@ Extrakce aspektů
 
 \begin_layout Standard
 Pro extrakci aspektů jsou v dokumentech ponechána pouze podstatná jména.
- Uzel 
+ Uzel
 \emph on
 Tag Filter
 \emph default
- filtruje slova na základě různých značek (viz Obrázek 
+ filtruje slova na základě různých značek (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 3"
@@ -2307,20 +2295,20 @@ reference "fig:implementace 3"
 \end_inset
 
 ).
- V tomto případě jde o značky, které vytvořil uzel 
+ V tomto případě jde o značky, které vytvořil uzel
 \emph on
-POS Tagger 
+POS Tagger
 \emph default
 v minulé části.
 \end_layout
 
 \begin_layout Standard
 Následuje stematizace slov.
- Uzel 
+ Uzel
 \emph on
 Snowball Stemmer
 \emph default
-, který stematizaci provádí používá Snowball algoritmus 
+, který stematizaci provádí používá Snowball algoritmus
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Snowball stemmer"
@@ -2374,21 +2362,21 @@ name "fig:implementace 3"
 \end_layout
 
 \begin_layout Standard
-Před extrakcí aspektů jsou recenze rozděleny na jednotlivé věty (uzel 
+Před extrakcí aspektů jsou recenze rozděleny na jednotlivé věty (uzel
 \emph on
 Sentence Extractor
 \emph default
-) a z vět jsou vytvořeny "transakce" v podobě pole slov (uzel 
+) a z vět jsou vytvořeny "transakce" v podobě pole slov (uzel
 \emph on
 Cell Splitter
 \emph default
 ).
  Následně jsou ve vytvořených transakcích vyhledány často se vyskytující
- položky (slova) pomocí uzlu 
+ položky (slova) pomocí uzlu
 \emph on
 Item Set Finder
 \emph default
-, který používá implementaci algoritmu Apriori v jazyce C 
+, který používá implementaci algoritmu Apriori v jazyce C
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Borgelt Apriori"
@@ -2408,7 +2396,7 @@ Hodnocení aspektů
 
 \begin_layout Standard
 V poslední, nejrozsáhlejší části workflow jsou vybrané aspekty vyhodnoceny.
- Opět jsou zde použity předzpracované dokumenty (viz 
+ Opět jsou zde použity předzpracované dokumenty (viz
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Předzpracování-textu"
@@ -2417,11 +2405,11 @@ reference "sub:Předzpracování-textu"
 
 ).
  Nejdříve jsou z dokumentů ponechána pouze podstatná jména, přídavná jména
- a příslovce (uzel 
+ a příslovce (uzel
 \emph on
 Tag Filter
 \emph default
-, viz Obrázek 
+, viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 5"
@@ -2430,32 +2418,31 @@ reference "fig:implementace 5"
 
 ).
  Tedy slova která buď značí aspekty, nebo jsou hodnotícími slovy.
- Recenze jsou poté rozděleny na jednotlivé věty (uzel 
+ Recenze jsou poté rozděleny na jednotlivé věty (uzel
 \emph on
 Sentence Extractor
 \emph default
 ).
- Uzel 
+ Uzel
 \emph on
 Document Data Extractor
 \emph default
  extrahuje metadata každé recenze (celkové hodnocení a ID dokumentu) a přidává
  je každému řádku (každé větě) jako sloupec.
  Tyto údaje budou využity dále.
- Uzel 
+ Uzel
 \emph on
-Column Rename 
+Column Rename
 \emph default
 přejmenovává jeden ze sloupců pro větší následnou přehlednost.
- Uzel 
+ Uzel
 \emph on
-String To Number 
+String To Number
 \emph default
 převádí uživatelské hodnocení z textového řetězce na číslo, aby s ním bylo
  možné provádět výpočty.
- 
 \emph on
-Table Indexer 
+Table Indexer
 \emph default
 vytváří index všech vět, který umožňuje vyhledávání slov a frází ve větách.
 \end_layout
@@ -2510,7 +2497,7 @@ name "fig:implementace 5"
 V dalším kroku je vyhodnocen každý aspekt.
  KNIME workflow umožňuje vytvářet různé druhy smyček.
  V této části je použita smyčka, která načítá řádky tabulky (v tomto případě
- ručně vytvořená tabulka s aspekty - uzel 
+ ručně vytvořená tabulka s aspekty - uzel
 \emph on
 Table Creator
 \emph default
@@ -2518,15 +2505,15 @@ Table Creator
 \end_layout
 
 \begin_layout Standard
-Smyčka začíná uzlem 
+Smyčka začíná uzlem
 \emph on
 Table Row To Variable Loop Start
 \emph default
- a končí uzelm 
+ a končí uzelm
 \emph on
-Loop End 
+Loop End
 \emph default
-(viz Obrázek 
+(viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 6"
@@ -2582,7 +2569,7 @@ name "fig:implementace 6"
 
 \begin_layout Standard
 V každé iteraci nejdříve proběhne vyhledávání aspektu (slova nebo fráze)
- ve větách (uzel 
+ ve větách (uzel
 \emph on
 Index Query
 \emph default
@@ -2592,12 +2579,12 @@ Index Query
 \end_layout
 
 \begin_layout Standard
-Ve větvi 
+Ve větvi
 \emph on
 a.
 
 \emph default
- probíhá vyhodnocení aspektů podle sentimentů (viz Obrázek 
+ probíhá vyhodnocení aspektů podle sentimentů (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Větev-A"
@@ -2605,11 +2592,11 @@ reference "fig:Větev-A"
 \end_inset
 
 ).
- Meta-uzel 
+ Meta-uzel
 \emph on
-Sentiment Tagger 
+Sentiment Tagger
 \emph default
-určuje sémantickou orientaci jednotlivých slov (viz Obrázek 
+určuje sémantickou orientaci jednotlivých slov (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Meta-uzel-Sentiment-Tagger"
@@ -2618,17 +2605,17 @@ reference "fig:Meta-uzel-Sentiment-Tagger"
 
 ).
  Uvnitř meta-uzlu je nejdříve odstraněn sloupec se zdrojovým dokumentem
- (uzel 
+ (uzel
 \emph on
 Column Filter
 \emph default
 ).
- Následují tři dvojice uzlů 
+ Následují tři dvojice uzlů
 \emph on
 File Reader
 \emph default
 , které načítají slovníky obsahující slova s označenou sémantickou orientací
- a 
+ a
 \emph on
 Dictionary Tagger
 \emph default
@@ -2638,19 +2625,19 @@ Dictionary Tagger
 \end_layout
 
 \begin_layout Standard
-Uzel 
+Uzel
 \emph on
 Bag of Words Creator
 \emph default
  vytváří soubor slov ze všech vět, ve kterých se aspekt vyskytuje.
- Uzel 
+ Uzel
 \emph on
 Python Script
 \emph default
  vypočítává skóre ze semantické orientace slov.
  Výstupní tabulka obsahuje jediný řádek, ve kterém je uložen název aspektu
  a skóre tohoto aspektu.
- Okomentovaný zdrojový kód je přiložen jako Příloha 
+ Okomentovaný zdrojový kód je přiložen jako Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -2747,12 +2734,11 @@ name "fig:Meta-uzel-Sentiment-Tagger"
 \end_layout
 
 \begin_layout Standard
-Ve větvi 
+Ve větvi
 \emph on
 b.
- 
 \emph default
-je vypočteno skóre z uživatelského hodnocení (viz Obrázek 
+je vypočteno skóre z uživatelského hodnocení (viz Obrázek
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Větev-B"
@@ -2761,25 +2747,25 @@ reference "fig:Větev-B"
 
 ).
  Jednotlivé věty jsou nejprve seskupeny podle zdrojového dokumentu, tedy
- podle recenze, ze které pochází (uzel 
+ podle recenze, ze které pochází (uzel
 \emph on
 GroupBy
 \emph default
 ).
- Uzel 
+ Uzel
 \emph on
-Python Script 
+Python Script
 \emph default
 pak vypočítává skóre z uživatelských hodnocení.
  Metoda vypočítání skóre je totožná pro tento uzel i uzel vyhodnocující
- aspekty (viz Příloha 
+ aspekty (viz Příloha
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
 
 \end_inset
 
-, funkce 
+, funkce
 \family typewriter
 lidstone_smooth
 \family default
@@ -2830,13 +2816,11 @@ name "fig:Větev-B"
 \end_layout
 
 \begin_layout Standard
-Ve větvi 
+Ve větvi
 \emph on
 c.
- 
 \emph default
 je vypočítáno procento vět, ve kterém se daný aspekt vyskytuje (viz Obrázek
- 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Větev-C"
@@ -2856,7 +2840,7 @@ Při každé iteraci vznikne tabulka o jednom řádku, který obsahuje sloupce
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -2921,70 +2905,50 @@ name "sec:Interpretace-výstupů"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Co jsme zjistili, jak by se dala zjištění použít, kdo by je mohl využít,
- jaké nedostatky má naše metoda (třeba to, že při celkovém hodnocení nezvažujeme
- čas - okecat to: v reálné situaci bych měl hromady recenzí během krátké
- doby).
- Co by se dalo udělat ještě lépe.
-\end_layout
-
-\begin_layout Plain Layout
-Tyhle věci rozepsat podrobně, do závěru pak jenom výcuc.
-\end_layout
-
-\begin_layout Plain Layout
-Tady by měly být všechny výstupy jako tabulky a obrázky.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Aplikací popsané metody na konkrétní data byly získnány informace, které
- je nutné interpretovat.
- Získané znalosti pak lze využít při rozhodování.
- V této kapitole jsou popsány získané výstupy, jsou navrženy jejich možné
- interpretace a způsoby jakým lze využít získané znalosti na příkladu konkrétní
- společnosti, od které data pochází.
+V této kapitole jsou popsány výstupy, které vznikly aplikováním metody na
+ data.
+ Jedntolivé výstupy jsou interpretovány a jsou navrhnuta možná praktická
+ využití.
 \end_layout
 
 \begin_layout Subsection
-Aspekty
+Výstupy
 \end_layout
 
 \begin_layout Standard
-Jedním z výstupů při použití popsané metody jsou aspekty služby, o kterých
- se v uživatelských recenzích hovoří nejčastěji.
- Z těchto spektů se dá odvodit, které služby/funkce jsou nejvíce používány
- zákazníky.
- Tato informace může být důležitá při rozhodování, na které funkce se zaměřit
- a do jejichž údržby/vývoje investovat prostředky.
- Z těchto informací však nijak nevyplývá, které aspekty jsou hodnoceny kladně
- a které záporně.
- Tyto informace na poskytnou následující výstupy.
+Výstupy jsou pro lepší přehlednost seskupeny do několika tabulek.
+ V Tabulce 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Sentimenty-podle-vyskytu"
+
+\end_inset
+
+ jsou aspekty seřazeny od nejčastějšího.
+ Ke každému aspektu je uveden počet výskytů a procento vět, ve kterých se
+ aspekt vyskytuje.
+\end_layout
+
+\begin_layout Subsubsection*
+Aspekty, skóre, pořadí
 \end_layout
 
 \begin_layout Standard
-V praxi by měl poskytovatel služby mít přehled o tom jaké služby poskytuje,
- nebo jaké funkce má poskytovaný produkt.
- Zísakné aspekty by měly odpovídat tomuto seznamu (buď zcela, nebo z části
- - z toho by vyplývalo, že uživatelé některé služby/funkce nevyužívají,
- nebo o nich nevědí).
- Získané aspekty mohou doplnit znalosti, které byly získány z jiných zdrojů
- - například sledování návštěvnosti jednotlivých stránek, rozbor dotazů
- zákazníků na pobočce apod.
- 
-\begin_inset Note Note
+\begin_inset Float table
+placement h
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-Učesat, přidat příklady jak lze analyzovat chování uživatele.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{threeparttable}
 \end_layout
 
 \end_inset
@@ -2992,100 +2956,2452 @@ Učesat, přidat příklady jak lze analyzovat chování uživatele.
 
 \end_layout
 
-\begin_layout Subsection
-Průměrný sentiment a uživatelské hodnocení
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sentimenty seřazené podle výskytu od nečastějšího
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Sentimenty-podle-vyskytu"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Aspekt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Počet výskytů
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+% výskytů
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+online banking
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5365
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,525
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+customer service
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2973
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,291
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+bank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1812
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,177
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+accounts
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1283
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,125
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+branch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1093
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,107
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+access
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+988
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,097
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+phone
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+825
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,081
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+website
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+622
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,061
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+security
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+493
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,048
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+credit (visa) card
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+tnote{a}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+424
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,041
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tablenotes}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+item [a] V tomto aspektu jsou započítány dva různé aspekty "credit card"
+ a "visa card", protože se jedná o stejný aspekt s různými názvy.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tablenotes}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Aby bylo možné určit, které aspekty jsou hodnoceny kladně a které záporně,
- je nutné zvolit určité kritérium, podle kterého se budou hodnotit.
- V tomto případě, byla zvolena dvě kritéria - uživatelské hodnocení a celkový
- sentiment recenze.
- Určení těchto hodnot u každého aspektu umožnuje seřadit je od nejzáporněji
- hodnoceného k nejkladněji hodnocenému.
- Z tabulky 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-vložit tabulku s hodnotami
-\end_layout
+V tabulce 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Sentimenty-prumerneho-skore"
 
 \end_inset
 
- je zřejmé, že při seřazení aspektů podle průměrného sentimentu i podle
- průměrného uživatelského hodnocení, zůstává pořadí téměř stejné (v tomto
- případě se pořadí liší pouze u dvou aspektů a to o jednu pozici v tabulce
- - viz 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-vložit tabulku z porovnáním pořadí aspektů 
-\end_layout
-
-\end_inset
-
-).
+ jsou aspekty seřazeny podle zprůměrovaného skóre.
+ Při interpretaci výstupů se hledí na toto pořadí.
 \end_layout
 
 \begin_layout Standard
-Z grafů v příloze 
-\begin_inset Note Note
+\begin_inset Float table
+placement h
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-přidat grafy s rozložením hodnocení jednotlivých aspektů
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{threeparttable}
 \end_layout
 
 \end_inset
 
- je dále zřejmé, že uživatelské hodnocení sleduje rozložení tvaru J.
- To znamená, že lidé při hodnocení nejčastěji používají extrémy (tj.
- nejnižší nebo nejvyšší možné hodnocení) a zřídka používají střední hodnocení.
- 
-\begin_inset Note Note
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sentimenty seřazené podle zprůměrovaného skóre
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Sentimenty-prumerneho-skore"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Aspekt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Zprůměrované skóre
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+% výskytů
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+online banking
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,731
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,525
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+branch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,713
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,107
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+accounts
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,690
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,125
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+customer service
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,690
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,291
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+bank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,682
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,177
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+security
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,667
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,048
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+phone
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,642
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,081
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+website
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,632
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,061
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+credit (visa) card
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,630
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,041
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+access
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,604
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0,097
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-citace - něco kde je popsnáno J rozložení https://www.researchgate.net/publication
-/228604596_Why_Do_Online_Product_Reviews_Have_a_J-Shaped_Distribution_Overcoming
-_Biases_in_Online_Word-of-Mouth_Communication
+
+
+\backslash
+end{threeparttable}
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V tabulce 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Porovanání-pořadí-aspektů"
+
+\end_inset
+
+ jsou v jednotlivých sloupcích uvedeny aspekty seřazené podle jednoho ze
+ tří kritérií.
+ Zde je evidentní, že pořadí ve aspektů seřazených podle skóre z uživatelského
+ hodnocení je podobné jako pořadí aspektů seřazených podle skóre ze sentimentů.
+ Uživatel tedy při vytváření recenze vyjadřuje své pocity obdobně jak v
+ psané formě, tak i udělením známky.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Porovanání pořadí aspektů seřazených podle různých kritérií
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Porovanání-pořadí-aspektů"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="30text%">
+<column alignment="center" valignment="top" width="30text%">
+<column alignment="center" valignment="top" width="30text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Podle zprůměrovaného skóre
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Podle skóre z uživatelského hodnocení
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Podle skóre ze sentimentů
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+online banking
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+online banking
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+branch
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+branch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+branch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+online banking
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+accounts
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+accounts
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+bank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+customer service
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+customer service
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+customer service
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+bank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+bank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+accounts
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+security
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+security
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+security
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+phone
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+credit OR visa card
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+phone
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+website
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+phone
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+website
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+credit (visa) card
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+website
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+credit (visa) card
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+access
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+access
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+access
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Rozložení uživatelského hodnocení
+\end_layout
+
+\begin_layout Standard
+Dalším výstupem jsou grafy rozložení uživatelského hodnocení.
+ Pro každý aspekt byl vytvořen sloupcový graf, který znázorňuje počty hodnocení
+ s různými hodnotami.
+ Grafy jsou přiloženy jako Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Grafy"
 
 \end_inset
 
 .
- Z toho vyplývá, že uživatelský review jsou nečastěji spíše kladná, nebo
- spíše záporná, ale méně častěji neutrální (lidé s neutrálním názorem mají
- zřídka kdy potřebu jej vyjadřovat 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-citace - zkusit najít něco kde se tohle tvrdí
 \end_layout
+
+\begin_layout Standard
+Z grafů je zřejmé, že uživatelská hodnocení sledují rozložení ve tvaru U
+ (př.
+ viz Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Grafy"
 
 \end_inset
 
-).
+, Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Graf-Security-type-U"
+
+\end_inset
+
+), nebo J (př.
+ viz Příloha 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Grafy"
+
+\end_inset
+
+, Obrázek 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Graf-online-banking-type J"
+
+\end_inset
+
+) namísto normálního rozložení.
+ Hodnocení jsou tedy silně polarizována (buď jsou kladná, nebo záporná,
+ ale zřídka umírněná).
 \end_layout
 
 \begin_layout Standard
-Hodnocení aspektů podle těchto kritérií je pouze relativní.
- Tzn.
- lze soudit o tom, který aspekt je lépe a který hůře hodnocení, nevypovídá
- však o absolutní kvalitě aspektů.
- Proto hlavním vypovídajícím výsledkem je právě pořadí aspektů.
+Toto je běžné pro online hodnocení podobného typu.
+ Rozložení tupy U nebo J jsou způsobena tím, že produkty a služby online
+ častěji hodnotí lidé, kteří jsou velice spokojení, nebo zcela nespokojení.
+ Lidé s neutrálním názorem nemají potřebu hodnotit služby nebo produkty
+ online.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "J-shaped-dist"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Interpretace výstupů
 \end_layout
 
 \begin_layout Standard
-V praxi lze pořadí aspektů využít při rozhodování, do kterých částí služby/funkc
-í je nutné investovat nejvíce prostředků.
+Hlavním výstupem jsou nejčastěji hodnocené aspekty služby.
+ Ke každému každému aspektu je přiřazena četnost jeho výskytů, skóre vypočítané
+ ze sentimentů vět a skóre vypočítané z uživatelského hodnocení.
+\end_layout
+
+\begin_layout Standard
+Z kombinace těchto údajů lze vyvodit různé závěry o používanosti aspektů
+ a zároveň o spokojenosti zákazníků.
+ Pokud je některý aspekt hodnocen často, ale má nižší hodnocení, může to
+ znamenat, že je tento aspekt nejužitečnějším a lidé ho využívají i přes
+ nižší kvalitu.
+ Díky této informaci se společnost může zaměřit na vylepšení daného aspektu.
+ Pokud je některý aspekt hodnocen málo, zato velmi kladně, může to znamenat
+ příležitost pro rozšíření tohoto aspektu a přilákání dalších uživatelů.
+\end_layout
+
+\begin_layout Standard
+Pokud aspekt hodnocen málo a zároveň silně záporně, může to znamenat, že
+ by bylo výhodnější zcela od tohoto aspektu služby upustit a ušetřené zdroje
+ využít jinde.
+\end_layout
+
+\begin_layout Standard
+Na základě těchto informací lze vyvozovat pouze závěry o relativní kvalitě
+ aspektů.
+ Aspekty nelze porovnávat absolutně, např.
+ porovnávat dvě obdobné služby dvou různých společností.
+\end_layout
+
+\begin_layout Standard
+Účelem těchto informací je usnadnění rozhodování v oblasti rozvíjení služeb
+ v kombinaci s dalšími metrikami (jako je například návštěvnost stránek,
+ dotazníkové šetření apod.).
 \end_layout
 
 \begin_layout Section
-Závěr 
+Závěr
 \end_layout
 
 \begin_layout Standard
@@ -3132,7 +5448,7 @@ General Python FAQ.
  Docs.python.org [online].
  [cit.
  2016-04-30].
- Dostupné z: https://docs.python.org/2/faq/general.html#what-is-python 
+ Dostupné z: https://docs.python.org/2/faq/general.html#what-is-python
 \end_layout
 
 \begin_layout Bibliography
@@ -3273,7 +5589,7 @@ The Art of Tokenization (Language Preprocessing) [online].
  2013 [cit.
  2016-05-01].
  Dostupné z: https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokeniza
-tion?lang=en 
+tion?lang=en
 \end_layout
 
 \begin_layout Bibliography
@@ -3328,7 +5644,7 @@ key "Penn Treebank"
 The Penn Treebank Project [online].
  [cit.
  2016-05-01].
- Dostupné z: https://www.cis.upenn.edu/~treebank 
+ Dostupné z: https://www.cis.upenn.edu/~treebank
 \end_layout
 
 \begin_layout Bibliography
@@ -3345,7 +5661,6 @@ HU Minqing a Liu BING.
  ACM, 2004.
  p.
  168-177.
- 
 \end_layout
 
 \begin_layout Bibliography
@@ -3445,7 +5760,25 @@ Christian Borgelt's Web Pages.
  Borgelt.net [online].
  [cit.
  2016-05-01].
- Dostupné z: http://www.borgelt.net/fpm.html 
+ Dostupné z: http://www.borgelt.net/fpm.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "J-shaped-dist"
+
+\end_inset
+
+HU, Nan, Jie ZHANG a Paul A.
+ PAVLOU.
+ Overcoming the J-shaped distribution of product reviews.
+ Communications of the ACM [online].
+ 2009, 52(10), 144- [cit.
+ 2016-05-02].
+ DOI: 10.1145/1562764.1562800.
+ ISSN 00010782.
+ Dostupné z: http://portal.acm.org/citation.cfm?doid=1562764.1562800
 \end_layout
 
 \begin_layout Standard
@@ -6698,7 +9031,7 @@ Wh-adverb (příslovce "how", "where", "why")
 \begin_layout Plain Layout
 \noindent
 \align center
-Zdroj: 
+Zdroj:
 \begin_inset Note Note
 status open
 
@@ -6824,7 +9157,7 @@ def lidstone_smooth(pos, neg, n, e=0.3):
 
 \begin_layout Plain Layout
 
-	"""Výpočet skóre pomocí pomětu kladných a záporných 
+	"""Výpočet skóre pomocí pomětu kladných a záporných
 \end_layout
 
 \begin_layout Plain Layout
@@ -6839,7 +9172,6 @@ def lidstone_smooth(pos, neg, n, e=0.3):
 
 \begin_layout Plain Layout
 
-	
 \end_layout
 
 \begin_layout Plain Layout
@@ -6929,6 +9261,611 @@ output_table['aspekt'] = flow_variables['aspect']
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Grafy
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Grafy"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/accounts.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Accounts
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/access.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Access
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/bank.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Bank
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/branch.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Branch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/credit_(visa)_card.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Credit (visa) card
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/customer_service.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Customer service
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/online_banking.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Online Banking
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Graf-online-banking-type J"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/phone.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Phone
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/security.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Security
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Graf-Security-type-U"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/luminar/Dropbox/Skola/bakalarka/images/barcharts/overall/website.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graf rozložení uživatelského hodnocení pro aspekt Website
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
