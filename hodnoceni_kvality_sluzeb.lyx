@@ -385,6 +385,490 @@ key "SentiWordNet"
  zabývající se sémantickou orientací slov.
 \end_layout
 
+\begin_layout Section
+Stanovení metody
+\end_layout
+
+\begin_layout Standard
+V této kapitole je popsána metoda, která byla použita pro získání informací
+ z dostupných dat.
+ Tato metoda byla vypracována na základě předchozí práce v [
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Mining opinion features ins customer revies
+\end_layout
+
+\end_inset
+
+].
+ Metoda není závislá na konkrétní implementaci.
+ Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
+h nástrojů.
+ Metody lze rozdělit na tři hlavní části: předzpracování textu, extrakce
+ aspektů a vyhodnocení aspektů.
+\end_layout
+
+\begin_layout Subsection
+Předzpracování textu
+\end_layout
+
+\begin_layout Standard
+Předzpracování textu je důležitou operací ve všech oblastech, které pracují
+ s textem jako je text mining, vyhledávání informací, zpracování přirozeného
+ jazyka apod.
+ Jedná se o soubor postupů, při kterých je text upraven tak, aby ho bylo
+ možné zpracovávat strojově a aby obsahoval co nejméně triviálních a irelevantní
+ch informací.
+ Pro účely této metody, byly na text jednotlivých recenzí aplikovány následující
+ postupy.
+\end_layout
+
+\begin_layout Subsubsection
+Tokenizace
+\end_layout
+
+\begin_layout Standard
+Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
+ Tyto znaky lze dělit na jednotlivé smysluplné celky jako jsou slova, fráze
+ nebo věty.
+ Tento proces dělení se nazývá tokenizace.
+ Při čtení textu je pro člověka tokenizace (rozlišení smysluplných celků)
+ samozřejmosí.
+ Při strojovém zpracování se může jednat o netriviální úkol.
+\end_layout
+
+\begin_layout Standard
+Tokenizační algoritmy se většinou řídí oddělovači, které se jsou pro daný
+ jazyk běžné.
+ Ve většině jazyků jsou slova oddělena mezerou (toto neplatí například u
+ Čínského jazyka).
+ Proto lze říci, že jakákoliv mezera (běžná mezera, tabulátor, atd.) je oddělovač.
+ Dalšími oddělovači jsou speciální znaky jako jsou tečka, čárka, dvojtečka,
+ středník, závorky, vykřičník, otazník a další.
+ Některé z nich jsou oddělovači vždy, některé v závislosti na kontextu (např.
+ tečka ve slově Ph.D není oddělovačem).
+ Všechny tyto komplikace je nutné v tomto kroce zvažovat.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Art of tokenization"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pro účely této metody je každá recenze rozdělena na jednotlivé věty a slova.
+ Každá recenze je pak uložena jako dokument tak, aby byla zachována její
+ struktura.
+ S uloženými dokumenty by mělo být možné pracovat jak na úrovni celé recenze,
+ jednotlivých vět (např.
+ vyhledávání výskytů slov ve větě) i jednotlivých slov (např.
+ označení slovních druhů).
+\end_layout
+
+\begin_layout Subsubsection
+Odstranění stop slov
+\end_layout
+
+\begin_layout Standard
+Tzv.
+ stop slova, jsou taková slova, která se v textu vyskytují nejčastěji a
+ přitom nenesou žádnou relevantní informaci.
+ Tato slova lze z textu vyřadit, aniž by se zmenšila jeho informační hodnota.
+ Seznamy stop slov se vytvářejí na základě frekvence slov a ručního výběru.
+ Mezi stop slova nejčastěji patří předložky, spojky, členy (např.
+\emph on
+the
+\emph default
+v anglickém jazyce) apod.
+\end_layout
+
+\begin_layout Standard
+Odstraněním stop slov se také zmenší objem textu, což může být u velkého
+ množství dat stěžejní (až 30% slov v textu může být označeno jako stop
+ slova)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Preprocessing techniques"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Určení slovních druhů
+\end_layout
+
+\begin_layout Standard
+K určování (značkování) slovních druhů slouží tzv.
+ značkovače (angl.
+\emph on
+part-of-speech
+\emph default
+ nebo
+\emph on
+POS tagger
+\emph default
+).
+ Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
+ (např.
+ korpus Brown, který obsahuje více než 1 000 000 slov
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brown Corpus Manual"
+
+\end_inset
+
+) a na základě předem předem stanovených pravidel a statistických metod
+ s co největší přesností určují slovní druh pro každé slovo, včetně vyřešení
+ sporných příkladů (např.
+ slovo "stav" může být jak podstatným jménem tak i slovesem).
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Oxford handbook of computational linguistics"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V anglickém jazyce se rozlišuje 8 až 9 slovních druhů.
+ Pro účely strojového zpracování textu se pro dosažení větší přesnosti rozlišují
+ také poddruhy.
+ Nejčastěji se používá seznam slovní druhů vypracovaný v rámci projektu
+ Penn Treebank
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Penn Treebank"
+
+\end_inset
+
+, viz Příloha
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seznam-slovních-druhů"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Extrakce aspektů
+\end_layout
+
+\begin_layout Standard
+Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či frázemi,
+ které se z podstatných jmen skládají.
+ Text může obsahovat i jiná podstatná jména, která nejsou aspekty, ale lze
+ předpokládat, že irelevantní slova se budou vyskytovat méně častěji (každý
+ uživatel zmiňuje ve své recenzi odlišné irelevantní věci), kdežto slova
+ značící aspekty se budou v různých recenzích překrývat.
+ Tato slova se budou vyskytovat s vyšší frekvencí.
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 171"
+key "Mining and summarizing customer reviews"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Filtrace a stematizace
+\end_layout
+
+\begin_layout Standard
+Před extrakcí aspektů jsou provedeny další úpravy textu.
+ Nejdříve jsou z vět odstraněna slova, která nejsou podstatnými jmény.
+ Na základě značek slovních druhů, jsou ponechána pouze ta slova, která
+ spadají do kategorie NN nebo NNP (podstatné jméno, resp.
+ množné podstatné jméno).
+\end_layout
+
+\begin_layout Standard
+Dalším krokem je tzv.
+ stematizace (angl.
+\emph on
+stemming
+\emph default
+) slov.
+ Tento proces spočívá v nalezení kmene slova, odstraněním koncovek, popř.
+ i přípon.
+ Stematizace slov umožňuje zamezit zbytečnému tříštění aspektů, kdy je jeden
+ aspekt označován podobnýmy slovy a tím dochází k nepřesnostem při měření
+ frekvence výskytu tohoto aspektu.
+ Např.
+ slova "pohodlnost" a "pohodlí" mohou být vyhodnocena jako dva různé aspekty,
+ ikdyž se ve skutečnosti týkají jednoho a toho samého aspektu.
+ Stematizací těchto slov vzniká kmen "pohod" a tak jsou výskyty obou slov
+ počítány společne.
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 168"
+key "Modern information retrieval"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Nalezení častých slov a frází
+\end_layout
+
+\begin_layout Standard
+Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
+ skupin slov, s pomocí algoritmu Apriori, který se používá k hledání častých
+ sestav položek a určování asociačních pravidel (v tomto případě je použita
+ pouze první část algoritmu).
+ Tento algorimus vyhledává položky, které se vyskytují s minimální danou
+ podporou (tzn.
+ vyskytují se v daném minimálním procentu transakcí).
+ Mezi těmito položkami pak vyhledává ty, které se vyskytují společně, opět
+ s danou minimální podporou.
+ Při každé iteraci zvyšuje počet položek ve skupině.
+ Algoritmus končí, kdy se již nenajde žádná skupina položek, která by se
+ vyskytovala s danou podporou.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fast algorithms Apriori"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Algoritmus Apriori se nejčastěji používá při analýze transakcí, jako je
+ například spotřební koš zákazníků supermarketů.
+ Algoritmus umožňuje určit, které položky se často vyskytují společně v
+ jedné transakci (při jednom nákupu) a tyto informace pak využít při předpovědíc
+h pro další transakce (např.
+ spotřebitel, který koupil položku X, s velkou pravděpodobností koupí položku
+ Y).
+ Takové předpovědi se v praxi používají pro rozmísťování zboží v obchodech,
+ nebo zaměřování reklamy na určité zákazníky.
+\end_layout
+
+\begin_layout Standard
+V tomto případě jsou transakcemi jednotlivé věty ze všech uživatelských
+ recenzí.
+ Uvažujeme jednotlivé věty a ne celé recenze, protože jedna recenze se může
+ týkat více aspektů, kdežto jednotlivé věty se budou nejčastěji týkat jednoho
+ aspektu.
+\end_layout
+
+\begin_layout Standard
+Použitý algoritmus pracuje s minimální podporou, kterou určuje uživatel.
+ V tomto případě je minimální podpora nastavena na 1%, tzn.
+ slova nebo fráze (položky nebo sada položek), které se vyskytují v méně
+ než 1% všech vět, jsou považovány za nedostatečně časté a tak nejsou zvažovány
+ jako možné aspekty.
+\end_layout
+
+\begin_layout Standard
+Protože algoritmus není zcela přesný, je posledním krokem ruční vyřazení
+ zjevně irelevantních slov a frází.
+ Takto vzniká seznam aspektů, u kterých se může dále hodnotit sentiment.
+\end_layout
+
+\begin_layout Subsection
+Vyhodnocení aspektů
+\end_layout
+
+\begin_layout Standard
+Poslední částí stanovené metody je určení, zda jsou jednotlivé aspekty hodnoceny
+ kladně, či záporně.
+ Za tímto účel jsou zvolena dvě kritéria: celkový sentiment a uživatelské
+ hodnocení.
+\end_layout
+
+\begin_layout Subsubsection
+Celkový sentiment
+\end_layout
+
+\begin_layout Standard
+Celkový sentiment vyjadřuje převládající (subjektivní) názor uživatelů na
+ daný aspekt.
+ K vyhodnocení této metriky je nejdříve nutné určit, která review se k danému
+ aspektu vyjadřují, a jaký postoj zaujímají (kladný, resp.
+ záporný).
+ Postoj hodnotitele k aspektu je možné stanovit podle přítomnosti slov vyjadřují
+cích názor (hodnotící slova).
+ Těmito slovy jsou většinou přídavná jména nebo příslovce
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 171"
+key "Mining and summarizing customer reviews"
+
+\end_inset
+
+.
+ Přítomnost kladně orientovaných slov ve větě značí kladný postoj hodnotitele.
+ Naopak přítomnost záporných slov značí negativní postoj.
+\end_layout
+
+\begin_layout Standard
+Zda je slovo orientováno kladně nebo záporně (tzv.
+ sémantická orientace) je určeno na základě souborů předem označených slov.
+ Pro účely této práce byly použity soubory SentiWordNet
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SentiWordNet"
+
+\end_inset
+
+, které obsahují více než 100 000 slov, u kterých jsou stanoveny sémantické
+ orientace.
+\end_layout
+
+\begin_layout Standard
+Při výpočtu celkového sentimentu pro daný aspekt tedy stačí najít věty ve
+ kterých se vyskytuje a poté spočítat, kolik kladně, resp.
+ záporně orientovaných slov tyto věty obsahují.
+ Při hledání výskytů aspektů se hledí na věty a ne na celé recenze, protože
+ jedna recenze se může vyjadřovat k více aspektům, kdežto jednotlivé věty
+ se budou vyjadřovat spíše k jednotlivým aspektům.
+\end_layout
+
+\begin_layout Paragraph
+Hodnocení aspektů podle sentimentů
+\end_layout
+
+\begin_layout Standard
+Pro každý aspekt je nalezen počet kladných a záporných "bodů".
+ To však nestačí k tomu, aby šlo tyto aspekty porovnávat mezi sebou (př.
+ není zřejmé, zda je aspekt se 100 kladnými a 10 zápornými body hodnocen
+ lépe, než aspekt se 10 kladnými a 4 zápornými body).
+ Pořadí aspektů lze určit například vypočtením skóre
+\emph on
+s
+\emph default
+, které lze spočítat podle následujicího vzorce:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Formula $s=\frac{n_{pos}}{n_{pos}+n_{neg}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Kde
+\begin_inset Formula $n_{pos}$
+\end_inset
+
+ je počtem positivně orientovaných slov a
+\begin_inset Formula $n_{neg}$
+\end_inset
+
+ je počtem negativně orientovaných slov.
+ Tento přístup však může být nepřesný v případech, kdy se
+\begin_inset Formula $n_{pos}$
+\end_inset
+
+ nebo
+\begin_inset Formula $n_{neg}$
+\end_inset
+
+ rovná 0.
+ Např.
+ pokud aspekt
+\emph on
+i
+\emph default
+obdržel 300 kladných a 2 záporná hodnocení a aspekt
+\emph on
+j
+\emph default
+ obdržel 3 kladná a 0 záporných hodnocení, bude aspekt
+\emph on
+j
+\emph default
+hodnocen výše (
+\begin_inset Formula $s_{j}=1,0$
+\end_inset
+
+) než aspekt
+\emph on
+i
+\emph default
+ (
+\begin_inset Formula $s_{i}=0,993$
+\end_inset
+
+), i když je intuitivní, že aspekt
+\emph on
+i
+\emph default
+byl hodnocen kladněji.
+ Tento problém lze vyřešit použitím, tzv.
+ vyhlazení Lidstone:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Formula $s=\frac{n_{pos}+\varepsilon}{(n_{pos}+\varepsilon)+(n_{neg}+\varepsilon)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Kde
+\begin_inset Formula $0<\varepsilon<1$
+\end_inset
+
+ je parametrem
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 6"
+key "how to count thumb ups"
+
+\end_inset
+
+.
+ Podle takto vypočítaného skóre lze aspekty seřadit od nejlepšího.
+\end_layout
+
+\begin_layout Subsubsection
+Uživatelské hodnocení
+\end_layout
+
+\begin_layout Standard
+Každé recenzi je uživatelem přiřazeno celkové hodnocení od 1 (nejhorší)
+ do 5 (nejlepší).
+ Aspekty jsou na základě tohoto kritéria hodnoceny vypočítáním skóre
+\emph on
+s
+\emph default
+ z uživatelských hodnocení všech recenzí, ve kterých se daný aspekt objevuje.
+ Skóre pro jednotlivé aspekty je vypočítáno podobně jako u vyhodnocování
+ sentimentů.
+ Aby bylo možné použít stejný vzorec, je každé hodnocení na 5 bodové škále
+ považováno za soubor několika binárních hodnocení (např.
+ hodnocení 3 je považováno za 3 kladná a 5-3=2 záporná hodnocení).
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 8"
+key "how to count thumb ups"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Part
 Praktická
 \end_layout
@@ -1643,490 +2127,6 @@ status open
 \begin_layout Standard
 Jednotlivé recenze jsou uložené na samostatných řádcích.
  Data v tomto formátu potom lze načíst do KNIME Application Platform.
-\end_layout
-
-\begin_layout Section
-Stanovení metody
-\end_layout
-
-\begin_layout Standard
-V této kapitole je popsána metoda, která byla použita pro získání informací
- z dostupných dat.
- Tato metoda byla vypracována na základě předchozí práce v [
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Mining opinion features ins customer revies
-\end_layout
-
-\end_inset
-
-].
- Metoda není závislá na konkrétní implementaci.
- Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
-h nástrojů.
- Metody lze rozdělit na tři hlavní části: předzpracování textu, extrakce
- aspektů a vyhodnocení aspektů.
-\end_layout
-
-\begin_layout Subsection
-Předzpracování textu
-\end_layout
-
-\begin_layout Standard
-Předzpracování textu je důležitou operací ve všech oblastech, které pracují
- s textem jako je text mining, vyhledávání informací, zpracování přirozeného
- jazyka apod.
- Jedná se o soubor postupů, při kterých je text upraven tak, aby ho bylo
- možné zpracovávat strojově a aby obsahoval co nejméně triviálních a irelevantní
-ch informací.
- Pro účely této metody, byly na text jednotlivých recenzí aplikovány následující
- postupy.
-\end_layout
-
-\begin_layout Subsubsection
-Tokenizace
-\end_layout
-
-\begin_layout Standard
-Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
- Tyto znaky lze dělit na jednotlivé smysluplné celky jako jsou slova, fráze
- nebo věty.
- Tento proces dělení se nazývá tokenizace.
- Při čtení textu je pro člověka tokenizace (rozlišení smysluplných celků)
- samozřejmosí.
- Při strojovém zpracování se může jednat o netriviální úkol.
-\end_layout
-
-\begin_layout Standard
-Tokenizační algoritmy se většinou řídí oddělovači, které se jsou pro daný
- jazyk běžné.
- Ve většině jazyků jsou slova oddělena mezerou (toto neplatí například u
- Čínského jazyka).
- Proto lze říci, že jakákoliv mezera (běžná mezera, tabulátor, atd.) je oddělovač.
- Dalšími oddělovači jsou speciální znaky jako jsou tečka, čárka, dvojtečka,
- středník, závorky, vykřičník, otazník a další.
- Některé z nich jsou oddělovači vždy, některé v závislosti na kontextu (např.
- tečka ve slově Ph.D není oddělovačem).
- Všechny tyto komplikace je nutné v tomto kroce zvažovat.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Art of tokenization"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Pro účely této metody je každá recenze rozdělena na jednotlivé věty a slova.
- Každá recenze je pak uložena jako dokument tak, aby byla zachována její
- struktura.
- S uloženými dokumenty by mělo být možné pracovat jak na úrovni celé recenze,
- jednotlivých vět (např.
- vyhledávání výskytů slov ve větě) i jednotlivých slov (např.
- označení slovních druhů).
-\end_layout
-
-\begin_layout Subsubsection
-Odstranění stop slov
-\end_layout
-
-\begin_layout Standard
-Tzv.
- stop slova, jsou taková slova, která se v textu vyskytují nejčastěji a
- přitom nenesou žádnou relevantní informaci.
- Tato slova lze z textu vyřadit, aniž by se zmenšila jeho informační hodnota.
- Seznamy stop slov se vytvářejí na základě frekvence slov a ručního výběru.
- Mezi stop slova nejčastěji patří předložky, spojky, členy (např.
-\emph on
-the
-\emph default
-v anglickém jazyce) apod.
-\end_layout
-
-\begin_layout Standard
-Odstraněním stop slov se také zmenší objem textu, což může být u velkého
- množství dat stěžejní (až 30% slov v textu může být označeno jako stop
- slova)
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Preprocessing techniques"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-Určení slovních druhů
-\end_layout
-
-\begin_layout Standard
-K určování (značkování) slovních druhů slouží tzv.
- značkovače (angl.
-\emph on
-part-of-speech
-\emph default
- nebo
-\emph on
-POS tagger
-\emph default
-).
- Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
- (např.
- korpus Brown, který obsahuje více než 1 000 000 slov
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Brown Corpus Manual"
-
-\end_inset
-
-) a na základě předem předem stanovených pravidel a statistických metod
- s co největší přesností určují slovní druh pro každé slovo, včetně vyřešení
- sporných příkladů (např.
- slovo "stav" může být jak podstatným jménem tak i slovesem).
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Oxford handbook of computational linguistics"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-V anglickém jazyce se rozlišuje 8 až 9 slovních druhů.
- Pro účely strojového zpracování textu se pro dosažení větší přesnosti rozlišují
- také poddruhy.
- Nejčastěji se používá seznam slovní druhů vypracovaný v rámci projektu
- Penn Treebank
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Penn Treebank"
-
-\end_inset
-
-, viz Příloha
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Seznam-slovních-druhů"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
-Extrakce aspektů
-\end_layout
-
-\begin_layout Standard
-Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či frázemi,
- které se z podstatných jmen skládají.
- Text může obsahovat i jiná podstatná jména, která nejsou aspekty, ale lze
- předpokládat, že irelevantní slova se budou vyskytovat méně častěji (každý
- uživatel zmiňuje ve své recenzi odlišné irelevantní věci), kdežto slova
- značící aspekty se budou v různých recenzích překrývat.
- Tato slova se budou vyskytovat s vyšší frekvencí.
-\begin_inset CommandInset citation
-LatexCommand cite
-after "str. 171"
-key "Mining and summarizing customer reviews"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Filtrace a stematizace
-\end_layout
-
-\begin_layout Standard
-Před extrakcí aspektů jsou provedeny další úpravy textu.
- Nejdříve jsou z vět odstraněna slova, která nejsou podstatnými jmény.
- Na základě značek slovních druhů, jsou ponechána pouze ta slova, která
- spadají do kategorie NN nebo NNP (podstatné jméno, resp.
- množné podstatné jméno).
-\end_layout
-
-\begin_layout Standard
-Dalším krokem je tzv.
- stematizace (angl.
-\emph on
-stemming
-\emph default
-) slov.
- Tento proces spočívá v nalezení kmene slova, odstraněním koncovek, popř.
- i přípon.
- Stematizace slov umožňuje zamezit zbytečnému tříštění aspektů, kdy je jeden
- aspekt označován podobnýmy slovy a tím dochází k nepřesnostem při měření
- frekvence výskytu tohoto aspektu.
- Např.
- slova "pohodlnost" a "pohodlí" mohou být vyhodnocena jako dva různé aspekty,
- ikdyž se ve skutečnosti týkají jednoho a toho samého aspektu.
- Stematizací těchto slov vzniká kmen "pohod" a tak jsou výskyty obou slov
- počítány společne.
-\begin_inset CommandInset citation
-LatexCommand cite
-after "str. 168"
-key "Modern information retrieval"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Nalezení častých slov a frází
-\end_layout
-
-\begin_layout Standard
-Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
- skupin slov, s pomocí algoritmu Apriori, který se používá k hledání častých
- sestav položek a určování asociačních pravidel (v tomto případě je použita
- pouze první část algoritmu).
- Tento algorimus vyhledává položky, které se vyskytují s minimální danou
- podporou (tzn.
- vyskytují se v daném minimálním procentu transakcí).
- Mezi těmito položkami pak vyhledává ty, které se vyskytují společně, opět
- s danou minimální podporou.
- Při každé iteraci zvyšuje počet položek ve skupině.
- Algoritmus končí, kdy se již nenajde žádná skupina položek, která by se
- vyskytovala s danou podporou.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Fast algorithms Apriori"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Algoritmus Apriori se nejčastěji používá při analýze transakcí, jako je
- například spotřební koš zákazníků supermarketů.
- Algoritmus umožňuje určit, které položky se často vyskytují společně v
- jedné transakci (při jednom nákupu) a tyto informace pak využít při předpovědíc
-h pro další transakce (např.
- spotřebitel, který koupil položku X, s velkou pravděpodobností koupí položku
- Y).
- Takové předpovědi se v praxi používají pro rozmísťování zboží v obchodech,
- nebo zaměřování reklamy na určité zákazníky.
-\end_layout
-
-\begin_layout Standard
-V tomto případě jsou transakcemi jednotlivé věty ze všech uživatelských
- recenzí.
- Uvažujeme jednotlivé věty a ne celé recenze, protože jedna recenze se může
- týkat více aspektů, kdežto jednotlivé věty se budou nejčastěji týkat jednoho
- aspektu.
-\end_layout
-
-\begin_layout Standard
-Použitý algoritmus pracuje s minimální podporou, kterou určuje uživatel.
- V tomto případě je minimální podpora nastavena na 1%, tzn.
- slova nebo fráze (položky nebo sada položek), které se vyskytují v méně
- než 1% všech vět, jsou považovány za nedostatečně časté a tak nejsou zvažovány
- jako možné aspekty.
-\end_layout
-
-\begin_layout Standard
-Protože algoritmus není zcela přesný, je posledním krokem ruční vyřazení
- zjevně irelevantních slov a frází.
- Takto vzniká seznam aspektů, u kterých se může dále hodnotit sentiment.
-\end_layout
-
-\begin_layout Subsection
-Vyhodnocení aspektů
-\end_layout
-
-\begin_layout Standard
-Poslední částí stanovené metody je určení, zda jsou jednotlivé aspekty hodnoceny
- kladně, či záporně.
- Za tímto účel jsou zvolena dvě kritéria: celkový sentiment a uživatelské
- hodnocení.
-\end_layout
-
-\begin_layout Subsubsection
-Celkový sentiment
-\end_layout
-
-\begin_layout Standard
-Celkový sentiment vyjadřuje převládající (subjektivní) názor uživatelů na
- daný aspekt.
- K vyhodnocení této metriky je nejdříve nutné určit, která review se k danému
- aspektu vyjadřují, a jaký postoj zaujímají (kladný, resp.
- záporný).
- Postoj hodnotitele k aspektu je možné stanovit podle přítomnosti slov vyjadřují
-cích názor (hodnotící slova).
- Těmito slovy jsou většinou přídavná jména nebo příslovce
-\begin_inset CommandInset citation
-LatexCommand cite
-after "str. 171"
-key "Mining and summarizing customer reviews"
-
-\end_inset
-
-.
- Přítomnost kladně orientovaných slov ve větě značí kladný postoj hodnotitele.
- Naopak přítomnost záporných slov značí negativní postoj.
-\end_layout
-
-\begin_layout Standard
-Zda je slovo orientováno kladně nebo záporně (tzv.
- sémantická orientace) je určeno na základě souborů předem označených slov.
- Pro účely této práce byly použity soubory SentiWordNet
-\begin_inset CommandInset citation
-LatexCommand cite
-key "SentiWordNet"
-
-\end_inset
-
-, které obsahují více než 100 000 slov, u kterých jsou stanoveny sémantické
- orientace.
-\end_layout
-
-\begin_layout Standard
-Při výpočtu celkového sentimentu pro daný aspekt tedy stačí najít věty ve
- kterých se vyskytuje a poté spočítat, kolik kladně, resp.
- záporně orientovaných slov tyto věty obsahují.
- Při hledání výskytů aspektů se hledí na věty a ne na celé recenze, protože
- jedna recenze se může vyjadřovat k více aspektům, kdežto jednotlivé věty
- se budou vyjadřovat spíše k jednotlivým aspektům.
-\end_layout
-
-\begin_layout Paragraph
-Hodnocení aspektů podle sentimentů
-\end_layout
-
-\begin_layout Standard
-Pro každý aspekt je nalezen počet kladných a záporných "bodů".
- To však nestačí k tomu, aby šlo tyto aspekty porovnávat mezi sebou (př.
- není zřejmé, zda je aspekt se 100 kladnými a 10 zápornými body hodnocen
- lépe, než aspekt se 10 kladnými a 4 zápornými body).
- Pořadí aspektů lze určit například vypočtením skóre
-\emph on
-s
-\emph default
-, které lze spočítat podle následujicího vzorce:
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
-\begin_inset Formula $s=\frac{n_{pos}}{n_{pos}+n_{neg}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Kde
-\begin_inset Formula $n_{pos}$
-\end_inset
-
- je počtem positivně orientovaných slov a
-\begin_inset Formula $n_{neg}$
-\end_inset
-
- je počtem negativně orientovaných slov.
- Tento přístup však může být nepřesný v případech, kdy se
-\begin_inset Formula $n_{pos}$
-\end_inset
-
- nebo
-\begin_inset Formula $n_{neg}$
-\end_inset
-
- rovná 0.
- Např.
- pokud aspekt
-\emph on
-i
-\emph default
-obdržel 300 kladných a 2 záporná hodnocení a aspekt
-\emph on
-j
-\emph default
- obdržel 3 kladná a 0 záporných hodnocení, bude aspekt
-\emph on
-j
-\emph default
-hodnocen výše (
-\begin_inset Formula $s_{j}=1,0$
-\end_inset
-
-) než aspekt
-\emph on
-i
-\emph default
- (
-\begin_inset Formula $s_{i}=0,993$
-\end_inset
-
-), i když je intuitivní, že aspekt
-\emph on
-i
-\emph default
-byl hodnocen kladněji.
- Tento problém lze vyřešit použitím, tzv.
- vyhlazení Lidstone:
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
-\begin_inset Formula $s=\frac{n_{pos}+\varepsilon}{(n_{pos}+\varepsilon)+(n_{neg}+\varepsilon)}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Kde
-\begin_inset Formula $0<\varepsilon<1$
-\end_inset
-
- je parametrem
-\begin_inset CommandInset citation
-LatexCommand cite
-after "str. 6"
-key "how to count thumb ups"
-
-\end_inset
-
-.
- Podle takto vypočítaného skóre lze aspekty seřadit od nejlepšího.
-\end_layout
-
-\begin_layout Subsubsection
-Uživatelské hodnocení
-\end_layout
-
-\begin_layout Standard
-Každé recenzi je uživatelem přiřazeno celkové hodnocení od 1 (nejhorší)
- do 5 (nejlepší).
- Aspekty jsou na základě tohoto kritéria hodnoceny vypočítáním skóre
-\emph on
-s
-\emph default
- z uživatelských hodnocení všech recenzí, ve kterých se daný aspekt objevuje.
- Skóre pro jednotlivé aspekty je vypočítáno podobně jako u vyhodnocování
- sentimentů.
- Aby bylo možné použít stejný vzorec, je každé hodnocení na 5 bodové škále
- považováno za soubor několika binárních hodnocení (např.
- hodnocení 3 je považováno za 3 kladná a 5-3=2 záporná hodnocení).
-\begin_inset CommandInset citation
-LatexCommand cite
-after "str. 8"
-key "how to count thumb ups"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
