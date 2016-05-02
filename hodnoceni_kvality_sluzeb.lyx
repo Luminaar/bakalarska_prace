@@ -329,18 +329,15 @@ Stanovení metody
 \begin_layout Standard
 V této kapitole je popsána metoda, která byla použita pro získání informací
  z dostupných dat.
- Tato metoda byla vypracována na základě předchozí práce v [
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Mining opinion features ins customer revies
-\end_layout
+ Tato metoda byla vypracována na základě předchozí práce v 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mining and summarizing customer reviews,Mining opinion features in customer reviews"
 
 \end_inset
 
-].
- Metoda není závislá na konkrétní implementaci.
+.
+ Metoda vázána na konkrétní implementaci.
  Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
 h nástrojů.
  Metody lze rozdělit na tři hlavní části: předzpracování textu, extrakce
