@@ -5404,6 +5404,13 @@ Na základě těchto informací lze vyvozovat pouze závěry o relativní kvalit
  dotazníkové šetření apod.).
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Závěr
 \end_layout
@@ -5411,6 +5418,56 @@ Závěr
 \begin_layout Standard
 \begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+Aby mohl poskytovatel zlepšovat nabízené služby, musí brát ohledy na zpětnou
+ vazbu od svých zákazníků.
+ Nejcennější zpětná vazba nejčastěji nemá pevně danou strukturu, tzn.
+ jde o text (např.
+ příspěvek na internetové diskuzi).
+ Při velkém množství dat (textu), může být nepraktické nebo i nemožné vyhodnotit
+ vše ručně.
+ Tato práce se zabývá metodami, které umožňují zcela, nebo alespoň částečně
+ automatizovat vyhodnocení zpětné vazby.
+\end_layout
+
+\begin_layout Plain Layout
+Cílem této práce je na základě doposud proběhlého výzkumu stanovit metodu
+ nestrukturovaných dat (v tomto případě zpětné vazby od zákazníků) a tuto
+ metodu aplikovat na reálná data.
+ V praktické části této práce bude popsaná metoda implementována s pomocí
+ volně dostupných nástrojů.
+ Tímto práce poskytne přehled, jaké typy nástrojů jsou využity při řešení
+ stanovených úloh.
+\end_layout
+
+\begin_layout Plain Layout
+Data, na která bude metoda aplikována pocházejí pochází z reálné společnosti.
+ Jedná se o uživatelské recenze na služby této společnosti.
+ Data jsou veřejně dostupná a neobsahují žádné osobní ani citlivé údaje
+ (jména, adresy atd.).
+ 
+\end_layout
+
+\begin_layout Plain Layout
+Teoretická část práce se věnuje doposud proběhlému výzkumu v oblasti a literatuř
+e, která se zabývá dobýváním informací z textu.
+ V této části je stanovena metoda, která bude na data aplikovaána.
+ V praktické části jsou popsány použité nástroje, zkoumaná dat, získání
+ těchto dat a implementace metody.
+\end_layout
+
+\begin_layout Plain Layout
+Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků, vyvození
+ závěrů z tohoto vyhodnocení.
+ Práce také navrhuje způsoby reálného využití a poskytuje náměty na další
+ vylepšování použitých postupů.
+\end_layout
+
+\begin_layout Plain Layout
+Hlavním přínosem práce by měla být ukázka implementace teoretických postupů
+ pomocí volně dostupných nástrojů.
+\end_layout
 
 \begin_layout Plain Layout
 shrnutí výsledků, ke kterým autor dospěl,
@@ -5435,14 +5492,44 @@ oblasti.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
+Hlavními cíli této práce bylo popsat metodu extrakci informací nestrukturovaných
+ dat a s pomocí těchto informací hodnotit služby.
+ Na základě dosposud proběhlého výzkumu byla popsána metoda, která zahrnuje
+ získání dat, předzpracování textu, extrakci aspektů služby a vyhodnocení
+ těchto aspektů pomocí klasifikace sentimentů recenzí.
 \end_layout
 
-\begin_layout Section*
-Terminologický slovník
+\begin_layout Standard
+V práci byl popsán způsob získání a za tímto účelem byl vytvořen počítačový
+ program v jazyce Python.
+ Dále byla popsána a uskutečněna implementace pomocí analytického nástroje
+ KNIME Analytics Platform.
+ V práci je zahrnuto schéma implementace a popis jednotlivých kroků.
+\end_layout
+
+\begin_layout Standard
+Stanovená metoda byla úspěšně aplikována na získaná data a vystupy byly
+ v práci vyhodnoceny.
+ K jednotlivým výstupům byly navrhnuty způsoby jejich využití v praxi.
+ Výstupy jsou podle názoru autora využitelné v praxi, pokud jsou kombinované
+ s dalšími informacemi, získanými z jiných zdrojů.
+ Výtvořená implementace funguje při aplikaci na ta data, pro která byla
+ vytvořena.
+ Pro jiná data by implementace vyžadovala značné úpravy.
+\end_layout
+
+\begin_layout Standard
+Výzkum v této oblasti stále probíhá, a ikdyž jsou dostupné některé služby,
+ které využívají výsledky tohoto výzkumu, stále nejsou příliš rozšířené.
+ Námětem na další práci v tomto oboru by mohlo být vytvoření postupů a nástrojů,
+ které by byly univerzální, tedy, takové postupy a nástroje, které lze silných
+ úprav používat na libovolná data.
+\end_layout
+
+\begin_layout Standard
+Toto téma je rozhodně velice zajímavé a v budoucnu lze očekávat další pokroky,
+ např.
+ díky rozvoji strojového učení a umělé inteligence.
 \end_layout
 
 \begin_layout Standard
@@ -5473,8 +5560,7 @@ key "Oxford handbook of computational linguistics"
 
 \end_inset
 
-MITKOV Ruslan.
- The Oxford handbook of computational linguistics.
+The Oxford handbook of computational linguistics.
  Oxford: Oxford University Press, 2003.
  ISBN 978-0-19-927634-9.
 \end_layout
