@@ -5546,8 +5546,7 @@ key "Modern information retrieval"
 
 \end_inset
 
-BAEZA-YATES, R.
- a Berthier de Araújo Neto RIBEIRO.
+BAEZA-YATES, Ricardo a Berthier de Araújo Neto RIBEIRO.
  Modern information retrieval.
  New York: ACM Press, 1999.
  ISBN 0-201-39829-X.
@@ -5574,7 +5573,7 @@ key "text mining predictive methods"
 
 WEISS, Sholom M.
  Text mining: predictive methods for analyzing unstructured information.
- New York: Springer, c2005.
+ New York: Springer, 2005.
  ISBN 0-387-95433-3.
 \end_layout
 
@@ -5615,8 +5614,9 @@ key "Mining opinion features in customer reviews"
 
 HU, Minqing a Bing LIU.
  Mining opinion features in customer reviews.
- Proceedings of the 19th national conference on Artifical intelligence (AAAI'04).
- AAAI Press, 2004, , 755-760.
+ In Proceedings of the 19th national conference on Artifical intelligence
+ (AAAI'04).
+ AAAI Press, 2004, 755-760.
 \end_layout
 
 \begin_layout Bibliography
@@ -5640,7 +5640,11 @@ key "Brown Corpus Manual"
 
 \end_inset
 
-BROWN CORPUS MANUAL [online].
+W.
+ NELSON, Francis a Henry KUCERA.
+ Brown Corpus Manual.
+ Brown University, 1979.
+ [online].
  [cit.
  2016-05-01].
  Dostupné z: http://www.hit.uib.no/icame/brown/bcm.html
@@ -5795,8 +5799,8 @@ GARRETT, Jesse James.
  Ajax: A New Approach to Web Applications [online].
  [cit.
  2016-04-30].
- Dostupné z: https://courses.cs.washington.edu/courses/cse490h/07sp/readings/ajax_a
-daptive_path.pdf
+ Dostupné z: https://courses.cs.washington.edu/courses/cse490h/07sp/readings/
+ ajax_adaptive_path.pdf
 \end_layout
 
 \begin_layout Bibliography
@@ -5820,11 +5824,13 @@ key "Art of tokenization"
 
 \end_inset
 
-The Art of Tokenization (Language Preprocessing) [online].
- 2013 [cit.
+TRIMM, Craig.
+ The Art of Tokenization.
+ In IBM developerWorks [online].
+ [cit.
  2016-05-01].
  Dostupné z: https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokeniza
-tion?lang=en
+tion
 \end_layout
 
 \begin_layout Bibliography
@@ -5834,13 +5840,13 @@ key "Preprocessing techniques"
 
 \end_inset
 
-GURUSAMY Vairaprakash, Subbu KANNAN.
+GURUSAMY Vairaprakash a Subbu KANNAN.
  Preprocessing Techniques for Text Mining.
- Conference paper- October 2014 [online].
+ In Conference paper- October 2014 [online].
  [cit.
  2016-04-30].
- Dostupné z: https://www.researchgate.net/publication/273127322_Preprocessing_Tech
-niques_for_Text_Mining
+ Dostupné z: https://www.researchgate.net/publication/ 273127322_Preprocessing_Tec
+hniques_for_Text_Mining
 \end_layout
 
 \begin_layout Bibliography
@@ -5850,7 +5856,7 @@ key "Fast algorithms Apriori"
 
 \end_inset
 
-ARGWAL Rakesh and Ramakrishnan SRIKANT.
+ARGWAL Rakesh a Ramakrishnan SRIKANT.
  Fast Algorithms for Mining Association Rules in Large Databases.
  In Proceedings of the 20th International Conference on Very Large Data
  Bases (VLDB '94), Jorge B.
@@ -5868,7 +5874,7 @@ key "how to count thumb ups"
 ZHANG, Dell a Robert MAO.
  How to count thumb-ups and thumb-downs: user-rating based ranking of items
  from an axiomatic perspective.
- ICTIR'11 Proceedings of the Third international conference on Advances
+ In ICTIR'11 Proceedings of the Third international conference on Advances
  in information retrieval theory.
  Springer-Verlag Berlin, Heidelberg, 2011, 238-249.
 \end_layout
@@ -5900,7 +5906,6 @@ HU, Nan, Jie ZHANG a Paul A.
  In Communications of the ACM [online].
  2009, 144-147 [cit.
  2016-05-02].
- DOI: 10.1145/1562764.1562800.
  Dostupné z: http://portal.acm.org/citation.cfm?doid=1562764.1562800
 \end_layout
 
