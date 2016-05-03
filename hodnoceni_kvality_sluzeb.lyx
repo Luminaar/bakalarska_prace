@@ -340,7 +340,9 @@ key "Mining and summarizing customer reviews,Mining opinion features in customer
 \end_inset
 
 .
- Metoda vázána na konkrétní implementaci.
+ Předpokládá se, že data jsou již dostupná, protože jakým způsob získání
+ dat nijak samotnou metodu neovlivní.
+ Metoda není vázána na konkrétní implementaci.
  Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
 h nástrojů.
  Metody lze rozdělit na tři hlavní části: předzpracování textu, extrakce
@@ -1709,7 +1711,6 @@ Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované
 \end_layout
 
 \begin_layout Verbatim
-
 https://cibc-secure.ugc.bazaarvoice.com/...page=5...
 \end_layout
 
