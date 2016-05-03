@@ -144,22 +144,21 @@ Aby mohl poskytovatel zlepšovat nabízené služby, musí brát ohledy na zpět
 \end_layout
 
 \begin_layout Standard
-Cílem této práce je popsat některé dostupné metody pro dobývání informací
- z textu (v našem případě zpětné vazby od zákazníků) a jednu z těchto metod
- aplikovat na reálná data.
- Použitá metoda je založena na výsledcích předchozího výzkumu v této oblasti.
+Cílem této práce je na základě doposud proběhlého výzkumu stanovit metodu
+ nestrukturovaných dat (v tomto případě zpětné vazby od zákazníků) a tuto
+ metodu aplikovat na reálná data.
  V praktické části této práce bude popsaná metoda implementována s pomocí
  volně dostupných nástrojů.
- Cílem není poskytnout vyčerpávající popis práce s těmito nástroji, ale
- ukázat, jaké typy nástrojů jsou použity pro řešení různých úloh.
- Na základě této práce by mělo být možné vybrat jiné nástroje, které tyto
- úlohy řeší.
+ Tímto práce poskytne přehled, jaké typy nástrojů jsou využity při řešení
+ stanovených úloh.
 \end_layout
 
 \begin_layout Standard
-Data použitá při aplikaci metody jsou veřejně dostupná a neobsahují žádné
- osobní ani citlivé údaje (jména, adresy atd.).
- Data pochází z jednoho zdroje.
+Data, na která bude metoda aplikována pocházejí pochází z reálné společnosti.
+ Jedná se o uživatelské recenze na služby této společnosti.
+ Data jsou veřejně dostupná a neobsahují žádné osobní ani citlivé údaje
+ (jména, adresy atd.).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -178,9 +177,8 @@ Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků
 \end_layout
 
 \begin_layout Standard
-Hlavním přínosem této práce by mělo být ověření, zda jsou doposud vypracované
- metody připraveny k praktickému použití, popřípadě určit oblasti, ve kterých
- je potřeba provést další výzkum.
+Hlavním přínosem práce by měla být ukázka implementace teoretických postupů
+ pomocí volně dostupných nástrojů.
 \end_layout
 
 \begin_layout Standard
@@ -1711,6 +1709,7 @@ Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované
 \end_layout
 
 \begin_layout Verbatim
+
 https://cibc-secure.ugc.bazaarvoice.com/...page=5...
 \end_layout
 
