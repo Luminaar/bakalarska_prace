@@ -197,29 +197,33 @@ Popis oblasti a rešerše
 \end_layout
 
 \begin_layout Standard
-Základní oblast, které se práce týká je práce s textem a extrakce informací
- z něj.
- Tímto tématem se zabývá např.
- publikace
+Základním tématem, kterým se tato práce zabývá je práce s nestrukturovanými
+ daty v podobně textu, extrakce dat z textu a jeho sumarizace.
+ Překrývá se zde několik vědeckých oblastí - mimo jiné lingvistika, tedy
+ nauka o přirozeném jazyku, získávání informací, statistika a strojové učení.
+ Díky tomu lze čerpat z široké škály různorodých zdrojů.
+\end_layout
+
+\begin_layout Standard
+Publikace
 \emph on
-Modern Information Retrieval
+ Modern Information Retrieval
 \emph default
-, napsaná Ricardem Baeza-Yatesem v roce 1999
+ napsaná Ricardem Baeza-Yatesem v roce 1999
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Modern information retrieval"
 
 \end_inset
 
-.
- Tato publikace je poměrně rozáshlá a týká se modely pro získání dat, dotazovací
-mi jazyky a operacemi a také vlastnostmi textu a možnostmi jeho zpracování.
+, je poměrně rozáshlá a týká se modelů pro získání dat, dotazovacích jazyků
+ a operací a také vlastností textu a možností jeho zpracování.
 \end_layout
 
 \begin_layout Standard
-Další relevantní publikace je
+Další relevantní publikací je
 \emph on
-Oxford Handbook of Computational Linguistics
+ Oxford Handbook of Computational Linguistics
 \emph default
 , napsaná kolektivem autorů a zpracovaná Ruslanem Mitkovem v roce 2003
 \begin_inset CommandInset citation
@@ -229,14 +233,18 @@ key "Oxford handbook of computational linguistics"
 \end_inset
 
 .
- Tato publikace zabývá se jak základy teorie jazyka (lexikologie, semantika
- a pod.), operacemi s textem (jako je určování slovních druhů) a možnými
+ Tato publikace se zabývá jak základy teorie jazyka (lexikologie, semantika
+ a pod.) tak i operacemi s textem (jako je určování slovních druhů) a možnými
  aplikacemi počítačového zpracování textu.
  Podobnými tématy se zabývá také
 \emph on
+ 
+\emph default
+publikace 
+\emph on
 Text Mining Predictive Methods for Analyzing Unstructured Information
 \emph default
-, napsaná Sholomem M.
+ napsaná Sholomem M.
  Weissem a kolektivem v roce 2005.
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -249,11 +257,11 @@ key "text mining predictive methods"
 
 \begin_layout Standard
 Jednou z hlavních publikací, která se zabývá text miningem, sumarizací textu,
- získání textu z webových stránek, extrakci a analýze sentimentů je
+ získáním textu z webových stránek, extrakci a analýze sentimentů je
 \emph on
-Exploring Hyperlinks
+ Exploring Hyperlinks
 \emph default
-, napsaná Bingem Liu v roce 2011
+ napsaná Bingem Liu v roce 2011
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bing Liu Exploring hyperlinks"
@@ -266,10 +274,10 @@ key "Bing Liu Exploring hyperlinks"
 \end_layout
 
 \begin_layout Standard
-Samotná metoda je založena na probíhajícím výzkumu, který je popsán v v
- publikacích
+Teoretická část této práce je založena na doposud proběhlém výzkumu, který
+ je popsán v publikacích
 \emph on
-Mining and Summarizing Customer Reviews
+ Mining and Summarizing Customer Reviews
 \emph default
  (Hu Minqing a Bing Liu, 2004)
 \begin_inset CommandInset citation
@@ -280,7 +288,7 @@ key "Mining and summarizing customer reviews"
 
  a
 \emph on
-Mining Opinion Features in Customer Reviews
+ Mining Opinion Features in Customer Reviews
 \emph default
  (Hu Minqing a Bing Liu, 2004).
 \begin_inset CommandInset citation
@@ -293,22 +301,23 @@ key "Mining opinion features in customer reviews"
 \end_layout
 
 \begin_layout Standard
-V této práci jsou taky použity některé veřejné a open source projekty, které
- se danou oblastí zabývají - Apache OpenNLP
+V této práci jsou také použity výstupy z některých veřejně přístupných projektů,
+ které se danou oblastí zabývají - Apache OpenNLP 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Apache OpenNLP"
 
 \end_inset
 
- poskytující knihovnu pro zpracování textu, lingvistický korpus Brown
+ poskytující knihovnu pro zpracování textu, lingvistický korpus vytvořený
+ na Brownově univerzitě 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Brown Corpus Manual"
 
 \end_inset
 
- a Penn TreeBank
+ a Penn TreeBank 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Penn Treebank"
@@ -316,6 +325,7 @@ key "Penn Treebank"
 \end_inset
 
  zabývající se problematikou určování slovních druhů v textu nebo SentiWordNet
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "SentiWordNet"
