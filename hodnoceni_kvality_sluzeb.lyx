@@ -139,14 +139,14 @@ Aby mohl poskytovatel zlepšovat nabízené služby, musí brát ohledy na zpět
  příspěvek na internetové diskuzi).
  Při velkém množství dat (textu), může být nepraktické nebo i nemožné vyhodnotit
  vše ručně.
- Tato práce se zabývá metodami, které umožňují zcela, nebo alespoň částečně
+ Tato práce se zabývá metodami, které umožňují zcela nebo alespoň částečně
  automatizovat vyhodnocení zpětné vazby.
 \end_layout
 
 \begin_layout Standard
-Cílem této práce je na základě doposud proběhlého výzkumu stanovit metodu
- nestrukturovaných dat (v tomto případě zpětné vazby od zákazníků) a tuto
- metodu aplikovat na reálná data.
+Cílem této práce je na základě dříve proběhlého výzkumu stanovit metodu
+ vyhodnocení nestrukturovaných dat (v tomto případě zpětné vazby od zákazníků)
+ a tuto metodu aplikovat na reálná data.
  V praktické části této práce bude popsaná metoda implementována s pomocí
  volně dostupných nástrojů.
  Tímto práce poskytne přehled, jaké typy nástrojů jsou využity při řešení
@@ -154,7 +154,7 @@ Cílem této práce je na základě doposud proběhlého výzkumu stanovit metod
 \end_layout
 
 \begin_layout Standard
-Data, na která bude metoda aplikována pocházejí pochází z reálné společnosti.
+Data, na která bude metoda aplikována pocházejí z reálné společnosti.
  Jedná se o uživatelské recenze na služby této společnosti.
  Data jsou veřejně dostupná a neobsahují žádné osobní ani citlivé údaje
  (jména, adresy atd.).
@@ -162,10 +162,10 @@ Data, na která bude metoda aplikována pocházejí pochází z reálné společ
 \end_layout
 
 \begin_layout Standard
-Teoretická část práce se věnuje doposud proběhlému výzkumu v oblasti a literatuř
-e, která se zabývá dobýváním informací z textu.
- V této části je stanovena metoda, která bude na data aplikovaána.
- V praktické části jsou popsány použité nástroje, zkoumaná dat, získání
+Teoretická část práce se věnuje dříve proběhlému výzkumu v oblasti a literatuře,
+ která se zabývá dobýváním informací z textu.
+ V této části je stanovena metoda, která bude na data aplikována.
+ V praktické části jsou popsány použité nástroje, zkoumaná data, získání
  těchto dat a implementace metody.
 \end_layout
 
@@ -209,7 +209,7 @@ Publikace
 \emph on
  Modern Information Retrieval
 \emph default
- napsaná Ricardem Baeza-Yatesem v roce 1999
+ napsaná Ricardem Baeza-Yatesem v roce 1999 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Modern information retrieval"
@@ -225,7 +225,7 @@ Další relevantní publikací je
 \emph on
  Oxford Handbook of Computational Linguistics
 \emph default
-, napsaná kolektivem autorů a zpracovaná Ruslanem Mitkovem v roce 2003
+, napsaná kolektivem autorů a zpracovaná Ruslanem Mitkovem v roce 2003 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Oxford handbook of computational linguistics"
@@ -246,6 +246,7 @@ Text Mining Predictive Methods for Analyzing Unstructured Information
 \emph default
  napsaná Sholomem M.
  Weissem a kolektivem v roce 2005.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "text mining predictive methods"
@@ -261,7 +262,7 @@ Jednou z hlavních publikací, která se zabývá text miningem, sumarizací tex
 \emph on
  Exploring Hyperlinks
 \emph default
- napsaná Bingem Liu v roce 2011
+ napsaná Bingem Liu v roce 2011 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bing Liu Exploring hyperlinks"
@@ -279,7 +280,7 @@ Teoretická část této práce je založena na doposud proběhlém výzkumu, kt
 \emph on
  Mining and Summarizing Customer Reviews
 \emph default
- (Hu Minqing a Bing Liu, 2004)
+ (Hu Minqing a Bing Liu, 2004) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Mining and summarizing customer reviews"
@@ -291,6 +292,7 @@ key "Mining and summarizing customer reviews"
  Mining Opinion Features in Customer Reviews
 \emph default
  (Hu Minqing a Bing Liu, 2004).
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Mining opinion features in customer reviews"
@@ -350,8 +352,8 @@ key "Mining and summarizing customer reviews,Mining opinion features in customer
 \end_inset
 
 .
- Předpokládá se, že data jsou již dostupná, protože jakým způsob získání
- dat nijak samotnou metodu neovlivní.
+ Předpokládá se, že data jsou již dostupná, protože způsob získání dat při
+ aplikaci metody nehraje žádnou.
  Metoda není vázána na konkrétní implementaci.
  Tento popis by měl umožnit aplikovat metodu na jiná data, s využitím libovolnýc
 h nástrojů.
@@ -365,8 +367,8 @@ Předzpracování textu
 
 \begin_layout Standard
 Předzpracování textu je důležitou operací ve všech oblastech, které pracují
- s textem jako je text mining, vyhledávání informací, zpracování přirozeného
- jazyka apod.
+ s textem jako je získání informací z textu, vyhledávání informací, zpracování
+ přirozeného jazyka apod.
  Jedná se o soubor postupů, při kterých je text upraven tak, aby ho bylo
  možné zpracovávat strojově a aby obsahoval co nejméně triviálních a irelevantní
 ch informací.
@@ -380,25 +382,25 @@ Tokenizace
 
 \begin_layout Standard
 Text je souvislý proud znaků, které sami o sobě nenesou žádnou informaci.
- Tyto znaky lze dělit na jednotlivé smysluplné celky jako jsou slova, fráze
- nebo věty.
+ Tyto znaky lze dělit na smysluplné celky jako jsou slova, fráze nebo věty.
  Tento proces dělení se nazývá tokenizace.
- Při čtení textu je pro člověka tokenizace (rozlišení smysluplných celků)
- samozřejmosí.
+ Při čtení textu je pro člověka rozlišení smysluplných celků samozřejmostí.
  Při strojovém zpracování se může jednat o netriviální úkol.
 \end_layout
 
 \begin_layout Standard
-Tokenizační algoritmy se většinou řídí oddělovači, které se jsou pro daný
- jazyk běžné.
+Tokenizační algoritmy se většinou řídí oddělovači, které jsou pro daný jazyk
+ běžné.
  Ve většině jazyků jsou slova oddělena mezerou (toto neplatí například u
  Čínského jazyka).
  Proto lze říci, že jakákoliv mezera (běžná mezera, tabulátor, atd.) je oddělovač.
- Dalšími oddělovači jsou speciální znaky jako jsou tečka, čárka, dvojtečka,
+ Dalšími oddělovači jsou speciální znaky, jako je tečka, čárka, dvojtečka,
  středník, závorky, vykřičník, otazník a další.
  Některé z nich jsou oddělovači vždy, některé v závislosti na kontextu (např.
- tečka ve slově Ph.D není oddělovačem).
- Všechny tyto komplikace je nutné v tomto kroce zvažovat.
+ tečka ve slově Ph.D.
+ není oddělovačem).
+ Všechny tyto komplikace je nutné v tomto kroku zvažovat.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Art of tokenization"
@@ -429,23 +431,25 @@ Tzv.
  Tato slova lze z textu vyřadit, aniž by se zmenšila jeho informační hodnota.
  Seznamy stop slov se vytvářejí na základě frekvence slov a ručního výběru.
  Mezi stop slova nejčastěji patří předložky, spojky, členy (např.
+
 \emph on
-the
+ the
 \emph default
-v anglickém jazyce) apod.
+ v anglickém jazyce) apod.
 \end_layout
 
 \begin_layout Standard
 Odstraněním stop slov se také zmenší objem textu, což může být u velkého
  množství dat stěžejní (až 30% slov v textu může být označeno jako stop
- slova)
+ slova).
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Preprocessing techniques"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -455,27 +459,29 @@ Určení slovních druhů
 \begin_layout Standard
 K určování (značkování) slovních druhů slouží tzv.
  značkovače (angl.
+
 \emph on
-part-of-speech
+ part-of-speech
 \emph default
  nebo
 \emph on
-POS tagger
+ POS tagger
 \emph default
 ).
- Jedná se o algoritmy, které na základě souborů ručně označkovaných slov
- (např.
- korpus Brown, který obsahuje více než 1 000 000 slov
+ Jedná se o algoritmy, které na základě souborů (korpů) ručně označkovaných
+ slov (např.
+ korpus vytvořený na Brownově univerzitě, který obsahuje více než 1 000
+ 000 slov 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Brown Corpus Manual"
 
 \end_inset
 
-) a na základě předem předem stanovených pravidel a statistických metod
- s co největší přesností určují slovní druh pro každé slovo, včetně vyřešení
- sporných příkladů (např.
+) a na základě předem stanovených pravidel a statistických metod s co největší
+ přesností určují slovní druh pro každé slovo, včetně sporných případů (např.
  slovo "stav" může být jak podstatným jménem tak i slovesem).
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Oxford handbook of computational linguistics"
@@ -489,15 +495,15 @@ key "Oxford handbook of computational linguistics"
 V anglickém jazyce se rozlišuje 8 až 9 slovních druhů.
  Pro účely strojového zpracování textu se pro dosažení větší přesnosti rozlišují
  také poddruhy.
- Nejčastěji se používá seznam slovní druhů vypracovaný v rámci projektu
- Penn Treebank
+ Nejčastěji se používá seznam slovních druhů vypracovaný v rámci projektu
+ Penn Treebank 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Penn Treebank"
 
 \end_inset
 
-, viz Příloha
+, viz Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Seznam-slovních-druhů"
@@ -512,13 +518,24 @@ Extrakce aspektů
 \end_layout
 
 \begin_layout Standard
-Aspekty služby jsou v textu nejčastěji vyjádřeny podstatnými jmény či frázemi,
+Podle 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "str. 462"
+key "Bing Liu Exploring hyperlinks"
+
+\end_inset
+
+ jsou aspekty definovány jako komponenty nebo atributy produktu, resp.
+ služby.
+ Aspekty jsou v textu nejčastěji vyjádřeny podstatnými jmény či frázemi,
  které se z podstatných jmen skládají.
  Text může obsahovat i jiná podstatná jména, která nejsou aspekty, ale lze
  předpokládat, že irelevantní slova se budou vyskytovat méně častěji (každý
  uživatel zmiňuje ve své recenzi odlišné irelevantní věci), kdežto slova
  značící aspekty se budou v různých recenzích překrývat.
  Tato slova se budou vyskytovat s vyšší frekvencí.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 171"
@@ -544,24 +561,35 @@ Před extrakcí aspektů jsou provedeny další úpravy textu.
 \begin_layout Standard
 Dalším krokem je tzv.
  stematizace (angl.
+
 \emph on
-stemming
+ stemming
 \emph default
 ) slov.
- Tento proces spočívá v nalezení kmene slova, odstraněním koncovek, popř.
+ Tento proces spočívá v nalezení kmene slova odstraněním koncovek, popř.
  i přípon.
+ Kmen slova se může shodovat a kořenem slova.
  Stematizace slov umožňuje zamezit zbytečnému tříštění aspektů, kdy je jeden
- aspekt označován podobnýmy slovy a tím dochází k nepřesnostem při měření
+ aspekt označován podobnými slovy a tím dochází k nepřesnostem při měření
  frekvence výskytu tohoto aspektu.
  Např.
  slova "pohodlnost" a "pohodlí" mohou být vyhodnocena jako dva různé aspekty,
- ikdyž se ve skutečnosti týkají jednoho a toho samého aspektu.
+ i když se ve skutečnosti týkají jednoho a toho samého aspektu.
  Stematizací těchto slov vzniká kmen "pohod" a tak jsou výskyty obou slov
- počítány společne.
+ počítány společně.
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 168"
 key "Modern information retrieval"
+
+\end_inset
+
+ Stematizační algoritmy nejčasteji fungují na základě předem daných pravidel,
+ podle ktrých odstraňují přebytečné části slov.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Snowball stemmer"
 
 \end_inset
 
@@ -573,16 +601,16 @@ Nalezení častých slov a frází
 \end_layout
 
 \begin_layout Standard
-Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov, nebo
- skupin slov, s pomocí algoritmu Apriori, který se používá k hledání častých
+Aspekty jsou extrahovány hledáním nejčastěji se vyskytujících slov nebo
+ skupin slov s pomocí algoritmu Apriori, který se používá k hledání častých
  sestav položek a určování asociačních pravidel (v tomto případě je použita
  pouze první část algoritmu).
- Tento algorimus vyhledává položky, které se vyskytují s minimální danou
+ Tento algoritmus vyhledává položky, které se vyskytují s minimální danou
  podporou (tzn.
  vyskytují se v daném minimálním procentu transakcí).
  Mezi těmito položkami pak vyhledává ty, které se vyskytují společně, opět
  s danou minimální podporou.
- Při každé iteraci zvyšuje počet položek ve skupině.
+ Při každé iteraci se zvyšuje počet položek ve skupině o jednu.
  Algoritmus končí, kdy se již nenajde žádná skupina položek, která by se
  vyskytovala s danou podporou.
 \begin_inset CommandInset citation
@@ -602,7 +630,7 @@ Algoritmus Apriori se nejčastěji používá při analýze transakcí, jako je
 h pro další transakce (např.
  spotřebitel, který koupil položku X, s velkou pravděpodobností koupí položku
  Y).
- Takové předpovědi se v praxi používají pro rozmísťování zboží v obchodech,
+ Takové předpovědi se v praxi používají pro rozmísťování zboží v obchodech
  nebo zaměřování reklamy na určité zákazníky.
 \end_layout
 
@@ -618,7 +646,7 @@ V tomto případě jsou transakcemi jednotlivé věty ze všech uživatelských
 Použitý algoritmus pracuje s minimální podporou, kterou určuje uživatel.
  V tomto případě je minimální podpora nastavena na 1%, tzn.
  slova nebo fráze (položky nebo sada položek), které se vyskytují v méně
- než 1% všech vět, jsou považovány za nedostatečně časté a tak nejsou zvažovány
+ než 1% všech vět jsou považovány za nedostatečně časté a tak nejsou zvažovány
  jako možné aspekty.
 \end_layout
 
@@ -634,8 +662,8 @@ Vyhodnocení aspektů
 
 \begin_layout Standard
 Poslední částí stanovené metody je určení, zda jsou jednotlivé aspekty hodnoceny
- kladně, či záporně.
- Za tímto účel jsou zvolena dvě kritéria: celkový sentiment a uživatelské
+ kladně či záporně.
+ Za tímto účelem jsou zvolena dvě kritéria: celkový sentiment a uživatelské
  hodnocení.
 \end_layout
 
@@ -651,7 +679,8 @@ Celkový sentiment vyjadřuje převládající (subjektivní) názor uživatelů
  záporný).
  Postoj hodnotitele k aspektu je možné stanovit podle přítomnosti slov vyjadřují
 cích názor (hodnotící slova).
- Těmito slovy jsou většinou přídavná jména nebo příslovce
+ Těmito slovy jsou většinou přídavná jména nebo příslovce.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 171"
@@ -659,7 +688,6 @@ key "Mining and summarizing customer reviews"
 
 \end_inset
 
-.
  Přítomnost kladně orientovaných slov ve větě značí kladný postoj hodnotitele.
  Naopak přítomnost záporných slov značí negativní postoj.
 \end_layout
@@ -667,7 +695,7 @@ key "Mining and summarizing customer reviews"
 \begin_layout Standard
 Zda je slovo orientováno kladně nebo záporně (tzv.
  sémantická orientace) je určeno na základě souborů předem označených slov.
- Pro účely této práce byly použity soubory SentiWordNet
+ Pro účely této práce byly použity soubory SentiWordNet 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "SentiWordNet"
@@ -679,8 +707,8 @@ key "SentiWordNet"
 \end_layout
 
 \begin_layout Standard
-Při výpočtu celkového sentimentu pro daný aspekt tedy stačí najít věty ve
- kterých se vyskytuje a poté spočítat, kolik kladně, resp.
+Při výpočtu celkového sentimentu pro daný aspekt tedy stačí najít věty,
+ ve kterých se vyskytuje a poté spočítat, kolik kladně, resp.
  záporně orientovaných slov tyto věty obsahují.
  Při hledání výskytů aspektů se hledí na věty a ne na celé recenze, protože
  jedna recenze se může vyjadřovat k více aspektům, kdežto jednotlivé věty
@@ -695,12 +723,12 @@ Hodnocení aspektů podle sentimentů
 Pro každý aspekt je nalezen počet kladných a záporných "bodů".
  To však nestačí k tomu, aby šlo tyto aspekty porovnávat mezi sebou (př.
  není zřejmé, zda je aspekt se 100 kladnými a 10 zápornými body hodnocen
- lépe, než aspekt se 10 kladnými a 4 zápornými body).
+ lépe, než aspekt s 10 kladnými a 4 zápornými body).
  Pořadí aspektů lze určit například vypočtením skóre
 \emph on
-s
+ s
 \emph default
-, které lze spočítat podle následujicího vzorce:
+, které lze spočítat podle následujícího vzorce:
 \end_layout
 
 \begin_layout Standard
@@ -713,20 +741,20 @@ s
 \end_layout
 
 \begin_layout Standard
-Kde
+Kde 
 \begin_inset Formula $n_{pos}$
 \end_inset
 
- je počtem positivně orientovaných slov a
+ je počtem positivně orientovaných slov a 
 \begin_inset Formula $n_{neg}$
 \end_inset
 
  je počtem negativně orientovaných slov.
- Tento přístup však může být nepřesný v případech, kdy se
+ Tento přístup však může být nepřesný v případech, kdy se 
 \begin_inset Formula $n_{pos}$
 \end_inset
 
- nebo
+ nebo 
 \begin_inset Formula $n_{neg}$
 \end_inset
 
@@ -734,23 +762,23 @@ Kde
  Např.
  pokud aspekt
 \emph on
-i
+ i
 \emph default
-obdržel 300 kladných a 2 záporná hodnocení a aspekt
+ obdržel 300 kladných a 2 záporná hodnocení a aspekt
 \emph on
-j
+ j
 \emph default
  obdržel 3 kladná a 0 záporných hodnocení, bude aspekt
 \emph on
-j
+ j
 \emph default
-hodnocen výše (
+ hodnocen výše (
 \begin_inset Formula $s_{j}=1,0$
 \end_inset
 
 ) než aspekt
 \emph on
-i
+ i
 \emph default
  (
 \begin_inset Formula $s_{i}=0,993$
@@ -758,9 +786,9 @@ i
 
 ), i když je intuitivní, že aspekt
 \emph on
-i
+ i
 \emph default
-byl hodnocen kladněji.
+ byl hodnocen kladněji.
  Tento problém lze vyřešit použitím, tzv.
  vyhlazení Lidstone:
 \end_layout
@@ -779,7 +807,8 @@ Kde
 \begin_inset Formula $0<\varepsilon<1$
 \end_inset
 
- je parametrem
+ je parametrem.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 6"
@@ -787,7 +816,6 @@ key "how to count thumb ups"
 
 \end_inset
 
-.
  Podle takto vypočítaného skóre lze aspekty seřadit od nejlepšího.
 \end_layout
 
@@ -800,7 +828,7 @@ Každé recenzi je uživatelem přiřazeno celkové hodnocení od 1 (nejhorší)
  do 5 (nejlepší).
  Aspekty jsou na základě tohoto kritéria hodnoceny vypočítáním skóre
 \emph on
-s
+ s
 \emph default
  z uživatelských hodnocení všech recenzí, ve kterých se daný aspekt objevuje.
  Skóre pro jednotlivé aspekty je vypočítáno podobně jako u vyhodnocování
@@ -829,10 +857,10 @@ Použité nástroje
 \begin_layout Standard
 Při zpracování této práce byly primárně použity dva nástroje: KNIME Analytics
  Platform a programovací jazyk Python.
- Pro dosažení stejných výsledků lze ale použít jakékoliv jiné, analogické
+ Pro dosažení stejných výsledků lze ale použít jakékoliv jiné analogické
  nástroje.
  Oba nástroje jsou představeny aby bylo zřejmé, jak právě tyto nástroje
- řešily konrétní úlohy a popřípadě, podle čeho volit jiný, vhodný nástroj.
+ řešily konkrétní úlohy a popřípadě, podle čeho volit jiný, vhodný nástroj.
 \end_layout
 
 \begin_layout Subsection
@@ -845,17 +873,18 @@ KNIME AP je volně dostupný, open source program určený ke zpracování a ana
  Práce v tomto programu probíhá prostřednictvím grafického rozhraní, ve
  kterém uživatel z předem dostupných uzlů (angl.
  node) sestavuje tzv.
+
 \emph on
-work flow.
+ workflow.
 
 \emph default
  Tento výraz lze volně přeložit jako
 \emph on
-roura
+ roura
 \emph default
 .
- Rourou pak prochází data, přičemž každý uzel nad těmito daty provádí určité
- operace.
+ Worklfow pak prochází data, přičemž každý uzel nad těmito daty provádí
+ určité operace.
  Tento princip práce je podobný funkčnímu programování, kdy každá funkce
  (uzel) přijímá vstupy, provádí nad nimi operace a vrací výstupy.
 \end_layout
@@ -863,7 +892,7 @@ roura
 \begin_layout Standard
 Program již v základu obsahuje většinu potřebných uzlů, které umožňují pracovat
  se všemi běžnými druhy dat (text, obrázky, databáze, dokumenty atd.) a provádět
- nad nimi různé operace jako jsou transformace, úpravy, statisické výpočty,
+ nad nimi různé operace jako jsou transformace, úpravy, statistické výpočty,
  strojové učení aj.
  KNIME AP také umožňuje vytvářet vlastní uzly a spouštět uživatelské programy
  napsané v různých jazycích (R, Python, Java, Pearl).
@@ -877,7 +906,7 @@ KNIME AP poskytuje také základní reportovací funkce, které však nejsou př
 
 \begin_layout Standard
 Díky grafickému rozhraní je práce s tímto programem jednoduchá a jediné
- speciální znalosti, které jsou potřeba se týkají konkrétních uzlů a jejich
+ speciální znalosti, které jsou potřeba, se týkají konkrétních uzlů a jejich
  použití.
  Grafické rozhraní také přehledně zobrazuje celý workflow a je jednoduché
  se v něm orientovat.
@@ -893,7 +922,7 @@ Výhodou KNIME AP je, že i při neznalosti postupů práce s tím to programem,
  probíhá.
  Části tohoto schématu budou v následujících částech této práce uvedeny
  pro ilustraci.
- Na Obrázku
+ Na Obrázku 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:popis-uzlu"
@@ -957,7 +986,7 @@ Název
 
 uzlu
 \series default
- Uzly stejného typu mají stenný název
+ Uzly stejného typu mají stejný název.
 \end_layout
 
 \begin_layout Labeling
@@ -967,7 +996,7 @@ uzlu
 Vstup
 \series default
  Každý uzel má jeden nebo více vstupů.
- Do jednoho vstupu může vést maximálně jeden výstup z jiného uzlu
+ Do jednoho vstupu může vést maximálně jeden výstup z jiného uzlu.
 \end_layout
 
 \begin_layout Labeling
@@ -976,7 +1005,7 @@ Vstup
 \series bold
 Výstup
 \series default
- Každý uzel může ale nemusí mít jeden či více vstupů.
+ Každý uzel může, ale nemusí, mít jeden či více vstupů.
  Data z jednoho výstupu lze směřovat zároveň do několika vstupů jiných uzlů.
 \end_layout
 
@@ -1007,17 +1036,17 @@ uzlu
 \end_layout
 
 \begin_layout Standard
-Ve workflow lze spouštět jednotlivé uzly, skupinu označených uzlů, nebo
- všechny uzly.
+Ve workflow lze spouštět jednotlivé uzly, skupinu označených uzlů nebo všechny
+ uzly.
  Data jsou mezi uzly přenášeny v tabulkách.
  Při spuštění, příjme uzel vstupní data a provede určenou operaci.
  U uzlu, který dokončil provádění operace lze zobrazit jeho výstupní data.
- Díky tomu, lze sledovat, co se s daty dějě na při každém kroku.
+ Díky tomu, lze sledovat, co se s daty děje na při každém kroku.
 \end_layout
 
 \begin_layout Standard
 Pokud je spuštěno několik propojených uzlů najednou, po skončení operace
- v jednom uzlu, jsou výstupní data ihned poslána do vstupu dalšího uzlu,
+ v jednom uzlu jsou výstupní data ihned poslána do vstupu dalšího uzlu,
  který zahájí další operaci atd., dokud neproběhnou všechny spuštěné uzly.
 \end_layout
 
@@ -1033,8 +1062,9 @@ Jednotlivé uzly lze konfigurovat (podle jejich specifikace).
 
 \begin_layout Standard
 Kromě základní konfigurace, mají všechny uzly přístup k tzv.
+
 \emph on
-flow variables
+ flow variables
 \emph default
 , což jsou globální proměnné dostupné všem uzlům.
 \end_layout
@@ -1045,9 +1075,9 @@ Meta-uzly
 
 \begin_layout Standard
 Speciálním případem uzlu je tzv.
- meta-uzel, které jsou vytvářeny uživatelem.
+ meta-uzly, které jsou vytvářeny uživatelem.
  Stejně jako obyčejné uzly přijímají vstupy a posílají dál výstupy.
- Hlavním rozdílem je, že v sami nemají žádnou funkci a pouze v sobě obsahují
+ Hlavním rozdílem je, že sami nemají žádnou funkci a pouze v sobě obsahují
  neomezené množství jiných uzlů.
  Jejich účel je tedy podobný jako u funkcí v programování - rozdělují workflow
  na samostatné celky.
@@ -1061,7 +1091,7 @@ Příklad work flow
 
 \begin_layout Standard
 Pro lepší pochopení základů práce s KNIME AP, je dále uveden příklad jednoduchéh
-o work flow (Obrázek
+o work flow (Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Příklad-work-flow"
@@ -1072,11 +1102,11 @@ reference "fig:Příklad-work-flow"
 \end_layout
 
 \begin_layout Standard
-V tomto příkladě, pracujeme s daty ze skladu.
+V tomto příkladu pracujeme s daty ze skladu.
  V tabulce jsou uloženy jednotlivé výrobky.
  U každého výrobku je uložen název, typ a počet dostupných kusů výrobku
  na skladě.
- Potřebujeme zjistit, kolik výrobků je dohromady pro každý typ.
+ Potřebujeme zjistit kolik výrobků je dohromady pro každý typ.
 \end_layout
 
 \begin_layout Standard
@@ -1135,14 +1165,14 @@ vytvoření
 \end_inset
 
 tabulky Uvnitř tohoto uzlu lze ručně zadávat data.
- Ručně vytvoříme potřebnou tabulku (viz Obrázek
+ Ručně vytvoříme potřebnou tabulku (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Ručně-vytvořená-tabulka"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Description
@@ -1162,8 +1192,8 @@ typu
 \begin_inset space ~
 \end_inset
 
-výrobku Tento uzel seskupí výrobku podle typu a sečte jednotlivé počty dostupnýc
-h kusů
+výrobku Tento uzel seskupí výrobky podle typu a sečte jednotlivé počty dostupnýc
+h kusů.
 \end_layout
 
 \begin_layout Description
@@ -1184,7 +1214,7 @@ do
 \end_inset
 
 databáze Tento uzel se připojí k databázi (která je předem nakonfigurována
- uvnitř uzlu) a uloží do ní výstupní data
+ uvnitř uzlu) a uloží do ní výstupní data.
 \end_layout
 
 \begin_layout Description
@@ -1209,7 +1239,7 @@ PDF
 \end_inset
 
 souboru Tento uzel vytvoří PSD soubor ve kterém bude tabulka s výstupními
- daty
+ daty.
 \end_layout
 
 \begin_layout Description
@@ -1264,8 +1294,12 @@ Ručně vytvořená tabulka
 \end_layout
 
 \begin_layout Standard
-Výsledek můžeme sledovat ve vzniklém PDF souboru, v databázi, nebo přímo
- v programu, zobrazením výstupní tabulky uzlu Group By (viz Obrázek
+Výsledek můžeme sledovat ve vzniklém PDF souboru, v databázi nebo přímo
+ v programu zobrazením výstupní tabulky uzlu 
+\emph on
+Group By
+\emph default
+ (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Výstupní-tabulka"
@@ -1327,21 +1361,21 @@ Python
 
 \begin_layout Standard
 Python je interpretovaný, objektově orientovaný, skriptovací programovací
- jazyk
+ jazyk 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "General Python FAQ"
 
 \end_inset
 
-, který nachází využití ve velkém množství různých oblastí
+, který nachází využití ve velkém množství různých oblastí 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Python Success Stories"
 
 \end_inset
 
-, díky rychlosti a jednoduchosti vývoje programů a velkému množství knihoven
+ díky rychlosti a jednoduchosti vývoje programů a velkému množství knihoven
  (jak standartních tak i třetích stran
 \begin_inset Foot
 status open
@@ -1354,15 +1388,15 @@ Index knihoven (https://pypi.python.org/pypi) pro Python v době psaná této
 \end_inset
 
 ).
- Python je standartně dodáván se všemi distribucemi operačního systému Linux.
+ Python je standardně dodáván se všemi distribucemi operačního systému Linux.
 \end_layout
 
 \begin_layout Standard
 Tento programovací jazyk byl použit při zpracování práce jak při vytvoření
  samostatného programu, tak i v rámci práce s KNIME AP pro vytváření skriptů
- pro manipulaci s daty, prostřednictvím uzlů
+ pro manipulaci s daty prostřednictvím uzlů
 \emph on
-Python Script.
+ Python Script.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1381,28 +1415,28 @@ Requests
 \end_layout
 
 \begin_layout Standard
-Tato knihovna umoňujě posílat poždavky na webové servery přes HTTP (Hypertext
- Transfer Protocol) protokol
+Tato knihovna umožňuje posílat požadavky na webové servery přes HTTP (Hypertext
+ Transfer Protocol) protokol.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Requests library"
 
 \end_inset
 
-.
  Python sice poskytuje vestavěnou HTTP knihovnu, ovšem práce s touto knihovnou
- je mnohem komplikvanější a méně efektivní.
+ je mnohem komplikovanější a méně efektivní.
 \end_layout
 
 \begin_layout Standard
-Knihovna Requests byla použita při získávání dat internetu (viz
+Knihovna Requests byla použita při získávání dat z internetu (viz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Získání-zdrojového-kódu"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Paragraph
@@ -1411,25 +1445,26 @@ Beautiful Soup
 
 \begin_layout Standard
 Tato knihovna je určena k syntaktické analýze HTML.
- Umožňuje získávat data z zdrojového kódu webové stránky
+ Umožňuje získávat data ze zdrojového kódu webové stránky.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Beautiful soup documentation"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
-Knihovna byla použita při získávání dat z webové stránky (viz
+Knihovna byla použita při získávání dat z webové stránky (viz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Extrakce-dat"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Paragraph
@@ -1438,15 +1473,16 @@ Pandas
 
 \begin_layout Standard
 Tato knihovna poskytuje pokročilé datové struktury a nástroje pro analýzu
- dat
+ dat.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Python Pandas"
 
 \end_inset
 
-.
  Knihovna byla použita při práci s tabulkami v rámci KNIME AP (viz Příloha
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -1461,14 +1497,14 @@ Matplotlib
 \end_layout
 
 \begin_layout Standard
-Tato knihovna slouží k vytváření grafů z poskytnutých dat
+Tato knihovna slouží k vytváření grafů z poskytnutých dat.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Matplotlib"
 
 \end_inset
 
-.
  Knihovna byla použita v rámci KNIME AP.
 \end_layout
 
@@ -1478,22 +1514,22 @@ Získání nestrukturovaných dat
 
 \begin_layout Standard
 Při zpracování dat byla využita veřejná data, dostupná z webových stránek
- banky CIBC
+ banky CIBC.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CIBC Customer Reviews"
 
 \end_inset
 
-.
  Jedná se o uživatelské recenze na služby této banky.
- V době psaní práce, obsahovala tato webová stránka více než 2600 recenzí.
+ V době psaní práce obsahovala tato webová stránka více než 2600 recenzí.
 \end_layout
 
 \begin_layout Standard
 Tato data jsou však dostupná jen jako součást webové stránky a nelze je
  proto jednoduše analyzovat.
- Přesto jsou to data strukturovaná.
+ Přesto jsou to data svým způsobem strukturovaná.
  Protože se jedná o dynamicky generovanou webovou stránku (zobrazují se
  pouze požadované recenze od uživatelů), je zřejmé, že na straně webového
  serveru jsou tato data uložena v databázi (ať už relační, či jiné), odkud
@@ -1522,8 +1558,8 @@ reference "sec:Zdrojový-kód-crawleru"
 \end_inset
 
 , který data z webové stránky získal a připravil je k dalšímu zpracování.
- Tento počítačový program a principy podle kterých funguje je popsán v této
- kapitole.
+ Tento počítačový program a principy, podle kterých funguje, je popsán v
+ této kapitole.
 \end_layout
 
 \begin_layout Subsection
@@ -1533,14 +1569,14 @@ Web scraping
 \begin_layout Standard
 Proces získání dat z webové stránky se nazývá
 \emph on
-web scraping
+ web scraping
 \emph default
- a programu
+ a program
 \emph on
-scraper.
+ scraper.
 
 \emph default
- K získání dat je možné přistupovat několika způsoby
+ K získání dat je možné přistupovat několika způsoby 
 \begin_inset CommandInset citation
 LatexCommand cite
 after "str. 363"
@@ -1556,9 +1592,9 @@ Manuální
 \begin_inset space ~
 \end_inset
 
-zpracování Při tomto přístupu, programátor ručně hledá opakující se vzory
+zpracování Při tomto přístupu programátor ručně hledá opakující se vzory
  ve zdrojovém kódu a poté píše program, který podle těchto vzoru extrahuje
- data
+ data.
 \end_layout
 
 \begin_layout Description
@@ -1567,8 +1603,9 @@ Poloautomatické
 \end_inset
 
 zpracování Tato metoda spočívá v učení s učitelem (angl.
+
 \emph on
-supervised learning
+ supervised learning
 \emph default
 ), kdy se program nejdříve učí na ručně označkovaných datech a podle naučených
  pravidel poté extrahuje data z podobně formátovaných stránek.
@@ -1579,8 +1616,8 @@ Automatické
 \begin_inset space ~
 \end_inset
 
-extrakce Podobně jako při poloautomatickém zpracování, progam extrahuje
- podle naučených pravidel, ale tato providla se učí automaticky z trénovacích
+extrakce Podobně jako při poloautomatickém zpracování, program extrahuje
+ podle naučených pravidel, ale tato pravidla se učí automaticky z trénovacích
  dat.
 \end_layout
 
@@ -1591,7 +1628,7 @@ Při zpracování této práce byl použit první přístup.
  (v tomto případě programovací jazyk Python).
  Nevýhodou je, že vytvořený program (scraper) nelze využít pro extrakci
  dat z jiného zdroje.
- Pro každou nový zdroj (webovou stránku) je nutné znovu ručně vyhledávat
+ Pro každý nový zdroj (webovou stránku) je nutné znovu ručně vyhledávat
  vzory ve zdrojovém kódu.
  V případě této práce, tato nevýhoda není omezující, protože jsou analyzována
  data pouze z jednoho zdroje.
@@ -1616,13 +1653,13 @@ Proces získání dat z webové stránky lze rozdělit na několik kroků.
 \end_layout
 
 \begin_layout Standard
-Jako první, je nutné určit, z jaké stránky budou data získávána.
- V tomto případě, se jedná o stránku s uživatelskými recenzemi na webové
+Jako první je nutné určit, z jaké stránky budou data získávána.
+ V tomto případě se jedná o stránku s uživatelskými recenzemi na webové
  stránce banky.
  Na této stránce si lze ihned všimnout, že jednotlivé recenze jsou zobrazovány
  na stránkách po 10.
  Dále si lze všimnout, že číslo stránku není uvedeno v URL (Uniform Resource
- Locator - jednotná adresa zdroje) stránky (viz Obrázek
+ Locator - jednotná adresa zdroje) stránky (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Stránka-s-recenzemi"
@@ -1683,29 +1720,30 @@ Stránka s recenzemi, červeně označeno URL a číslování stránek.
 \begin_layout Standard
 Scraper musí projít každou stránku a uložit její zdrojový kód.
  Aby to bylo možné, musí mít scraper URL každé z nich.
- Podrobnějším prozkoumáním webové stránky lze zjistit, že při řechodu na
- další stránku s recenzemi, nedochází k načtení celé stránky, ale pouze
- nových recenzí.
+ Podrobnějším prozkoumáním webové stránky lze zjistit, že při přechodu na
+ další stránku s recenzemi nedochází k načtení celé stránky, ale pouze nových
+ recenzí.
  To poukazuje na využití webových technologií AJAX (Asynchronous JavaScript
- and XML)
+ and XML).
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AJAX"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
-Ke zjištění URL jednotlivých stránek stačí sledovat HTTP požadavky, které
+K zjištění URL jednotlivých stránek stačí sledovat HTTP požadavky, které
  probíhají mezi klientem a serverem při přecházení mezi jednotlivými stránkami.
  Toto umožňuje celá řada nástrojů, včetně většiny běžných webových prohlížečů.
 \end_layout
 
 \begin_layout Standard
 Pozorováním proběhlých požadavků lze zjistit, na jaké URL je zdrojový kód
- dostupný (viz Obrázek
+ dostupný (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:HTTP-požadavky"
@@ -1716,11 +1754,12 @@ reference "fig:HTTP-požadavky"
 \end_layout
 
 \begin_layout Standard
-Přímo v URL si lze všimnout čísla, které se shoduje s čísel požadované stránky
- (URL zkráceno pro přehlednost):
+Přímo v URL si lze všimnout čísla, které se shoduje s číslem požadované
+ stránky (URL zkráceno pro přehlednost):
 \end_layout
 
 \begin_layout Verbatim
+
 https://cibc-secure.ugc.bazaarvoice.com/...page=5...
 \end_layout
 
@@ -1767,13 +1806,12 @@ HTTP požadavky
 \end_layout
 
 \begin_layout Standard
-Scraper nyní může projít všechny stránky podle čísla, dosazením tohoto čísla
+Scraper nyní může projít všechny stránky podle čísla dosazením tohoto čísla
  do URL.
  Program projde všechny stránky s recenzemi jednu po druhé a uloží jejich
  zdrojové kódy.
- V této implementaci byla pro zásílání HTTP požadavků použita knihovna Requests
- (viz.
- Příloha
+ V této implementaci byla pro zasílání HTTP požadavků použita knihovna Requests
+ (viz Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-crawleru"
@@ -1782,7 +1820,7 @@ reference "sec:Zdrojový-kód-crawleru"
 
 , funkce
 \family typewriter
-get_data
+ get_data
 \family default
 ).
 \end_layout
@@ -1803,7 +1841,7 @@ Před tím než je možné data extrahovat, je nutné ručně projít strukturu 
  a určit vzory, podle kterých budou data extrahována.
  Nejdříve určíme, které části recenze jsou podstatné.
  V tomto případě jde o titulek recenze, text recenze a celkové hodnocení
- (viz Obrázek
+ (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Uživatelská-recenze"
@@ -1857,7 +1895,7 @@ Uživatelská recenze
 \begin_layout Standard
 Ve zdrojovém kódu se určí část, kde je popsána jedna samostatná recenze.
  V případě této stránky, jsou potřebná data obsažena v HTML prvcích, které
- mají přiřazené třídy s konzistentními názvy (viz Obrázek
+ mají přiřazené třídy s konzistentními názvy (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Zdrojový-kód-recenze."
@@ -1874,7 +1912,7 @@ reference "fig:Zdrojový-kód-recenze."
 \family typewriter
 BVRRConentReview
 \family default
- prvky s touto třídou obsahují jednotlivá review
+ prvky s touto třídou obsahují jednotlivá review.
 \end_layout
 
 \begin_layout Labeling
@@ -1883,7 +1921,7 @@ BVRRConentReview
 \family typewriter
 BVRROverallRatingContainer
 \family default
- prvky s touto třídou obsahují celkové hodnocení od uživatele
+ prvky s touto třídou obsahují celkové hodnocení od uživatele.
 \end_layout
 
 \begin_layout Labeling
@@ -1892,7 +1930,7 @@ BVRROverallRatingContainer
 \family typewriter
 BVRRReviewTitleContainer
 \family default
- prvky s touto třídou obsahují titulek review
+ prvky s touto třídou obsahují titulek review.
 \end_layout
 
 \begin_layout Labeling
@@ -1901,7 +1939,7 @@ BVRRReviewTitleContainer
 \family typewriter
 BVRRReviewTextContainer
 \family default
- prvky s touto třídou obsahují text review
+ prvky s touto třídou obsahují text review.
 \end_layout
 
 \begin_layout Standard
@@ -1952,13 +1990,14 @@ Scraper nejdříve provede syntaktickou analýzu zdrojového kódu s pomocí kni
  BeautifulSoup.
  To umožní jednoduše procházet a vyhledávat ve stromu HTML prvků.
  Scraper nejdříve vyhledá jednotlivé recenze.
- Uvnitř každé recenze pak vyhledává prvky, obsahující potřebná data.
+ Uvnitř každé recenze pak vyhledává prvky obsahující potřebná data.
 \end_layout
 
 \begin_layout Standard
 V případě titulku a textu recenze, stačí pouze uložit text uvnitř patřičného
  prvku.
  Uživatelské hodnocení je zapsáno jako text (př.
+ 
 \begin_inset Quotes grd
 \end_inset
 
@@ -1971,10 +2010,10 @@ V případě titulku a textu recenze, stačí pouze uložit text uvnitř patři�
  mohou určovat pouze celočíselná hodnocení).
  Python toto umožňuje pomocí vestavěné knihovny
 \family typewriter
-Re
+ Re
 \family default
  (viz.
- Příloha
+ Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-crawleru"
@@ -1983,7 +2022,7 @@ reference "sec:Zdrojový-kód-crawleru"
 
 , funkce
 \family typewriter
-get_rating
+ get_rating
 \family default
 ).
 \end_layout
@@ -1994,8 +2033,10 @@ Vyextrahovaná data jsou poté uložena ve formátu JSON
 status open
 
 \begin_layout Plain Layout
-JSON (Javascript Object Notation) je univerzální formát pro přenost dat,
- kdetý je nezávislý na jazyku a je snadno čitelný a zapisovatelný pro člověka
+JSON (Javascript Object Notation) je univerzální formát pro přenos dat,
+ který je nezávislý na programovacím jazyku a je snadno čitelný a zapisovatelný
+ pro člověka.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "JSON"
@@ -2063,14 +2104,14 @@ Jednotlivé recenze jsou uložené na samostatných řádcích.
 \end_layout
 
 \begin_layout Section
-Popis implemetnace v KNIME
+Popis implementace v KNIME
 \end_layout
 
 \begin_layout Standard
 V této kapitole je popsána implementace (KNIME workflow) stanovené metody
  pomocí KNIME AP.
  Workflow je rozdělen na 4 části: načtení textových dat ze souboru (který
- je výstupem scrapperu, viz
+ je výstupem scraperu, viz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Extrakce-dat"
@@ -2079,7 +2120,7 @@ reference "sub:Extrakce-dat"
 
 ), předzpracování textu, extrakce aspektů a hodnocení aspektů.
  Ke každé části je uveden popis použitých uzlů a schéma workflow.
- Zdrojové kódy vytvořených skritpů jsou přiloženy jako Příloha
+ Zdrojové kódy vytvořených skriptů jsou přiloženy jako Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -2098,10 +2139,10 @@ Data získaná z webové stránky jsou uložena v souboru jako prostý text.
  Každý řádek obsahuje jednu recenzi a je formátován do JSON.
  Workflow nejdříve načte jednotlivé řádky pomocí uzlu
 \emph on
-Line Reader
+ Line Reader
 \emph default
-(viz.
- Obrázek
+ (viz.
+ Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Implementace 1"
@@ -2110,24 +2151,24 @@ reference "fig:Implementace 1"
 
 ) a pomocí uzlu
 \emph on
-String to JSON
+ String to JSON
 \emph default
  provede parsování textových řetězců do JSON.
  Data jsou pak převedena do tabulky (uzel
 \emph on
-JSON to Table
+ JSON to Table
 \emph default
 ).
  Uzel
 \emph on
-RowID
+ RowID
 \emph default
-přiřazuje každé recenzi (řádku v tabulce) číselný identifikátor (ID).
+ přiřazuje každé recenzi (řádku v tabulce) číselný identifikátor (ID).
  Uzel
 \emph on
-String To Document
+ String To Document
 \emph default
-provádí tokenizaci jednotlivých recenzí a ukládá je jako dokumenty.
+ provádí tokenizaci jednotlivých recenzí a ukládá je jako dokumenty.
  Dokumenty v KNIME AP jsou uloženy v interním formátu.
  Pro každý dokument lze nastavit autora, datum vytvoření, titulek, text
  a další metadata.
@@ -2193,7 +2234,7 @@ name "sub:Předzpracování-textu"
 
 \begin_layout Standard
 V této části jsou na titulek a text každé recenze aplikovány postupy pro
- předzpracování textu (viz Obrázek
+ předzpracování textu (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 2"
@@ -2203,49 +2244,50 @@ reference "fig:implementace 2"
 ).
  Uzel
 \emph on
-Case Converter
+ Case Converter
 \emph default
-sjednocuje velikost písmen.
+ sjednocuje velikost písmen.
  Uzel
 \emph on
-Stop word Filter
+ Stop word Filter
 \emph default
-odstraňuje stop slova na základě vestavěného seznamu slov.
+ odstraňuje stop slova na základě vestavěného seznamu slov.
  Uzel
 \emph on
-Punctuation Erasure
+ Punctuation Erasure
 \emph default
-z textu odstraňuje punktuaci.
+ z textu odstraňuje interpunkci.
 \end_layout
 
 \begin_layout Standard
-Ukázalo se, že získaná data obsahují velké množtví slov, které obsahují
+Ukázalo se, že získaná data obsahují velké množství slov, které obsahují
  číslice (př.
- 2nd, 3rd apod) nebo větší množství pomlček (s největší pravděpodobností
+ 2nd, 3rd apod.) nebo větší množství pomlček (s největší pravděpodobností
  jde o překlepy).
  Uzly
 \emph on
-RegEx Filter
+ RegEx Filter
 \emph default
-tato slova odstraňují pomocí regulárních výrazů.
+ tato slova odstraňují pomocí regulárních výrazů.
 \end_layout
 
 \begin_layout Standard
-Posledním krokem je označní slovních druhů (uzel
+Posledním krokem je označení slovních druhů (uzel
 \emph on
-POS tagger
+ POS tagger
 \emph default
 ).
  Označování slovních druhů je postaveno na Apache OpenNLP, což je open source
  knihovna pro jazyk Java, která zahrnuje nástroje pro strojové učení a zpracován
-í přirozeného jazyka
+í přirozeného jazyka.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Apache OpenNLP"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
@@ -2300,9 +2342,9 @@ Extrakce aspektů
 Pro extrakci aspektů jsou v dokumentech ponechána pouze podstatná jména.
  Uzel
 \emph on
-Tag Filter
+ Tag Filter
 \emph default
- filtruje slova na základě různých značek (viz Obrázek
+ filtruje slova na základě různých značek (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 3"
@@ -2312,25 +2354,26 @@ reference "fig:implementace 3"
 ).
  V tomto případě jde o značky, které vytvořil uzel
 \emph on
-POS Tagger
+ POS Tagger
 \emph default
-v minulé části.
+ v minulé části.
 \end_layout
 
 \begin_layout Standard
 Následuje stematizace slov.
  Uzel
 \emph on
-Snowball Stemmer
+ Snowball Stemmer
 \emph default
-, který stematizaci provádí používá Snowball algoritmus
+, který stematizaci provádí, používá Snowball algoritmus.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Snowball stemmer"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
@@ -2379,30 +2422,31 @@ name "fig:implementace 3"
 \begin_layout Standard
 Před extrakcí aspektů jsou recenze rozděleny na jednotlivé věty (uzel
 \emph on
-Sentence Extractor
+ Sentence Extractor
 \emph default
 ) a z vět jsou vytvořeny "transakce" v podobě pole slov (uzel
 \emph on
-Cell Splitter
+ Cell Splitter
 \emph default
 ).
  Následně jsou ve vytvořených transakcích vyhledány často se vyskytující
  položky (slova) pomocí uzlu
 \emph on
-Item Set Finder
+ Item Set Finder
 \emph default
-, který používá implementaci algoritmu Apriori v jazyce C
+, který používá implementaci algoritmu Apriori v jazyce C.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Borgelt Apriori"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
-Z výdledné tabulky jsou poté ručně vybrány aspekty.
+Z výsledné tabulky jsou poté ručně vybrány aspekty.
 \end_layout
 
 \begin_layout Subsection
@@ -2411,7 +2455,7 @@ Hodnocení aspektů
 
 \begin_layout Standard
 V poslední, nejrozsáhlejší části workflow jsou vybrané aspekty vyhodnoceny.
- Opět jsou zde použity předzpracované dokumenty (viz
+ Opět jsou zde použity předzpracované dokumenty (viz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Předzpracování-textu"
@@ -2422,9 +2466,9 @@ reference "sub:Předzpracování-textu"
  Nejdříve jsou z dokumentů ponechána pouze podstatná jména, přídavná jména
  a příslovce (uzel
 \emph on
-Tag Filter
+ Tag Filter
 \emph default
-, viz Obrázek
+, viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 5"
@@ -2432,34 +2476,39 @@ reference "fig:implementace 5"
 \end_inset
 
 ).
- Tedy slova která buď značí aspekty, nebo jsou hodnotícími slovy.
+ Tedy slova, která buď značí aspekty, nebo jsou hodnotícími slovy.
  Recenze jsou poté rozděleny na jednotlivé věty (uzel
 \emph on
-Sentence Extractor
+ Sentence Extractor
 \emph default
 ).
  Uzel
 \emph on
-Document Data Extractor
+ Document Data Extractor
 \emph default
  extrahuje metadata každé recenze (celkové hodnocení a ID dokumentu) a přidává
  je každému řádku (každé větě) jako sloupec.
  Tyto údaje budou využity dále.
  Uzel
 \emph on
-Column Rename
+ Column Rename
 \emph default
-přejmenovává jeden ze sloupců pro větší následnou přehlednost.
+ přejmenovává jeden ze sloupců pro větší následnou přehlednost.
  Uzel
 \emph on
-String To Number
+ String To Number
 \emph default
-převádí uživatelské hodnocení z textového řetězce na číslo, aby s ním bylo
+ převádí uživatelské hodnocení z textového řetězce na číslo, aby s ním bylo
  možné provádět výpočty.
+
+\emph on
+ 
+\emph default
+Uzel 
 \emph on
 Table Indexer
 \emph default
-vytváří index všech vět, který umožňuje vyhledávání slov a frází ve větách.
+ vytváří index všech vět, který umožňuje vyhledávání slov a frází ve větách.
 \end_layout
 
 \begin_layout Standard
@@ -2514,7 +2563,7 @@ V dalším kroku je vyhodnocen každý aspekt.
  V této části je použita smyčka, která načítá řádky tabulky (v tomto případě
  ručně vytvořená tabulka s aspekty - uzel
 \emph on
-Table Creator
+ Table Creator
 \emph default
 ) a jednotlivé řádky pak ukládá do globálních proměnných (flow variables).
 \end_layout
@@ -2522,13 +2571,13 @@ Table Creator
 \begin_layout Standard
 Smyčka začíná uzlem
 \emph on
-Table Row To Variable Loop Start
+ Table Row To Variable Loop Start
 \emph default
- a končí uzelm
+ a končí uzlem
 \emph on
-Loop End
+ Loop End
 \emph default
-(viz Obrázek
+ (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:implementace 6"
@@ -2562,7 +2611,8 @@ status open
 
 \begin_layout Plain Layout
 Smyčka ve workflow, zkráceno pro přehlednost.
- Písmena a., b., c., značí jednotivé větve worflow.
+ Písmena a., b., c.
+ značí jednotlivé větve workflow.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:implementace 6"
@@ -2586,20 +2636,19 @@ name "fig:implementace 6"
 V každé iteraci nejdříve proběhne vyhledávání aspektu (slova nebo fráze)
  ve větách (uzel
 \emph on
-Index Query
+ Index Query
 \emph default
 ).
- Výstupem je tabulka s větami, který daný aspekt obsahují.
+ Výstupem je tabulka s větami, které daný aspekt obsahují.
  Poté se workflow rozděluje na tři větve.
 \end_layout
 
 \begin_layout Standard
 Ve větvi
 \emph on
-a.
-
+ a
 \emph default
- probíhá vyhodnocení aspektů podle sentimentů (viz Obrázek
+ probíhá vyhodnocení aspektů podle sentimentů (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Větev-A"
@@ -2609,9 +2658,9 @@ reference "fig:Větev-A"
 ).
  Meta-uzel
 \emph on
-Sentiment Tagger
+ Sentiment Tagger
 \emph default
-určuje sémantickou orientaci jednotlivých slov (viz Obrázek
+ určuje sémantickou orientaci jednotlivých slov (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Meta-uzel-Sentiment-Tagger"
@@ -2622,17 +2671,17 @@ reference "fig:Meta-uzel-Sentiment-Tagger"
  Uvnitř meta-uzlu je nejdříve odstraněn sloupec se zdrojovým dokumentem
  (uzel
 \emph on
-Column Filter
+ Column Filter
 \emph default
 ).
  Následují tři dvojice uzlů
 \emph on
-File Reader
+ File Reader
 \emph default
 , které načítají slovníky obsahující slova s označenou sémantickou orientací
  a
 \emph on
-Dictionary Tagger
+ Dictionary Tagger
 \emph default
 , které podle těchto slovníků značkují slova obsažená v recenzích.
  Neutrálně značkovaná slova jsou značkována pro přehled, i když jejich počet
@@ -2642,17 +2691,17 @@ Dictionary Tagger
 \begin_layout Standard
 Uzel
 \emph on
-Bag of Words Creator
+ Bag of Words Creator
 \emph default
  vytváří soubor slov ze všech vět, ve kterých se aspekt vyskytuje.
  Uzel
 \emph on
-Python Script
+ Python Script
 \emph default
- vypočítává skóre ze semantické orientace slov.
+ vypočítává skóre ze sémantické orientace slov.
  Výstupní tabulka obsahuje jediný řádek, ve kterém je uložen název aspektu
  a skóre tohoto aspektu.
- Okomentovaný zdrojový kód je přiložen jako Příloha
+ Okomentovaný zdrojový kód je přiložen jako Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -2751,9 +2800,9 @@ name "fig:Meta-uzel-Sentiment-Tagger"
 \begin_layout Standard
 Ve větvi
 \emph on
-b.
+ b
 \emph default
-je vypočteno skóre z uživatelského hodnocení (viz Obrázek
+ je vypočteno skóre z uživatelského hodnocení (viz Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Větev-B"
@@ -2764,16 +2813,16 @@ reference "fig:Větev-B"
  Jednotlivé věty jsou nejprve seskupeny podle zdrojového dokumentu, tedy
  podle recenze, ze které pochází (uzel
 \emph on
-GroupBy
+ GroupBy
 \emph default
 ).
  Uzel
 \emph on
-Python Script
+ Python Script
 \emph default
-pak vypočítává skóre z uživatelských hodnocení.
+ pak vypočítává skóre z uživatelských hodnocení.
  Metoda vypočítání skóre je totožná pro tento uzel i uzel vyhodnocující
- aspekty (viz Příloha
+ aspekty (viz Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Zdrojový-kód-Python-Script"
@@ -2782,7 +2831,7 @@ reference "sec:Zdrojový-kód-Python-Script"
 
 , funkce
 \family typewriter
-lidstone_smooth
+ lidstone_smooth
 \family default
 ).
 \end_layout
@@ -2833,9 +2882,10 @@ name "fig:Větev-B"
 \begin_layout Standard
 Ve větvi
 \emph on
-c.
+ c
 \emph default
-je vypočítáno procento vět, ve kterém se daný aspekt vyskytuje (viz Obrázek
+ je vypočítáno procento vět, ve kterém se daný aspekt vyskytuje (viz Obrázek
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Větev-C"
@@ -2897,8 +2947,8 @@ name "fig:Větev-C"
 \end_layout
 
 \begin_layout Standard
-Pro účely této práce byly na také z výstupních dat s pomocí knihovny Matplotlib
- vygenerovány grafy použité při interpretaci výsledků (viz
+Pro účely této práce byly také z výstupních dat s pomocí knihovny Matplotlib
+ vygenerovány grafy použité při interpretaci výsledků (viz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Interpretace-výstupů"
@@ -2922,7 +2972,7 @@ name "sec:Interpretace-výstupů"
 \begin_layout Standard
 V této kapitole jsou popsány výstupy, které vznikly aplikováním metody na
  data.
- Jedntolivé výstupy jsou interpretovány a jsou navrhnuta možná praktická
+ Jednotlivé výstupy jsou interpretovány a jsou navrhnuta možná praktická
  využití.
 \end_layout
 
@@ -2932,7 +2982,7 @@ Výstupy
 
 \begin_layout Standard
 Výstupy jsou pro lepší přehlednost seskupeny do několika tabulek.
- V Tabulce
+ V Tabulce 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Sentimenty-podle-vyskytu"
@@ -3750,7 +3800,7 @@ end{threeparttable}
 \end_layout
 
 \begin_layout Standard
-V tabulce
+V tabulce 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Sentimenty-prumerneho-skore"
@@ -4526,7 +4576,7 @@ end{threeparttable}
 \end_layout
 
 \begin_layout Standard
-V tabulce
+V Tabulce 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Porovanání-pořadí-aspektů"
@@ -4535,7 +4585,7 @@ reference "tab:Porovanání-pořadí-aspektů"
 
  jsou v jednotlivých sloupcích uvedeny aspekty seřazené podle jednoho ze
  tří kritérií.
- Zde je evidentní, že pořadí ve aspektů seřazených podle skóre z uživatelského
+ Zde je evidentní, že pořadí aspektů seřazených podle skóre z uživatelského
  hodnocení je podobné jako pořadí aspektů seřazených podle skóre ze sentimentů.
  Uživatel tedy při vytváření recenze vyjadřuje své pocity obdobně jak v
  psané formě, tak i udělením známky.
@@ -4568,7 +4618,7 @@ begin{threeparttable}
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Porovanání pořadí aspektů seřazených podle různých kritérií
+Porovnání pořadí aspektů seřazených podle různých kritérií
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Porovanání-pořadí-aspektů"
@@ -5313,7 +5363,7 @@ Rozložení uživatelského hodnocení
 Dalším výstupem jsou grafy rozložení uživatelského hodnocení.
  Pro každý aspekt byl vytvořen sloupcový graf, který znázorňuje počty hodnocení
  s různými hodnotami.
- Grafy jsou přiloženy jako Příloha
+ Grafy jsou přiloženy jako Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Grafy"
@@ -5326,14 +5376,14 @@ reference "sec:Grafy"
 \begin_layout Standard
 Z grafů je zřejmé, že uživatelská hodnocení sledují rozložení ve tvaru U
  (př.
- viz Příloha
+ viz Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Grafy"
 
 \end_inset
 
-, Obrázek
+, Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Graf-Security-type-U"
@@ -5341,14 +5391,14 @@ reference "fig:Graf-Security-type-U"
 \end_inset
 
 ), nebo J (př.
- viz Příloha
+ viz Příloha 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Grafy"
 
 \end_inset
 
-, Obrázek
+, Obrázek 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Graf-online-banking-type J"
@@ -5356,16 +5406,17 @@ reference "fig:Graf-online-banking-type J"
 \end_inset
 
 ) namísto normálního rozložení.
- Hodnocení jsou tedy silně polarizována (buď jsou kladná, nebo záporná,
- ale zřídka umírněná).
+ Hodnocení jsou tedy silně polarizována (buď jsou kladná nebo záporná, ale
+ jen zřídka umírněná).
 \end_layout
 
 \begin_layout Standard
 Toto je běžné pro online hodnocení podobného typu.
- Rozložení tupy U nebo J jsou způsobena tím, že produkty a služby online
- častěji hodnotí lidé, kteří jsou velice spokojení, nebo zcela nespokojení.
+ Rozložení typu U nebo J jsou způsobena tím, že produkty a služby online
+ častěji hodnotí lidé, kteří jsou velice spokojení nebo zcela nespokojení.
  Lidé s neutrálním názorem nemají potřebu hodnotit služby nebo produkty
  online.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "J-shaped-dist"
@@ -5381,7 +5432,7 @@ Interpretace výstupů
 
 \begin_layout Standard
 Hlavním výstupem jsou nejčastěji hodnocené aspekty služby.
- Ke každému každému aspektu je přiřazena četnost jeho výskytů, skóre vypočítané
+ Ke každému aspektu je přiřazena četnost jeho výskytů, skóre vypočítané
  ze sentimentů vět a skóre vypočítané z uživatelského hodnocení.
 \end_layout
 
@@ -5427,85 +5478,9 @@ Závěr
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Aby mohl poskytovatel zlepšovat nabízené služby, musí brát ohledy na zpětnou
- vazbu od svých zákazníků.
- Nejcennější zpětná vazba nejčastěji nemá pevně danou strukturu, tzn.
- jde o text (např.
- příspěvek na internetové diskuzi).
- Při velkém množství dat (textu), může být nepraktické nebo i nemožné vyhodnotit
- vše ručně.
- Tato práce se zabývá metodami, které umožňují zcela, nebo alespoň částečně
- automatizovat vyhodnocení zpětné vazby.
-\end_layout
-
-\begin_layout Plain Layout
-Cílem této práce je na základě doposud proběhlého výzkumu stanovit metodu
- nestrukturovaných dat (v tomto případě zpětné vazby od zákazníků) a tuto
- metodu aplikovat na reálná data.
- V praktické části této práce bude popsaná metoda implementována s pomocí
- volně dostupných nástrojů.
- Tímto práce poskytne přehled, jaké typy nástrojů jsou využity při řešení
- stanovených úloh.
-\end_layout
-
-\begin_layout Plain Layout
-Data, na která bude metoda aplikována pocházejí pochází z reálné společnosti.
- Jedná se o uživatelské recenze na služby této společnosti.
- Data jsou veřejně dostupná a neobsahují žádné osobní ani citlivé údaje
- (jména, adresy atd.).
- 
-\end_layout
-
-\begin_layout Plain Layout
-Teoretická část práce se věnuje doposud proběhlému výzkumu v oblasti a literatuř
-e, která se zabývá dobýváním informací z textu.
- V této části je stanovena metoda, která bude na data aplikovaána.
- V praktické části jsou popsány použité nástroje, zkoumaná dat, získání
- těchto dat a implementace metody.
-\end_layout
-
-\begin_layout Plain Layout
-Výstupem této práce jsou vyhodnocení reálné zpětné vazby od zákazníků, vyvození
- závěrů z tohoto vyhodnocení.
- Práce také navrhuje způsoby reálného využití a poskytuje náměty na další
- vylepšování použitých postupů.
-\end_layout
-
-\begin_layout Plain Layout
-Hlavním přínosem práce by měla být ukázka implementace teoretických postupů
- pomocí volně dostupných nástrojů.
-\end_layout
-
-\begin_layout Plain Layout
-shrnutí výsledků, ke kterým autor dospěl,
-\end_layout
-
-\begin_layout Plain Layout
-přínos autora práce k řešené problematice (co je v práci původní),
-\end_layout
-
-\begin_layout Plain Layout
-zhodnocení využitelnosti dosažených výsledků, příp.
- další náměty pro řešení v uvedené
-\end_layout
-
-\begin_layout Plain Layout
-oblasti.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Hlavními cíli této práce bylo popsat metodu extrakci informací nestrukturovaných
- dat a s pomocí těchto informací hodnotit služby.
- Na základě dosposud proběhlého výzkumu byla popsána metoda, která zahrnuje
+Hlavními cíli této práce bylo popsat metodu pro extrakci informací z nestrukturo
+vaných dat a s pomocí těchto informací hodnotit služby.
+ Na základě dříve proběhlého výzkumu byla popsána metoda, která zahrnuje
  získání dat, předzpracování textu, extrakci aspektů služby a vyhodnocení
  těchto aspektů pomocí klasifikace sentimentů recenzí.
 \end_layout
@@ -5519,12 +5494,12 @@ V práci byl popsán způsob získání a za tímto účelem byl vytvořen poč�
 \end_layout
 
 \begin_layout Standard
-Stanovená metoda byla úspěšně aplikována na získaná data a vystupy byly
+Stanovená metoda byla úspěšně aplikována na získaná data a výstupy byly
  v práci vyhodnoceny.
  K jednotlivým výstupům byly navrhnuty způsoby jejich využití v praxi.
  Výstupy jsou podle názoru autora využitelné v praxi, pokud jsou kombinované
  s dalšími informacemi, získanými z jiných zdrojů.
- Výtvořená implementace funguje při aplikaci na ta data, pro která byla
+ Vytvořená implementace funguje při aplikaci na ta data, pro která byla
  vytvořena.
  Pro jiná data by implementace vyžadovala značné úpravy.
 \end_layout
@@ -5533,8 +5508,8 @@ Stanovená metoda byla úspěšně aplikována na získaná data a vystupy byly
 Výzkum v této oblasti stále probíhá, a ikdyž jsou dostupné některé služby,
  které využívají výsledky tohoto výzkumu, stále nejsou příliš rozšířené.
  Námětem na další práci v tomto oboru by mohlo být vytvoření postupů a nástrojů,
- které by byly univerzální, tedy, takové postupy a nástroje, které lze silných
- úprav používat na libovolná data.
+ které by byly univerzální, tedy, takové postupy a nástroje, které lze bez
+ silných úprav používat na libovolná data.
 \end_layout
 
 \begin_layout Standard
@@ -5647,6 +5622,22 @@ Apache OpenNLP Developer Documentation.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
+key "Preprocessing techniques"
+
+\end_inset
+
+GURUSAMY Vairaprakash a Subbu KANNAN.
+ Preprocessing Techniques for Text Mining.
+ In Conference paper- October 2014 [online].
+ [cit.
+ 2016-04-30].
+ Dostupné z: https://www.researchgate.net/publication/ 273127322_Preprocessing_Tec
+hniques_for_Text_Mining
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
 key "Brown Corpus Manual"
 
 \end_inset
@@ -5690,15 +5681,46 @@ SentiWordNet [online].
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Borgelt Apriori"
+key "Art of tokenization"
 
 \end_inset
 
-Christian Borgelt's Web Pages.
- Borgelt.net [online].
+TRIMM, Craig.
+ The Art of Tokenization.
+ In IBM developerWorks [online].
  [cit.
  2016-05-01].
- Dostupné z: http://www.borgelt.net/fpm.html
+ Dostupné z: https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokeniza
+tion
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Snowball stemmer"
+
+\end_inset
+
+The English (Porter2) stemming algorithm.
+ Snowball.tartarus.org [online].
+ [cit.
+ 2016-05-01].
+ Dostupné z: http://snowball.tartarus.org/algorithms/english/stemmer.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Fast algorithms Apriori"
+
+\end_inset
+
+ARGWAL Rakesh a Ramakrishnan SRIKANT.
+ Fast Algorithms for Mining Association Rules in Large Databases.
+ In Proceedings of the 20th International Conference on Very Large Data
+ Bases (VLDB '94), Jorge B.
+ Bocca, Matthias Jarke, and Carlo Zaniolo (Eds.).
+ Morgan Kaufmann Publishers Inc., 1994, 487-499.
 \end_layout
 
 \begin_layout Bibliography
@@ -5831,48 +5853,15 @@ JSON.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "Art of tokenization"
+key "Borgelt Apriori"
 
 \end_inset
 
-TRIMM, Craig.
- The Art of Tokenization.
- In IBM developerWorks [online].
+Christian Borgelt's Web Pages.
+ Borgelt.net [online].
  [cit.
  2016-05-01].
- Dostupné z: https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokeniza
-tion
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Preprocessing techniques"
-
-\end_inset
-
-GURUSAMY Vairaprakash a Subbu KANNAN.
- Preprocessing Techniques for Text Mining.
- In Conference paper- October 2014 [online].
- [cit.
- 2016-04-30].
- Dostupné z: https://www.researchgate.net/publication/ 273127322_Preprocessing_Tec
-hniques_for_Text_Mining
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Fast algorithms Apriori"
-
-\end_inset
-
-ARGWAL Rakesh a Ramakrishnan SRIKANT.
- Fast Algorithms for Mining Association Rules in Large Databases.
- In Proceedings of the 20th International Conference on Very Large Data
- Bases (VLDB '94), Jorge B.
- Bocca, Matthias Jarke, and Carlo Zaniolo (Eds.).
- Morgan Kaufmann Publishers Inc., 1994, 487-499.
+ Dostupné z: http://www.borgelt.net/fpm.html
 \end_layout
 
 \begin_layout Bibliography
@@ -5888,20 +5877,6 @@ ZHANG, Dell a Robert MAO.
  In ICTIR'11 Proceedings of the Third international conference on Advances
  in information retrieval theory.
  Springer-Verlag Berlin, Heidelberg, 2011, 238-249.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Snowball stemmer"
-
-\end_inset
-
-The English (Porter2) stemming algorithm.
- Snowball.tartarus.org [online].
- [cit.
- 2016-05-01].
- Dostupné z: http://snowball.tartarus.org/algorithms/english/stemmer.html
 \end_layout
 
 \begin_layout Bibliography
