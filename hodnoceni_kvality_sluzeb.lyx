@@ -8,6 +8,8 @@
 \usepackage{algorithm,algpseudocode}
 \usepackage{threeparttable}
 \definecolor{mygray}{gray}{0.95}
+\widowpenalty=10000
+\clubpenalty=10000
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -4615,6 +4617,8 @@ begin{threeparttable}
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\align left
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -5464,13 +5468,6 @@ Na základě těchto informací lze vyvozovat pouze závěry o relativní kvalit
 Účelem těchto informací je usnadnění rozhodování v oblasti rozvíjení služeb
  v kombinaci s dalšími metrikami (jako je například návštěvnost stránek,
  dotazníkové šetření apod.).
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
